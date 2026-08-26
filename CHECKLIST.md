@@ -1,6 +1,6 @@
 # Checklist
 
-Status as of **2026-08-26:** Stage 0 scaffold (pin, freeze, claims, fixture HUC/template). Live NLCD template is still required before Stage A.
+Status as of **2026-08-26:** Stage 0 live WBD + NLCD 2021 template on disk. Fixture path remains the CI join. Stage A may start.
 
 ## Stage 0
 
@@ -9,8 +9,8 @@ Status as of **2026-08-26:** Stage 0 scaffold (pin, freeze, claims, fixture HUC/
 - [x] Occupancy freeze file (`2897` / `120` / `0.041422`)
 - [x] Claim scanner (sibling bans plus this tree)
 - [x] Fixture Stage 0 path (`tests/fixtures/huc.geojson` + 30 m 5070 template)
-- [ ] Live WBD clip for 05120201
-- [ ] Live NLCD 2021 impervious template
+- [x] Live WBD clip for 05120201
+- [x] Live NLCD 2021 impervious template (4826x4252, 30 m, EPSG:5070; 0% kept)
 - [x] Private GitHub remote (`martialsystems/indiana_flood_completion`)
 
 ## Later work

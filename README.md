@@ -26,7 +26,13 @@ PYTHONPATH=src:. python3 -m pytest tests -q
 
 Hard gate: freeze numbers match, claim scan clean, HUC non-empty, template EPSG:5070 at 30 m, product laws allow Stage 0. See METHODOLOGY.md.
 
-Live WBD and NLCD 2021 template are still required before Stage A. The fixture path is the CI join.
+Live WBD + NLCD 2021 (network; writes `data/raw/` and `data/interim/`, gitignored):
+
+```bash
+PYTHONPATH=src:. python3 scripts/run_stage0_live.py
+```
+
+Stage A refuses a fixture template. The fixture path is the CI join.
 
 ## Claim bans
 

@@ -30,5 +30,20 @@ FIXTURE_COLS = 32
 
 USER_AGENT = "MartialSystemsResearch/indiana_flood_completion (stage0)"
 
+WBD_LAYER_URL = (
+    "https://hydro.nationalmap.gov/arcgis/rest/services/wbd/MapServer/4"
+)
+WBD_MAX_ALLOWABLE_OFFSET_DEG = 0.0001
+WBD_GEOMETRY_PRECISION = 6
+# USGS catalog ~2700 sq mi; live query 2026-08-26 was 7046.97 km2.
+EXPECTED_AREA_SQKM = (6000.0, 8000.0)
+
+NLCD_WMS_URL = "https://www.mrlc.gov/geoserver/mrlc_download/wms"
+NLCD_LAYER = "NLCD_2021_Impervious_L48"
+NLCD_WMS_VERSION = "1.3.0"
+NLCD_TILE_PX = 2000
+NLCD_NODATA = 255
+NLCD_YEAR = 2021
+
 REPO_ROOT = Path(__file__).resolve().parents[2]
 FROZEN_OCCUPANCY_PATH = REPO_ROOT / "data" / "frozen" / "sibling_stage0_occupancy.json"

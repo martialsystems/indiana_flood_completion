@@ -11,9 +11,9 @@ from typing import Any
 from shapely.geometry import shape
 from shapely.geometry.base import BaseGeometry
 
-from floodmap.config import HUC8, VECTOR_CRS
+from floodmap.config import EXPECTED_AREA_SQKM, HUC8, STATE_CODE, VECTOR_CRS
 from floodmap.crs import require_epsg
-from floodmap.errors import CrsMissingError, EmptyHucError
+from floodmap.errors import CrsMissingError, EmptyHucError, GateError
 
 
 @dataclass(frozen=True)
@@ -22,6 +22,9 @@ class HucLayer:
     huc8: str
     crs: int
     n_features: int
+    name: str = ""
+    states: str = ""
+    areasqkm: float | None = None
 
 
 def _crs_from_geojson(doc: dict[str, Any]) -> int | None:
@@ -70,6 +73,7 @@ def load_huc(
     features = doc.get("features") or []
     geoms: list[BaseGeometry] = []
     codes: list[str] = []
+    kept_props: list[dict[str, Any]] = []
     for feat in features:
         geom_doc = feat.get("geometry")
         if not geom_doc:
@@ -77,8 +81,10 @@ def load_huc(
         geom = shape(geom_doc)
         if geom.is_empty:
             continue
+        props = feat.get("properties") or {}
         geoms.append(geom)
-        codes.append(_huc_code(feat.get("properties") or {}))
+        codes.append(_huc_code(props))
+        kept_props.append(props)
     if not geoms:
         raise EmptyHucError(f"no HUC polygons in {path}")
     merged = geoms[0]
@@ -89,7 +95,37 @@ def load_huc(
     code = next((c for c in codes if c), expected_huc)
     if code != expected_huc:
         raise EmptyHucError(f"HUC {code!r} != {expected_huc!r}")
-    return HucLayer(geom=merged, huc8=code, crs=crs, n_features=len(geoms))
+    first_props = kept_props[0] if kept_props else {}
+    name = str(first_props.get("name") or first_props.get("NAME") or "")
+    states = str(first_props.get("states") or first_props.get("STATES") or "")
+    area = _optional_area(first_props)
+    if states and STATE_CODE not in states.upper():
+        raise GateError(f"HUC states={states!r} missing {STATE_CODE}")
+    if area is not None:
+        lo, hi = EXPECTED_AREA_SQKM
+        if not (lo <= area <= hi):
+            raise GateError(f"HUC area_sqkm={area} outside {EXPECTED_AREA_SQKM}")
+    return HucLayer(
+        geom=merged,
+        huc8=code,
+        crs=crs,
+        n_features=len(geoms),
+        name=name,
+        states=states,
+        areasqkm=area,
+    )
+
+
+def _optional_area(props: dict[str, Any]) -> float | None:
+    raw = props.get("areasqkm")
+    if raw is None:
+        raw = props.get("AREASQKM")
+    if raw is None or raw == "":
+        return None
+    try:
+        return float(raw)
+    except (TypeError, ValueError) as exc:
+        raise GateError(f"HUC areasqkm not a number: {raw!r}") from exc
 
 
 def require_huc_crs(wkid: int | None, *, expected: int = VECTOR_CRS) -> int:

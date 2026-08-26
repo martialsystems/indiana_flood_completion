@@ -6,6 +6,7 @@ from floodmap.errors import (
     CrsMismatchError,
     CrsMissingError,
     EmptyHucError,
+    FetchError,
     FreezeError,
     GateError,
 )
@@ -15,6 +16,7 @@ __all__ = [
     "CrsMismatchError",
     "CrsMissingError",
     "EmptyHucError",
+    "FetchError",
     "FreezeError",
     "GateError",
 ]

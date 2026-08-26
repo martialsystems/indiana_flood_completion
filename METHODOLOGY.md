@@ -18,7 +18,9 @@ Sibling `indiana_hazmat_floodplain` stays parked. Its Stage 0 occupancy (facilit
 
 Upper White HUC-8 **05120201**. FIPS state 18. Expanding the HUC is a new stage.
 
-Template raster: NLCD 2021 Percent Developed Impervious, 30 m, EPSG:5070. Every other raster warps to that grid. A fixture template is allowed for Stage 0 CI. Stage A refuses a fixture template.
+Template raster: NLCD 2021 Percent Developed Impervious (`NLCD_2021_Impervious_L48`), 30 m, EPSG:5070, clipped to the HUC. Every later raster warps to that grid. Zero is a valid percent; MRLC WMS GeoTIFFs that tag nodata=0 are rewritten so 0 is kept and 255 is nodata. A fixture template is allowed for Stage 0 CI. Stage A refuses a fixture template.
+
+HUC source: USGS WBD MapServer layer 4 (8-digit HU), `huc8='05120201'`, `outSR=4269`. Simplification `maxAllowableOffset=0.0001` degrees (~11 m). Area must fall in 6000 to 8000 km² when the WBD `areasqkm` field is present. States must include IN when that field is present.
 
 Vector layers stay EPSG:4269 until an explicit, logged warp.
 
@@ -89,3 +91,4 @@ Pass only if all of these hold:
 ## Revisions
 
 - 2026-08-26: locked the five-stage table, occupancy freeze, D1/D2, Upper White 05120201, WhiteForge pin.
+- 2026-08-26: live WBD HUC-8 fetch and NLCD 2021 impervious template (30 m, EPSG:5070, MRLC WMS, tiled).

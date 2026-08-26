@@ -1,0 +1,45 @@
+{
+  "claim_bans": [
+    "casualty_count",
+    "climate_attribution",
+    "tornado_count",
+    "population_at_risk",
+    "tri_storage",
+    "p_as_100yr",
+    "unmapped_risk",
+    "occupancy_as_this_tree"
+  ],
+  "gate": "pass",
+  "huc8": "05120201",
+  "huc_areasqkm": 7046.97,
+  "huc_name": "Upper White",
+  "huc_source": "huc05120201.geojson",
+  "huc_states": "IN",
+  "imported_occupancy": {
+    "frozen_date": "2026-08-25",
+    "n_in_sfha": 120,
+    "n_tris_joinable": 2897,
+    "share_in_sfha": 0.041422,
+    "source_repo": "martialsystems/indiana_hazmat_floodplain",
+    "unit": "facility"
+  },
+  "n_huc_features": 1,
+  "nlcd_layer": "NLCD_2021_Impervious_L48",
+  "nlcd_wms": "https://www.mrlc.gov/geoserver/mrlc_download/wms",
+  "nlcd_year": 2021,
+  "p_definition": "P(sfha | hydro)",
+  "stage": "0",
+  "state": "IN",
+  "template_crs": 5070,
+  "template_kind": "nlcd_2021",
+  "template_res_m": 30.0,
+  "template_sha256": "bfbd21bdbb1564fd9df58ffd8d0e80c0b4dcf2ac34c010aea4c6306df5ec2a2f",
+  "template_shape": [
+    4252,
+    4826
+  ],
+  "template_source": "nlcd_impervious_2021_05120201.tif",
+  "unit": "pixel",
+  "vector_crs": 4269,
+  "wbd_layer": "https://hydro.nationalmap.gov/arcgis/rest/services/wbd/MapServer/4"
+}

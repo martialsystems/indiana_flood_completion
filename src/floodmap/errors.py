@@ -23,3 +23,7 @@ class FreezeError(GateError):
 
 class ClaimBanError(GateError):
     """Report text hit a banned claim."""
+
+
+class FetchError(GateError):
+    """Remote layer fetch failed closed."""

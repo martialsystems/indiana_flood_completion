@@ -22,6 +22,7 @@ def build_stage0_report(
     huc_source: str,
     template_source: str,
     freeze: dict[str, Any],
+    extra: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     packet = verify_freeze(freeze)
     if huc.huc8 != HUC8:
@@ -32,7 +33,7 @@ def build_stage0_report(
         "stage": "0",
         "state": STATE_CODE,
         "huc8": HUC8,
-        "huc_name": HUC_NAME,
+        "huc_name": huc.name or HUC_NAME,
         "unit": "pixel",
         "p_definition": "P(sfha | hydro)",
         "vector_crs": huc.crs,
@@ -43,6 +44,8 @@ def build_stage0_report(
         "huc_source": huc_source,
         "template_source": template_source,
         "n_huc_features": huc.n_features,
+        "huc_states": huc.states,
+        "huc_areasqkm": huc.areasqkm,
         "imported_occupancy": {
             "source_repo": packet.get("source_repo"),
             "frozen_date": packet.get("frozen_date"),
@@ -63,6 +66,8 @@ def build_stage0_report(
         ],
         "gate": "pass",
     }
+    if extra:
+        report.update(extra)
     require_clean(json.dumps(report, default=str), source="stage0_report")
     hits = scan_obj(report)
     if hits:

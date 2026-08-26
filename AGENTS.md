@@ -20,7 +20,7 @@ Stage order is 0, A, B, C, D. `whiteforge.gate.require_stage` refuses skips. Sta
 
 ## CRS
 
-Vector native: EPSG:4269 until an explicit logged warp. Rasters: EPSG:5070, 30 m, NLCD 2021 template. Missing CRS: refuse.
+Vector native: EPSG:4269 until an explicit logged warp. Rasters: EPSG:5070, 30 m, NLCD 2021 template. Missing CRS: refuse. Live HUC is USGS WBD layer 4. Live template is MRLC WMS `NLCD_2021_Impervious_L48`, tiled, clipped to the HUC.
 
 ## Verify
 
