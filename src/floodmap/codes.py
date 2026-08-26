@@ -51,6 +51,30 @@ P_DEFINITION = "P(sfha | hydro)"
 OFR_2008_1322_URL = "https://pubs.usgs.gov/of/2008/1322/"
 OFR_APPENDIX2_LABEL = "June 7-9, 2008 inundation (OFR 2008-1322)"
 OFR_NOT_SUBSTITUTES = ("SIM 3251", "SIM 3231")
+OFR_ZIP_BASE = "https://pubs.usgs.gov/of/2008/1322/zip/"
+# (slug, display name, zip filename). 17 Appendix 2 reaches. Not a basin layer.
+OFR_APPENDIX2_ZIPS: tuple[tuple[str, str, str], ...] = (
+    ("blue_edinburgh", "Blue River at Edinburgh", "blue_edinburgh.ZIP"),
+    ("canary_franklin", "Canary Ditch at Franklin", "canary_franklin.ZIP"),
+    ("clifty_columbus", "Clifty Creek at Columbus", "clifty_columbus.ZIP"),
+    ("eastfk_white_columbus", "East Fork White River at Columbus", "eastfk_white_columbus.ZIP"),
+    ("eastfk_white_seymour", "East Fork White River at Seymour", "eastfk_white_seymour.ZIP"),
+    ("eastside_swale_edinburgh", "East Side Swale at Edinburgh", "eastside_swale_edinburgh.ZIP"),
+    ("eel_worthington", "Eel River at Worthington", "eel_worthington.ZIP"),
+    ("flatrock_columbus", "Flatrock River at Columbus", "flatrock_columbus.ZIP"),
+    ("haw_columbus", "Haw Creek at Columbus", "haw_columbus.ZIP"),
+    ("hurricane_franklin", "Hurricane Creek at Franklin", "hurricane_franklin.ZIP"),
+    ("unt_fall_paragon", "unnamed tributary of Fall Creek at Paragon", "unt_fall_paragon.ZIP"),
+    ("unt_youngs_franklin", "unnamed tributary of Youngs Creek at Franklin", "unt_youngs_franklin.ZIP"),
+    ("white_martinsville", "White River at Martinsville", "white_martinsville.ZIP"),
+    ("white_newberry", "White River at Newberry", "white_newberry.ZIP"),
+    ("white_spencer", "White River at Spencer", "white_spencer.ZIP"),
+    ("white_worthington", "White River at Worthington", "white_worthington.ZIP"),
+    ("youngs_franklin", "Youngs Creek at Franklin", "youngs_franklin.ZIP"),
+)
+OFR_CANDIDATE_SLUGS = frozenset({"white_martinsville", "unt_fall_paragon"})
+# No Appendix 2 raster. Do not invent from HWMs unless code 3 is written.
+OFR_NO_RASTER = ("Sartor Ditch at Martinsville", "Elnora (withdrawn)")
 
 # Appendix 2 mapped communities (reach-scale .img grids). Not a HUC layer.
 OFR_APPENDIX2_COMMUNITIES: tuple[tuple[str, str, str], ...] = (

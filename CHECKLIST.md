@@ -1,6 +1,6 @@
 # Checklist
 
-Status as of **2026-08-26:** Stage 0 live template on disk. Stage A success table locked (FIRM zone codebook + 2008 three-state mask). Stage A fetch has not started.
+Status as of **2026-08-26:** Stage A report on disk. Martinsville and Paragon Appendix 2 rasters intersect 05120201 (measured). Stage B has not started.
 
 ## Stage 0
 
@@ -16,7 +16,7 @@ Status as of **2026-08-26:** Stage 0 live template on disk. Stage A success tabl
 
 ## Later work
 
-- [ ] Stage A: DEM, NHD, soils, FIRM zone codebook, TRI pounds, 2008 three-state mask (OFR 2008-1322 Appendix 2 only)
+- [x] Stage A: DEM, NHD, soils, FIRM zone codebook, TRI pounds, 2008 three-state mask (OFR 2008-1322 Appendix 2 only)
 - [ ] Stage B: TWI / HAND stack
 - [ ] Stage C: HUC-10 CV + XGBoost + `p_sfha.tif`
 - [ ] Stage D: D1/D2 tables, SHAP, Folium

@@ -45,5 +45,51 @@ NLCD_TILE_PX = 2000
 NLCD_NODATA = 255
 NLCD_YEAR = 2021
 
+FIRM_LAYER_URL = (
+    "https://gisdata.in.gov/server/rest/services/Hosted/"
+    "FIRM_Flood_Hazard_Zones_2023/FeatureServer/1"
+)
+FIRM_MAX_ALLOWABLE_OFFSET_DEG = 0.0001
+FIRM_GEOMETRY_PRECISION = 6
+FIRM_PAGE_SIZE = 1000
+FIRM_EXPECTED_CRS = 4269
+
+FRS_URL = "https://ordsext.epa.gov/FLA/www3/state_files/state_single_in.zip"
+FRS_CSV_NAME = "STATE_SINGLE_IN.CSV"
+TRI_PROGRAM = "TRIS"
+TRI_YEAR_CANDIDATES = (2023, 2022, 2021)
+# EPA TRI basic data file 1a (on-site releases), national zip, filtered to IN.
+TRI_1A_URL_TMPL = (
+    "https://www.epa.gov/system/files/other-files/{year_path}/us_1a_{year}.zip"
+)
+
+DEM_IMAGE_URL = (
+    "https://elevation.nationalmap.gov/arcgis/rest/services/"
+    "3DEPElevation/ImageServer/exportImage"
+)
+DEM_NODATA = -9999.0
+DEM_TILE_PX = 2000
+
+NHD_FLOWLINE_URL = (
+    "https://hydro.nationalmap.gov/arcgis/rest/services/nhd/MapServer/6"
+)
+NHD_PAGE_SIZE = 2000
+DIST_NODATA = -1.0
+
+# gSSURGO / muaggatt hydrologic group. Dual groups stay distinct codes.
+HSG_CODE = {
+    "A": 1,
+    "B": 2,
+    "C": 3,
+    "D": 4,
+    "A/D": 5,
+    "B/D": 6,
+    "C/D": 7,
+    "A/B": 8,
+    "B/C": 9,
+}
+HSG_NODATA = 255
+SDA_URL = "https://sdmdataaccess.nrcs.usda.gov/Tabular/post.rest"
+
 REPO_ROOT = Path(__file__).resolve().parents[2]
 FROZEN_OCCUPANCY_PATH = REPO_ROOT / "data" / "frozen" / "sibling_stage0_occupancy.json"

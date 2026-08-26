@@ -1,0 +1,212 @@
+{
+  "citation_2008": "June 7-9, 2008 inundation (OFR 2008-1322)",
+  "dem": {
+    "path": "/Users/samw/indiana_flood_completion/data/interim/dem.tif",
+    "skipped_existing": true
+  },
+  "firm": {
+    "from_existing_rasters": true,
+    "sfha_counts": {
+      "0": 7071023,
+      "1": 759016
+    },
+    "sfha_has_0_and_1": true,
+    "zone_class_counts": {
+      "floodway": 309852,
+      "sfha": 449164,
+      "shaded_x": 77826,
+      "unmapped": 6981692,
+      "unshaded_x": 11505
+    }
+  },
+  "gate": "pass",
+  "huc8": "05120201",
+  "imported_occupancy_path": "/Users/samw/indiana_flood_completion/data/frozen/sibling_stage0_occupancy.json",
+  "martinsville_paragon_intersection": "measured, not assumed",
+  "mask_value_counts": {
+    "0": 12690113,
+    "1": 7826957,
+    "2": 3082
+  },
+  "nhd": {
+    "path": "/Users/samw/indiana_flood_completion/data/interim/dist_stream.tif",
+    "skipped_existing": true
+  },
+  "ofr2008": {
+    "appendix2_intersects_huc": true,
+    "citation": "June 7-9, 2008 inundation (OFR 2008-1322)",
+    "elnora_withdrawn": true,
+    "martinsville_paragon_measured": true,
+    "mask_path": "/Users/samw/indiana_flood_completion/data/interim/mask_2008.tif",
+    "mask_value_counts": {
+      "0": 12690113,
+      "1": 7826957,
+      "2": 3082
+    },
+    "n_zips": 17,
+    "ofr_reaches_intersecting_huc": [
+      "unnamed tributary of Fall Creek at Paragon",
+      "White River at Martinsville"
+    ],
+    "reaches": [
+      {
+        "intersect_cells": 0,
+        "name": "Blue River at Edinburgh",
+        "slug": "blue_edinburgh",
+        "zip": "blue_edinburgh.ZIP"
+      },
+      {
+        "intersect_cells": 0,
+        "name": "Canary Ditch at Franklin",
+        "slug": "canary_franklin",
+        "zip": "canary_franklin.ZIP"
+      },
+      {
+        "intersect_cells": 0,
+        "name": "Clifty Creek at Columbus",
+        "slug": "clifty_columbus",
+        "zip": "clifty_columbus.ZIP"
+      },
+      {
+        "intersect_cells": 0,
+        "name": "East Fork White River at Columbus",
+        "slug": "eastfk_white_columbus",
+        "zip": "eastfk_white_columbus.ZIP"
+      },
+      {
+        "intersect_cells": 0,
+        "name": "East Fork White River at Seymour",
+        "slug": "eastfk_white_seymour",
+        "zip": "eastfk_white_seymour.ZIP"
+      },
+      {
+        "intersect_cells": 0,
+        "name": "East Side Swale at Edinburgh",
+        "slug": "eastside_swale_edinburgh",
+        "zip": "eastside_swale_edinburgh.ZIP"
+      },
+      {
+        "intersect_cells": 0,
+        "name": "Eel River at Worthington",
+        "slug": "eel_worthington",
+        "zip": "eel_worthington.ZIP"
+      },
+      {
+        "intersect_cells": 0,
+        "name": "Flatrock River at Columbus",
+        "slug": "flatrock_columbus",
+        "zip": "flatrock_columbus.ZIP"
+      },
+      {
+        "intersect_cells": 0,
+        "name": "Haw Creek at Columbus",
+        "slug": "haw_columbus",
+        "zip": "haw_columbus.ZIP"
+      },
+      {
+        "intersect_cells": 0,
+        "name": "Hurricane Creek at Franklin",
+        "slug": "hurricane_franklin",
+        "zip": "hurricane_franklin.ZIP"
+      },
+      {
+        "intersect_cells": 1257,
+        "name": "unnamed tributary of Fall Creek at Paragon",
+        "slug": "unt_fall_paragon",
+        "zip": "unt_fall_paragon.ZIP"
+      },
+      {
+        "intersect_cells": 0,
+        "name": "unnamed tributary of Youngs Creek at Franklin",
+        "slug": "unt_youngs_franklin",
+        "zip": "unt_youngs_franklin.ZIP"
+      },
+      {
+        "intersect_cells": 1825,
+        "name": "White River at Martinsville",
+        "slug": "white_martinsville",
+        "zip": "white_martinsville.ZIP"
+      },
+      {
+        "intersect_cells": 0,
+        "name": "White River at Newberry",
+        "slug": "white_newberry",
+        "zip": "white_newberry.ZIP"
+      },
+      {
+        "intersect_cells": 0,
+        "name": "White River at Spencer",
+        "slug": "white_spencer",
+        "zip": "white_spencer.ZIP"
+      },
+      {
+        "intersect_cells": 0,
+        "name": "White River at Worthington",
+        "slug": "white_worthington",
+        "zip": "white_worthington.ZIP"
+      },
+      {
+        "intersect_cells": 0,
+        "name": "Youngs Creek at Franklin",
+        "slug": "youngs_franklin",
+        "zip": "youngs_franklin.ZIP"
+      }
+    ],
+    "sartor_ditch_img": false
+  },
+  "ofr_reaches_intersecting_huc": [
+    "unnamed tributary of Fall Creek at Paragon",
+    "White River at Martinsville"
+  ],
+  "p_definition": "P(sfha | hydro)",
+  "soils": {
+    "hsg_counts": {
+      "2": 60486,
+      "255": 6651027,
+      "3": 110910,
+      "4": 109673,
+      "5": 6818,
+      "6": 437447,
+      "7": 453678
+    },
+    "n_polygons": 160000,
+    "n_tiles_ok": 40,
+    "path": "/Users/samw/indiana_flood_completion/data/interim/hsg.tif"
+  },
+  "stage": "A",
+  "template_fingerprint": {
+    "crs": 5070,
+    "height": 4252,
+    "kind": "nlcd_2021",
+    "raster_sha256": "bfbd21bdbb1564fd9df58ffd8d0e80c0b4dcf2ac34c010aea4c6306df5ec2a2f",
+    "transform": [
+      30.0,
+      0.0,
+      793020.0,
+      0.0,
+      -30.0,
+      1977420.0
+    ],
+    "transform_sha256": "479ac37628bfd7e5d409f6108ae6ba1805acfd37ecdc7093785db06ac9ebec22",
+    "width": 4826
+  },
+  "tri": {
+    "n_1a_in": 3303,
+    "n_1a_rows": 3303,
+    "n_dioxin_rows_held_grams": 29,
+    "n_dropped_missing_xy": 0,
+    "n_dropped_non_in": 0,
+    "n_dropped_out_of_huc": 773,
+    "n_excluded_off_site": 1257,
+    "n_tris_huc_year": 117,
+    "reporting_year": 2023
+  },
+  "unit": "pixel",
+  "zone_class_counts": {
+    "floodway": 309852,
+    "sfha": 449164,
+    "shaded_x": 77826,
+    "unmapped": 6981692,
+    "unshaded_x": 11505
+  }
+}

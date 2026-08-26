@@ -55,6 +55,28 @@ def default_get_bytes(url: str, *, timeout: int = 120) -> bytes:
     return _request(url, timeout=timeout)
 
 
+def default_post_json(url: str, fields: dict[str, str], *, timeout: int = 120) -> dict[str, Any]:
+    body = urlencode(fields).encode("utf-8")
+    req = Request(
+        url,
+        data=body,
+        headers={"User-Agent": USER_AGENT, "Content-Type": "application/x-www-form-urlencoded"},
+        method="POST",
+    )
+    try:
+        with urlopen(req, timeout=timeout) as resp:
+            raw = resp.read()
+    except (HTTPError, URLError, TimeoutError) as exc:
+        raise FetchError(f"POST failed: {url}: {exc}") from exc
+    try:
+        doc = json.loads(raw.decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise FetchError(f"POST not JSON: {url}") from exc
+    if not isinstance(doc, dict):
+        raise FetchError(f"POST JSON object required: {url}")
+    return doc
+
+
 def _layer_wkid(meta: dict[str, Any]) -> int | None:
     extent = meta.get("extent") or {}
     sr = (

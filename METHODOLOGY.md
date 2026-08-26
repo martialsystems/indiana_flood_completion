@@ -136,3 +136,4 @@ Pass only if all of these hold:
 - 2026-08-26: locked the five-stage table, occupancy freeze, D1/D2, Upper White 05120201, WhiteForge pin.
 - 2026-08-26: live WBD HUC-8 fetch and NLCD 2021 impervious template (30 m, EPSG:5070, MRLC WMS, tiled).
 - 2026-08-26: Stage A success table: FIRM zone codebook, 2008 three-state mask (OFR 2008-1322 Appendix 2 is reach-scale), D1=`unshaded_x`, D2=mask code 2, TRI error budget, occupancy is `n_tris_huc_year`.
+- 2026-08-26: Stage A fetch: warp_to_template on live nlcd_2021; all 17 Appendix 2 zips downloaded; only intersecting reaches paint mask code 2; Martinsville/Paragon intersection measured.
