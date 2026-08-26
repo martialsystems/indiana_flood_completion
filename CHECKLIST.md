@@ -11,7 +11,7 @@ Status as of **2026-08-26:** Stage 0 scaffold (pin, freeze, claims, fixture HUC/
 - [x] Fixture Stage 0 path (`tests/fixtures/huc.geojson` + 30 m 5070 template)
 - [ ] Live WBD clip for 05120201
 - [ ] Live NLCD 2021 impervious template
-- [ ] Private GitHub remote (`martialsystems/indiana_flood_completion`)
+- [x] Private GitHub remote (`martialsystems/indiana_flood_completion`)
 
 ## Later work
 
