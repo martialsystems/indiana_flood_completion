@@ -1,0 +1,6 @@
+Copyright (c) 2026 Martial Systems LLC. All rights reserved.
+
+Private research tree. The software produces a 30 m hydrologic
+classification of the Upper White River HUC-8 (05120201) and overlays
+EPA TRI facilities. Occupancy counts of Indiana TRI facilities inside
+current SFHA polygons belong to the sibling tree indiana_hazmat_floodplain.

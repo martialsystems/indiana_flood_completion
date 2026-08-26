@@ -1,0 +1,13 @@
+{
+  "source_repo": "martialsystems/indiana_hazmat_floodplain",
+  "source_stage": "0",
+  "frozen_date": "2026-08-25",
+  "state": "IN",
+  "unit": "facility",
+  "crs": 4269,
+  "n_tris_joinable": 2897,
+  "n_in_sfha": 120,
+  "share_in_sfha": 0.041422,
+  "n_dropped_missing_xy": 13,
+  "note": "Imported occupancy snapshot. This tree does not recompute it."
+}

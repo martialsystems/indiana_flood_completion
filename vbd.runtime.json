@@ -1,0 +1,44 @@
+{
+  "runtime_checks": [
+    {
+      "id": "unit-tests",
+      "argv": [".venv/bin/python", "-m", "pytest", "tests/", "-q"],
+      "timeout_s": 120,
+      "paths": [
+        "src/**",
+        "tests/**",
+        "scripts/**",
+        "whiteforge/**",
+        "requirements.txt",
+        "vbd.runtime.json"
+      ]
+    },
+    {
+      "id": "stage0-fixture-path",
+      "argv": [
+        ".venv/bin/python",
+        "scripts/run_stage0.py",
+        "--huc",
+        "tests/fixtures/huc.geojson",
+        "--out",
+        "logs/stage0_fixture"
+      ],
+      "timeout_s": 60,
+      "paths": [
+        "src/**",
+        "scripts/**",
+        "tests/fixtures/**",
+        "data/frozen/**"
+      ]
+    },
+    {
+      "id": "whiteforge-sanity",
+      "argv": [".venv/bin/python", "whiteforge/scripts/sanity_whiteforge.py"],
+      "timeout_s": 60,
+      "paths": [
+        "whiteforge/**",
+        "tests/test_whiteforge_laws.py"
+      ]
+    }
+  ]
+}

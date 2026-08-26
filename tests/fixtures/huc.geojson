@@ -1,0 +1,25 @@
+{
+  "type": "FeatureCollection",
+  "crs": {
+    "type": "name",
+    "properties": { "name": "EPSG:4269" }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": { "huc8": "05120201" },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [-86.30, 39.90],
+            [-86.00, 39.90],
+            [-86.00, 39.70],
+            [-86.30, 39.70],
+            [-86.30, 39.90]
+          ]
+        ]
+      }
+    }
+  ]
+}

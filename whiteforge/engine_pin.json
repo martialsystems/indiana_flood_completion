@@ -1,0 +1,11 @@
+{
+  "engine": "graphforge",
+  "github": "martialsystems/graphforge",
+  "track": "main",
+  "remote": "origin",
+  "min_version": "0.6.0",
+  "policy": "report_only",
+  "local_candidates": ["~/graphforge"],
+  "require_product_laws": true,
+  "note": "WhiteForge: stage order, claim bans, imported occupancy freeze, stale public map. Verify-before-done stays the finish gate; this pin does not re-encode it. policy: report_only | auto_pull_if_clean | fail_if_behind"
+}
