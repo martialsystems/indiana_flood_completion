@@ -32,7 +32,7 @@ Live WBD + NLCD 2021 (network; writes `data/raw/` and `data/interim/`, gitignore
 PYTHONPATH=src:. python3 scripts/run_stage0_live.py
 ```
 
-Stage A refuses a fixture template. The fixture path is the CI join.
+Stage A refuses a fixture template. D1 is `unshaded_x`, not `sfha==0`. OFR 2008-1322 Appendix 2 is a reach-scale three-state mask, not a basin flood layer. The fixture path is the CI join.
 
 ## Claim bans
 

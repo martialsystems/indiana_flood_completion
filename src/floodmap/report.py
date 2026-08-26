@@ -63,6 +63,7 @@ def build_stage0_report(
             "p_as_100yr",
             "unmapped_risk",
             "occupancy_as_this_tree",
+            "d2_empty_without_split",
         ],
         "gate": "pass",
     }

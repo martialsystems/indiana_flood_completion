@@ -23,6 +23,8 @@ def _schema() -> StateSchema:
             ChannelSpec("tri_pounds_are_storage", last_value, default=False),
             ChannelSpec("p_as_100yr_exceedance", last_value, default=False),
             ChannelSpec("d1_without_d2", last_value, default=False),
+            ChannelSpec("d2_without_coverage_split", last_value, default=False),
+            ChannelSpec("d1_on_sfha_zero", last_value, default=False),
             ChannelSpec("score_outside_huc", last_value, default=False),
             ChannelSpec("violations", last_value, default=[]),
             ChannelSpec("decision", last_value, default=None),
@@ -40,6 +42,8 @@ def _evaluate(state: dict[str, Any]) -> dict[str, Any]:
         ("tri_pounds_are_storage", "tri_storage_pounds"),
         ("p_as_100yr_exceedance", "p_as_100yr"),
         ("d1_without_d2", "d1_without_d2"),
+        ("d2_without_coverage_split", "d2_without_coverage_split"),
+        ("d1_on_sfha_zero", "d1_on_sfha_zero"),
         ("score_outside_huc", "score_outside_huc"),
     )
     violations = [code for key, code in flags if state.get(key)]

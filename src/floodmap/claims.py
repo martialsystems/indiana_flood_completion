@@ -67,6 +67,10 @@ _BANS: tuple[tuple[str, re.Pattern[str]], ...] = (
             re.I,
         ),
     ),
+    (
+        "d2_empty_without_split",
+        re.compile(r"\bno 2008 overlap\b", re.I),
+    ),
 )
 
 

@@ -16,7 +16,7 @@ re-implemented in `product_laws.py`.
 | ID | Blocks |
 |----|--------|
 | `white.stage_gate` | Unknown stage; skipping a stage; Stage A on a fixture template; Stage C without A/B reports; Stage D without C metrics or a 2008 overlap mask; Stage 0 complete without freeze verified |
-| `white.claim_bans` | Casualties; climate attribution; tornado counts; population-at-risk; TRI storage as pounds; `P` as 100-year exceedance; D1 as missing maps without D2; scoring facilities outside 05120201 |
+| `white.claim_bans` | Casualties; climate attribution; tornado counts; population-at-risk; TRI storage as pounds; `P` as 100-year exceedance; D1 as missing maps without D2; D2 without the 2008 coverage split; D1 filtered on `sfha==0`; scoring facilities outside 05120201 |
 | `white.stage0_import_freeze` | Rewriting `data/frozen/sibling_stage0_occupancy.json` without an explicit unfreeze; treating this tree as a replacement occupancy count |
 | `white.stale_map` | Public dashboard publish that would regress a newer live payload, or publish without a live compare |
 

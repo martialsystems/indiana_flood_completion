@@ -29,5 +29,16 @@ def test_bans_sibling_and_this_tree() -> None:
 
 def test_allows_firm_and_sfha_like() -> None:
     assert scan_text(
-        "SFHA-like hydrology outside Zone A/AE. Flood hazard zone X. TRI reporter."
+        "SFHA-like hydrology outside Zone A/AE. Flood hazard zone X. TRI reporter. "
+        "June 7-9, 2008 inundation (OFR 2008-1322)."
     ) == []
+
+
+def test_ofr_abstract_and_empty_d2_phrase() -> None:
+    assert "casualty_count" in scan_text(
+        "The flood caused three deaths and evacuation of thousands of residents."
+    )
+    assert "d2_empty_without_split" in scan_text("there was no 2008 overlap in the HUC")
+    assert "unmapped_risk" not in scan_text(
+        "SFHA-like hydrology outside Zone A/AE on unshaded X"
+    )

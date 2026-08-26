@@ -106,6 +106,10 @@ def test_claim_bans_allow_default_and_block_storage() -> None:
     with pytest.raises(LawBlockedError):
         require_claims(tri_pounds_are_storage=True)
     with pytest.raises(LawBlockedError):
+        require_claims(d2_without_coverage_split=True)
+    with pytest.raises(LawBlockedError):
+        require_claims(d1_on_sfha_zero=True)
+    with pytest.raises(LawBlockedError):
         require_law(
             claim_bans(),
             {"p_as_100yr_exceedance": True},

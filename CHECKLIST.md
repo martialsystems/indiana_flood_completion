@@ -1,10 +1,11 @@
 # Checklist
 
-Status as of **2026-08-26:** Stage 0 live WBD + NLCD 2021 template on disk. Fixture path remains the CI join. Stage A may start.
+Status as of **2026-08-26:** Stage 0 live template on disk. Stage A success table locked (FIRM zone codebook + 2008 three-state mask). Stage A fetch has not started.
 
 ## Stage 0
 
 - [x] Methodology lock (05120201, pixel unit, D1/D2, occupancy freeze, claim bans)
+- [x] Stage A codebook lock (2008 mask 0/1/2, FIRM `zone_class`, D1=`unshaded_x`)
 - [x] WhiteForge pin (stage order, claims, import freeze, stale map)
 - [x] Occupancy freeze file (`2897` / `120` / `0.041422`)
 - [x] Claim scanner (sibling bans plus this tree)
@@ -15,7 +16,7 @@ Status as of **2026-08-26:** Stage 0 live WBD + NLCD 2021 template on disk. Fixt
 
 ## Later work
 
-- [ ] Stage A: DEM, NHD, soils, FIRM all zones, TRI pounds, 2008 overlap mask
+- [ ] Stage A: DEM, NHD, soils, FIRM zone codebook, TRI pounds, 2008 three-state mask (OFR 2008-1322 Appendix 2 only)
 - [ ] Stage B: TWI / HAND stack
 - [ ] Stage C: HUC-10 CV + XGBoost + `p_sfha.tif`
 - [ ] Stage D: D1/D2 tables, SHAP, Folium

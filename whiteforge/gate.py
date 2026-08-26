@@ -59,6 +59,8 @@ def require_claims(**flags: Any) -> None:
         "tri_pounds_are_storage": False,
         "p_as_100yr_exceedance": False,
         "d1_without_d2": False,
+        "d2_without_coverage_split": False,
+        "d1_on_sfha_zero": False,
         "score_outside_huc": False,
     }
     state.update(flags)
