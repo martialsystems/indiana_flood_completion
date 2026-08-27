@@ -126,6 +126,12 @@ C_NON_SFHA_RATIO = 3.0
 C_NEAR_STREAM_M = 300.0
 C_RANDOM_SEED = 20260827
 P_SFHA_NODATA = -1.0
+P_SFHA_CALIBRATED_NAME = "p_sfha_calibrated.tif"
+D_THRESHOLDS = (0.50, 0.75, 0.90)
+D_HEADLINE_T = 0.75
+# 9x9 window at 30 m: 120 m orthogonal, 170 m diagonal. Inside 100-300 m.
+D_BUFFER_RADIUS_CELLS = 4
+D1_HEADER = "SFHA-like hydrology outside Zone A/AE"
 
 # gSSURGO / muaggatt hydrologic group. Dual groups stay distinct codes.
 HSG_CODE = {

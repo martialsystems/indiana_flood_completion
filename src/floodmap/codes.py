@@ -159,6 +159,11 @@ def validate_d_report(obj: Mapping[str, Any]) -> None:
         raise GateError("Stage D p_definition must be P(sfha | hydro)")
     if obj.get("d1_zone_class") != D1_ZONE_CLASS:
         raise GateError(f"Stage D d1_zone_class must be {D1_ZONE_CLASS}")
+    p_source = str(obj.get("p_source") or "")
+    if "p_sfha_calibrated" not in p_source:
+        raise GateError("Stage D p_source must be p_sfha_calibrated.tif")
+    if obj.get("expected_pounds_from_raw_p"):
+        raise GateError("Stage D must not ship sum(P*lb) from the raw grid")
     path = obj.get("imported_occupancy_path")
     if not path:
         raise GateError("Stage D must cite imported_occupancy_path")

@@ -69,6 +69,7 @@ def test_validate_d_report_coverage_split_and_occupancy() -> None:
         "d2_n_code1": 12,
         "d2_n_code2": 0,
         "ofr_reaches_intersecting_huc": [],
+        "p_source": "p_sfha_calibrated.tif",
     }
     validate_d_report(ok)
     bad = dict(ok)
@@ -83,6 +84,14 @@ def test_validate_d_report_coverage_split_and_occupancy() -> None:
     wrong_filter["d1_zone_class"] = "sfha"
     with pytest.raises(GateError, match="unshaded_x"):
         validate_d_report(wrong_filter)
+    raw = dict(ok)
+    raw["p_source"] = "p_sfha.tif"
+    with pytest.raises(GateError, match="p_sfha_calibrated"):
+        validate_d_report(raw)
+    raw_lb = dict(ok)
+    raw_lb["expected_pounds_from_raw_p"] = True
+    with pytest.raises(GateError, match="raw grid"):
+        validate_d_report(raw_lb)
 
 
 def test_tri_error_budget_fields_locked() -> None:

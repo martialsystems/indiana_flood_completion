@@ -52,7 +52,14 @@ Stage C (HUC-10 fetch; live bands required):
 PYTHONPATH=src:. python3 scripts/run_stage_c.py
 ```
 
-Report and colorbar: `P(sfha | hydro)`. Do not start D from C. The fixture path is the CI join.
+Report and colorbar: `P(sfha | hydro)`. Calibrate OOF scores before D:
+
+```bash
+PYTHONPATH=src:. python3 scripts/run_c_calibrate.py
+PYTHONPATH=src:. python3 scripts/run_stage_d.py
+```
+
+D samples `p_sfha_calibrated.tif`. Do not ship expected pounds from the raw grid. The fixture path is the CI join.
 
 ## Claim bans
 

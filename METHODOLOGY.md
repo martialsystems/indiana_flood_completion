@@ -99,7 +99,9 @@ Sampling: do not load 7.83M rows as a dense matrix. Take all eligible SFHA ones 
 
 Blocks: WBD 10-digit HU (17 watersheds in 05120201). Leave-one-HUC-10-out. No test HUC-10 in train, including a 1-pixel halo. Metrics on all eligible held-out cells, not the stratified train sample.
 
-Pass: PR-AUC above the SFHA-rate constant; Brier vs that constant logged; report and colorbar say `P(sfha | hydro)`; file `p_sfha.tif`. If the booster barely beats a HAND score, still pass C and say so. Stratified sampling plus class weight can rank well while Brier is worse than the constant: log `probabilities_calibrated` as false until a calibration pass. Do not treat 0.75 as a cutoff in C. Do not write D1/D2. Do not touch OFR or TRI. Do not start D until C metrics exist and HSG is either in under the coverage rule or explicitly omitted in the C report.
+Pass: PR-AUC above the SFHA-rate constant; Brier vs that constant logged; report and colorbar say `P(sfha | hydro)`; file `p_sfha.tif`. If the booster barely beats a HAND score, still pass C and say so. Stratified sampling plus class weight can rank well while Brier is worse than the constant: log `probabilities_calibrated` as false on the raw raster. Fit isotonic on OOF scores with the same HUC-10 cuts (no test-fold labels). Write `p_sfha_calibrated.tif` with the HAND-nodata mask unchanged. Keep `p_sfha.tif`. Do not treat 0.75 as a cutoff in C. Do not write D1/D2 in C. Do not touch OFR or TRI.
+
+Stage D samples `p_sfha_calibrated.tif` only. `p_source=p_sfha_calibrated.tif`. Thresholds 0.50 / 0.75 / 0.90. Headline D1 is `zone_class == unshaded_x` and buffer-max P ≥ 0.75. Expected pounds is `sum(P * on_site_release_lb)` from the calibrated raster. Do not ship that product from the raw grid. Buffer is a 9×9 window (120 to 170 m). Report max and mean P. D2 is unshaded X and 2008 mask code 2 at the facility cell. Empty D2 is coverage: list Martinsville and Paragon, print in-HUC TRI counts in mask code 1 vs 2. HSG omitted is an accepted C state. Do not start D from raw P.
 
 ## 2008 three-state mask (Stage A)
 
@@ -194,3 +196,4 @@ Pass only if all of these hold:
 - 2026-08-27: FIRM source switched to FEMA NFHL layer 28, `where=1=1`. IndianaMap 2023 left Monument Circle, Carmel, and a Delaware field as `unmapped`. Gate samples must be `unshaded_x`. Binary `sfha==1` includes floodway. HSG tiled SDA marked `hsg_incomplete`. Stage B blocked until `firm_unshaded_x_ok`.
 - 2026-08-27: Stage B hydrology: slope floor 0.001 rad, NHD burn + waterbodies, flow-path HAND, TWI, separate COGs. HSG stays out of the stack. Stage C not started.
 - 2026-08-27: Stage C: binary sfha labels, HUC-10 leave-one-out with 1-pixel halo, HAND-nodata excluded, no HSG, `P(sfha | hydro)`. Stage D not started.
+- 2026-08-27: C addendum: isotonic OOF calibration, `p_sfha_calibrated.tif`. Stage D tables from calibrated P, buffer max/mean, D2 coverage split. Raw `sum(P*lb)` not shipped.

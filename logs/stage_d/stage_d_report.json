@@ -1,0 +1,83 @@
+{
+  "buffer_m": 120.0,
+  "buffer_radius_cells": 4,
+  "d1_by_t": [
+    {
+      "expected_pounds_p_max": 240765.71098480697,
+      "expected_pounds_p_mean": 0.0,
+      "headline": false,
+      "n_d1_p_max": 16,
+      "n_d1_p_mean": 0,
+      "n_shaded_x_p_max_sensitivity": 3,
+      "t": 0.5
+    },
+    {
+      "expected_pounds_p_max": 223988.67173606157,
+      "expected_pounds_p_mean": 0.0,
+      "headline": true,
+      "n_d1_p_max": 5,
+      "n_d1_p_mean": 0,
+      "n_shaded_x_p_max_sensitivity": 1,
+      "t": 0.75
+    },
+    {
+      "expected_pounds_p_max": 0.0,
+      "expected_pounds_p_mean": 0.0,
+      "headline": false,
+      "n_d1_p_max": 0,
+      "n_d1_p_mean": 0,
+      "n_shaded_x_p_max_sensitivity": 0,
+      "t": 0.9
+    }
+  ],
+  "d1_header": "SFHA-like hydrology outside Zone A/AE",
+  "d1_n_unshaded_x": 101,
+  "d1_zone_class": "unshaded_x",
+  "d2_empty_is_coverage": true,
+  "d2_n": 0,
+  "d2_n_code1": 117,
+  "d2_n_code2": 0,
+  "expected_pounds_from_calibrated_p": true,
+  "expected_pounds_from_raw_p": false,
+  "folium_written": false,
+  "gate": "pass",
+  "headline_p": "p_max",
+  "headline_t": 0.75,
+  "hsg_in_model": false,
+  "huc8": "05120201",
+  "imported_occupancy_path": "/Users/samw/indiana_flood_completion/data/frozen/sibling_stage0_occupancy.json",
+  "n_dioxin_rows_held_grams": 29,
+  "n_tris_huc_year": 117,
+  "ofr_reaches_intersecting_huc": [
+    "unnamed tributary of Fall Creek at Paragon",
+    "White River at Martinsville"
+  ],
+  "p_definition": "P(sfha | hydro)",
+  "p_source": "p_sfha_calibrated.tif",
+  "p_source_raw_kept": "p_sfha.tif",
+  "reporting_year": 2023,
+  "shap_written": false,
+  "stage": "D",
+  "state": "IN",
+  "template_fingerprint": {
+    "crs": 5070,
+    "height": 4252,
+    "kind": "nlcd_2021",
+    "raster_sha256": "bfbd21bdbb1564fd9df58ffd8d0e80c0b4dcf2ac34c010aea4c6306df5ec2a2f",
+    "transform": [
+      30.0,
+      0.0,
+      793020.0,
+      0.0,
+      -30.0,
+      1977420.0
+    ],
+    "transform_sha256": "479ac37628bfd7e5d409f6108ae6ba1805acfd37ecdc7093785db06ac9ebec22",
+    "width": 4826
+  },
+  "thresholds": [
+    0.5,
+    0.75,
+    0.9
+  ]
+}

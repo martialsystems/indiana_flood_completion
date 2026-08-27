@@ -1,6 +1,6 @@
 # Checklist
 
-Status as of **2026-08-27:** Stage C report on disk. PR-AUC above the SFHA-rate baseline. HSG omitted. Probabilities not calibrated. Stage D has not started.
+Status as of **2026-08-27:** Calibrated P and Stage D tables on disk. D2 empty (coverage). HSG omitted. B closed. SHAP/Folium not written.
 
 ## Stage 0
 
@@ -21,5 +21,6 @@ Status as of **2026-08-27:** Stage C report on disk. PR-AUC above the SFHA-rate 
 - [ ] Stage A HSG: Indiana gSSURGO 10 m (tiled SDA is `hsg_incomplete`)
 - [x] Stage B: TWI / HAND stack (flow-path HAND, slope floor, waterbody distance)
 - [x] Stage C: HUC-10 CV + XGBoost + `p_sfha.tif` (no HSG; HAND-nodata excluded)
-- [ ] Stage D: D1/D2 tables, SHAP, Folium
+- [x] Stage C addendum: isotonic OOF `p_sfha_calibrated.tif`
+- [x] Stage D: D1/D2 tables from calibrated P (SHAP/Folium later)
 - [ ] Research note PDF

@@ -18,7 +18,7 @@ Cite OFR 2008-1322 as “June 7-9, 2008 inundation (OFR 2008-1322)”. Do not pa
 
 ## Stages
 
-Stage order is 0, A, B, C, D. `whiteforge.gate.require_stage` refuses skips. Stage A refuses a fixture template. Stage B refuses `firm_unshaded_x_ok=False`. Stage C refuses missing A/B reports. Stage D refuses missing C metrics or a missing 2008 three-state mask. Stage C may start without HSG. Do not train C on the tiled SDA scrape. Do not start D from C. Do not write D1/D2 in C. OFR 3082 and TRI 117 stay frozen until D. HAND-nodata cells are excluded from the C sample and stay nodata in `p_sfha.tif`.
+Stage order is 0, A, B, C, D. `whiteforge.gate.require_stage` refuses skips. Stage A refuses a fixture template. Stage B refuses `firm_unshaded_x_ok=False`. Stage C refuses missing A/B reports. Stage D refuses missing C metrics or a missing 2008 three-state mask. Stage D samples `p_sfha_calibrated.tif` only. Do not ship `sum(P*lb)` from raw `p_sfha.tif`. Do not reopen B. HSG omitted is accepted. OFR 3082 and TRI 117 stay frozen as inputs; D reads them. HAND-nodata stays nodata on both P rasters.
 
 ## CRS
 
