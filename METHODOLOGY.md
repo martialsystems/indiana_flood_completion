@@ -30,7 +30,7 @@ Vector layers stay EPSG:4269 until an explicit, logged warp.
 |-------|-----|---------|
 | **0** | Pin, claims, occupancy freeze, HUC clip, 30 m 5070 template | Freeze numbers match; claim scan clean; HUC non-empty; template CRS 5070 at 30 m |
 | **A** | Ingest DEM, NHD, soils, FIRM (all zones), TRI points and pounds, 2008 three-state mask | Shared template transform; `sfha` ∈ {0,1} **and** `zone_class` codebook written; FIRM from NFHL S_FLD_HAZ_AR with `where=1=1`; gate samples at Monument Circle, Carmel till-plain, and a Delaware field are `unshaded_x`; `unshaded_x` > `sfha`; floodway cells have `sfha==1`; 2008 mask unique values include code 1, and code 2 if any Appendix 2 raster intersects the HUC; TRI error budget fields listed below. HSG may be marked `hsg_incomplete` |
-| **B** | TWI, HAND, distance, stack | Finite TWI on interior; toy-watershed test green. Do not start until Stage A `firm_unshaded_x_ok` is true |
+| **B** | TWI, HAND, distance, stack | Finite TWI on interior cells where DEM is finite; toy-watershed test green; every band on transform sha256 `479ac37628bfd7e5`; `firm_unshaded_x_ok` required to start |
 | **C** | Spatial block CV, XGBoost, `p_sfha.tif` | Report title and colorbar say `P(sfha \| hydro)`; PR-AUC above the SFHA-rate baseline; Brier vs that same constant; no test HUC-10 in train, including a 1-pixel halo; HAND-thresholded SFHA logged on the held-out HUC-10s |
 | **D** | Sample TRI in-HUC; tables D1 and D2; SHAP; Folium | Both tables written; D1 filter is `zone_class == unshaded_x`; D2 is mask code 2; coverage split (`ofr_reaches_intersecting_huc`, `d2_n_code1`, `d2_n_code2`) present even if D2 is empty; pounds column `on_site_release_lb` with year; occupancy is `n_tris_huc_year` only; freeze path cited; every row `huc=05120201` and `state=IN` |
 
@@ -73,7 +73,21 @@ Binary `sfha==1` is 758,046 cells, equal to floodway + sfha. Gate samples (Monum
 
 Codes live in `floodmap.codes`. D1 filter is `zone_class == unshaded_x`. Shaded X (0.2% annual chance) is a mapped FEMA moderate-hazard zone: it is still Zone X in speech and is **not** eligible for D1. Count shaded X in a sensitivity column. D1 headers say “SFHA-like hydrology outside Zone A/AE” and name the filter `unshaded_x`, not `sfha==0`.
 
-HSG from tiled SDA `TOP 4000` per 0.25° tile is incomplete (~15% of the interior on 2026-08-26). Stage A may record `hsg_incomplete` and keep code 255 as `hsg_missing`. Replace that pull with the Indiana gSSURGO 10 m raster joined to `hydgrpdcd` before Stage C trains on soils. HSG may trail one commit. FIRM may not. Do not start Stage B until the NFHL recount and gate samples exist.
+HSG from tiled SDA `TOP 4000` per 0.25° tile is incomplete (~15% of the interior on 2026-08-26). Stage A may record `hsg_incomplete` and keep code 255 as `hsg_missing`. Replace that pull with the Indiana gSSURGO 10 m raster joined to `hydgrpdcd` after Stage B and before Stage C trains on soils. Stage B does not wait on HSG and does not put HSG in the stack.
+
+## Stage B hydrology
+
+Inputs: live template DEM, NHD Flowline `ftype=460`, NHD Waterbody, NHD Area `ftype=460`. Order:
+
+1. Slope (radians) from the display DEM. Till-plain cells have tan β near 0. Floor β at 0.001 rad (~0.057°) when computing TWI. Log `n_slope_floor`.
+2. Hydroconditioned copy: burn NHD flowlines, waterbody polygons, and Area StreamRiver 50 m, then priority-flood fill with those cells as seeds. D8 and accumulation run on that copy.
+3. HAND: raw DEM elevation minus elevation of the drained stream cell along D8. Not Euclidean height to the nearest painted stream pixel. Stream mask is the burned network (flowline ∪ waterbody ∪ area 460).
+4. Distance: Euclidean metres to flowlines (`dist_flowline`) and separately to waterbodies (`dist_waterbody`). Geist, Morse, and Eagle Creek are waterbodies, not flowlines.
+5. TWI = ln(α / tan β) with α = (acc+1) × 30 m from the conditioned accumulation. Interior nodata only where DEM is nodata. No inf.
+
+Write `slope`, `twi`, `hand`, `dist_flowline`, `dist_waterbody` as separate COGs plus `stack_manifest.json`. Do not materialize 7.83M × k as a dense float64 matrix. Do not put HSG in the stack.
+
+Stage C trains on binary `sfha` (floodway included). Stage D filters `unshaded_x`. Do not start Stage C from the B runner. OFR mask code 2 (3082) and `n_tris_huc_year` (117) stay frozen until D.
 
 ## 2008 three-state mask (Stage A)
 
@@ -166,3 +180,4 @@ Pass only if all of these hold:
 - 2026-08-26: Stage A success table: FIRM zone codebook, 2008 three-state mask (OFR 2008-1322 Appendix 2 is reach-scale), D1=`unshaded_x`, D2=mask code 2, TRI error budget, occupancy is `n_tris_huc_year`.
 - 2026-08-26: Stage A fetch: warp_to_template on live nlcd_2021; all 17 Appendix 2 zips downloaded; only intersecting reaches paint mask code 2; Martinsville/Paragon intersection measured.
 - 2026-08-27: FIRM source switched to FEMA NFHL layer 28, `where=1=1`. IndianaMap 2023 left Monument Circle, Carmel, and a Delaware field as `unmapped`. Gate samples must be `unshaded_x`. Binary `sfha==1` includes floodway. HSG tiled SDA marked `hsg_incomplete`. Stage B blocked until `firm_unshaded_x_ok`.
+- 2026-08-27: Stage B hydrology: slope floor 0.001 rad, NHD burn + waterbodies, flow-path HAND, TWI, separate COGs. HSG stays out of the stack. Stage C not started.

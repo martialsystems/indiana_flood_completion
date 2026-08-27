@@ -18,7 +18,7 @@ Cite OFR 2008-1322 as “June 7-9, 2008 inundation (OFR 2008-1322)”. Do not pa
 
 ## Stages
 
-Stage order is 0, A, B, C, D. `whiteforge.gate.require_stage` refuses skips. Stage A refuses a fixture template. Stage B refuses `firm_unshaded_x_ok=False`. Stage C refuses missing A/B reports. Stage D refuses missing C metrics or a missing 2008 three-state mask. Do not start Stage B until the NFHL FIRM recount exists: gate samples at Monument Circle, Carmel, and a Delaware field are `unshaded_x`, and `unshaded_x` > `sfha`. HSG may stay `hsg_incomplete` for one commit.
+Stage order is 0, A, B, C, D. `whiteforge.gate.require_stage` refuses skips. Stage A refuses a fixture template. Stage B refuses `firm_unshaded_x_ok=False`. Stage C refuses missing A/B reports. Stage D refuses missing C metrics or a missing 2008 three-state mask. Stage B may start now that NFHL gate samples are `unshaded_x`. Do not start Stage C from B. HSG stays `hsg_incomplete` until the gSSURGO 10 m pass; it is not a B input and is not in the C design matrix until interior coded fraction is no longer a majority-missing class. OFR 3082 and TRI 117 stay frozen until D.
 
 ## CRS
 

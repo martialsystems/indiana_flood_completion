@@ -86,8 +86,29 @@ DEM_TILE_PX = 2000
 NHD_FLOWLINE_URL = (
     "https://hydro.nationalmap.gov/arcgis/rest/services/nhd/MapServer/6"
 )
+NHD_AREA_URL = (
+    "https://hydro.nationalmap.gov/arcgis/rest/services/nhd/MapServer/9"
+)
+NHD_WATERBODY_URL = (
+    "https://hydro.nationalmap.gov/arcgis/rest/services/nhd/MapServer/12"
+)
 NHD_PAGE_SIZE = 2000
 DIST_NODATA = -1.0
+HYDRO_NODATA = -9999.0
+SLOPE_FLOOR_RAD = 0.001
+HYDRO_BURN_M = 50.0
+HYDRO_FILL_EPSILON_M = 1e-3
+# Live NLCD 2021 template transform (Stage 0/A). Stage B refuses a mismatch.
+LOCKED_TRANSFORM_SHA256 = (
+    "479ac37628bfd7e5d409f6108ae6ba1805acfd37ecdc7093785db06ac9ebec22"
+)
+STAGE_B_BANDS = (
+    "slope",
+    "twi",
+    "hand",
+    "dist_flowline",
+    "dist_waterbody",
+)
 
 # gSSURGO / muaggatt hydrologic group. Dual groups stay distinct codes.
 HSG_CODE = {

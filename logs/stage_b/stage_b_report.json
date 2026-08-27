@@ -1,0 +1,93 @@
+{
+  "bands": [
+    {
+      "driver": "COG",
+      "dtype": "float32",
+      "name": "slope",
+      "nodata": -9999.0,
+      "path": "/Users/samw/indiana_flood_completion/data/interim/slope.tif",
+      "units": "rad"
+    },
+    {
+      "driver": "COG",
+      "dtype": "float32",
+      "name": "twi",
+      "nodata": -9999.0,
+      "path": "/Users/samw/indiana_flood_completion/data/interim/twi.tif",
+      "units": "ln(m)"
+    },
+    {
+      "driver": "COG",
+      "dtype": "float32",
+      "name": "hand",
+      "nodata": -9999.0,
+      "path": "/Users/samw/indiana_flood_completion/data/interim/hand.tif",
+      "units": "m"
+    },
+    {
+      "driver": "COG",
+      "dtype": "float32",
+      "name": "dist_flowline",
+      "nodata": -1.0,
+      "path": "/Users/samw/indiana_flood_completion/data/interim/dist_flowline.tif",
+      "units": "m"
+    },
+    {
+      "driver": "COG",
+      "dtype": "float32",
+      "name": "dist_waterbody",
+      "nodata": -1.0,
+      "path": "/Users/samw/indiana_flood_completion/data/interim/dist_waterbody.tif",
+      "units": "m"
+    }
+  ],
+  "firm_unshaded_x_ok": true,
+  "gate": "pass",
+  "hand_is_flow_path": true,
+  "hsg_in_stack": false,
+  "hsg_incomplete": true,
+  "huc8": "05120201",
+  "hydro_burn_m": 50.0,
+  "n_area_460_features": 28,
+  "n_dem_valid": 7830039,
+  "n_flowline_cells": 568236,
+  "n_flowline_features": 65615,
+  "n_hand_undefined": 28695,
+  "n_interior": 7830039,
+  "n_slope_floor": 121187,
+  "n_stream_cells": 838844,
+  "n_waterbody_cells": 212308,
+  "n_waterbody_features": 11745,
+  "p_definition": "P(sfha | hydro)",
+  "slope_floor_rad": 0.001,
+  "stack_manifest": "/Users/samw/indiana_flood_completion/logs/stage_b/stack_manifest.json",
+  "stage": "B",
+  "stage_c_started": false,
+  "template_fingerprint": {
+    "crs": 5070,
+    "height": 4252,
+    "kind": "nlcd_2021",
+    "raster_sha256": "bfbd21bdbb1564fd9df58ffd8d0e80c0b4dcf2ac34c010aea4c6306df5ec2a2f",
+    "transform": [
+      30.0,
+      0.0,
+      793020.0,
+      0.0,
+      -30.0,
+      1977420.0
+    ],
+    "transform_sha256": "479ac37628bfd7e5d409f6108ae6ba1805acfd37ecdc7093785db06ac9ebec22",
+    "width": 4826
+  },
+  "twi_finite_on_dem_valid": true,
+  "unit": "pixel",
+  "unmapped_addendum": {
+    "largest_component_cells": 35,
+    "n_components": 6335,
+    "n_components_ge10": 3,
+    "n_on_huc_edge": 4,
+    "n_unmapped": 7480,
+    "named_community_without_firm": null,
+    "pattern": "interior speckle"
+  }
+}

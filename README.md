@@ -38,7 +38,13 @@ Stage A (network; live `nlcd_2021` template required):
 PYTHONPATH=src:. python3 scripts/run_stage_a.py
 ```
 
-Do not start Stage B until `logs/stage_a/stage_a_report.json` has `firm_unshaded_x_ok: true` (NFHL unfiltered Zone X, gate samples at Monument Circle / Carmel / Delaware). D1 is `unshaded_x`. OFR 2008-1322 Appendix 2 is a reach-scale three-state mask. The fixture path is the CI join. HSG may be `hsg_incomplete` until the gSSURGO 10 m pass.
+Stage B (network for NHD waterbodies; live template + DEM required):
+
+```bash
+PYTHONPATH=src:. python3 scripts/run_stage_b.py
+```
+
+Finite TWI on interior, toy-watershed tests in `tests/test_hydro.py`, bands on transform sha256 `479ac37628bfd7e5`. D1 is `unshaded_x`. OFR 2008-1322 Appendix 2 is a reach-scale three-state mask. HSG stays out of the B stack. Do not start Stage C from B. The fixture path is the CI join.
 
 ## Claim bans
 

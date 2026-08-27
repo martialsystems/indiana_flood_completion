@@ -106,6 +106,40 @@ def write_aligned(
     return dest
 
 
+def write_aligned_cog(
+    dest: Path,
+    template: TemplateGrid,
+    data: np.ndarray,
+    *,
+    dtype: str,
+    nodata,
+) -> Path:
+    """Cloud-optimized GeoTIFF on the live template. Separate bands, not a dense stack."""
+    require_live_template(template)
+    if data.shape != (template.height, template.width):
+        raise GateError(
+            f"aligned raster shape {data.shape} != "
+            f"({template.height}, {template.width})"
+        )
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    arr = np.asarray(data, dtype=dtype)
+    profile = {
+        "driver": "COG",
+        "height": template.height,
+        "width": template.width,
+        "count": 1,
+        "dtype": dtype,
+        "crs": CRS.from_epsg(template.crs),
+        "transform": template.transform,
+        "nodata": nodata,
+        "compress": "deflate",
+        "blocksize": 512,
+    }
+    with rasterio.open(dest, "w", **profile) as dst:
+        dst.write(arr, 1)
+    return dest
+
+
 def warp_to_template(
     src_path: Path,
     template: TemplateGrid,

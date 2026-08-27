@@ -271,6 +271,15 @@
     "reporting_year": 2023
   },
   "unit": "pixel",
+  "unmapped_addendum": {
+    "largest_component_cells": 35,
+    "n_components": 6335,
+    "n_components_ge10": 3,
+    "n_on_huc_edge": 4,
+    "n_unmapped": 7480,
+    "named_community_without_firm": null,
+    "pattern": "interior speckle"
+  },
   "zone_class_counts": {
     "floodway": 308139,
     "sfha": 449907,

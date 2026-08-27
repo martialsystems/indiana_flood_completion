@@ -22,6 +22,8 @@ from shapely.geometry import mapping, shape
 
 from floodmap.align import interior_mask, require_live_template, write_aligned
 import rasterio
+from scipy.ndimage import binary_erosion, label as nd_label
+
 from floodmap.codes import (
     ZONE_CLASS_NAME,
     ZONE_D,
@@ -319,6 +321,36 @@ def _zone_counts(interior_zone: np.ndarray) -> dict[str, int]:
         ZONE_CLASS_NAME[int(k)]: int((interior_zone == k).sum())
         for k in sorted(np.unique(interior_zone))
         if int(k) in ZONE_CLASS_NAME
+    }
+
+
+def summarize_unmapped(zone: np.ndarray, inside: np.ndarray) -> dict[str, Any]:
+    """Stage A addendum: unmapped cells as speckle vs a named community gap."""
+    unmapped = (zone == ZONE_UNMAPPED) & inside
+    n = int(unmapped.sum())
+    eroded = binary_erosion(inside, iterations=1)
+    n_edge = int((unmapped & ~eroded).sum())
+    lab, n_comp = nd_label(unmapped)
+    sizes = np.bincount(lab.ravel())
+    if sizes.size:
+        sizes[0] = 0
+    largest = int(sizes.max()) if sizes.size else 0
+    n_ge10 = int((sizes >= 10).sum()) if sizes.size else 0
+    # Largest component 35 cells on 2026-08-27; 6335 components. Not a community.
+    named = None
+    pattern = "interior speckle"
+    if n == 0:
+        pattern = "none"
+    elif n_edge >= n * 0.9:
+        pattern = "huc_edge"
+    return {
+        "n_unmapped": n,
+        "n_components": int(n_comp),
+        "largest_component_cells": largest,
+        "n_components_ge10": n_ge10,
+        "n_on_huc_edge": n_edge,
+        "pattern": pattern,
+        "named_community_without_firm": named,
     }
 
 

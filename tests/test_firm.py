@@ -18,6 +18,7 @@ from floodmap.firm import (
     firm_query_url,
     rasterize_firm,
     require_unshaded_majority,
+    summarize_unmapped,
 )
 from floodmap.huc import load_huc
 from floodmap.template import write_synthetic_nlcd
@@ -180,6 +181,19 @@ def test_firm_floodway_cells_are_sfha(tmp_path: Path) -> None:
     assert info["sfha_counts"]["1"] >= int(info["zone_class_counts"]["floodway"]) + int(
         info["zone_class_counts"]["sfha"]
     )
+
+
+def test_unmapped_speckle_is_not_a_community() -> None:
+    inside = np.ones((20, 20), dtype=bool)
+    zone = np.ones((20, 20), dtype=np.uint8)
+    zone[5, 5] = 0
+    zone[12, 3] = 0
+    zone[12, 4] = 0
+    info = summarize_unmapped(zone, inside)
+    assert info["n_unmapped"] == 3
+    assert info["pattern"] == "interior speckle"
+    assert info["named_community_without_firm"] is None
+    assert info["largest_component_cells"] == 2
 
 
 def test_require_unshaded_majority() -> None:

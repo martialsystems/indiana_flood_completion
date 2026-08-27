@@ -1,0 +1,50 @@
+{
+  "bands": [
+    {
+      "driver": "COG",
+      "dtype": "float32",
+      "name": "slope",
+      "nodata": -9999.0,
+      "path": "/Users/samw/indiana_flood_completion/data/interim/slope.tif",
+      "units": "rad"
+    },
+    {
+      "driver": "COG",
+      "dtype": "float32",
+      "name": "twi",
+      "nodata": -9999.0,
+      "path": "/Users/samw/indiana_flood_completion/data/interim/twi.tif",
+      "units": "ln(m)"
+    },
+    {
+      "driver": "COG",
+      "dtype": "float32",
+      "name": "hand",
+      "nodata": -9999.0,
+      "path": "/Users/samw/indiana_flood_completion/data/interim/hand.tif",
+      "units": "m"
+    },
+    {
+      "driver": "COG",
+      "dtype": "float32",
+      "name": "dist_flowline",
+      "nodata": -1.0,
+      "path": "/Users/samw/indiana_flood_completion/data/interim/dist_flowline.tif",
+      "units": "m"
+    },
+    {
+      "driver": "COG",
+      "dtype": "float32",
+      "name": "dist_waterbody",
+      "nodata": -1.0,
+      "path": "/Users/samw/indiana_flood_completion/data/interim/dist_waterbody.tif",
+      "units": "m"
+    }
+  ],
+  "hsg_in_stack": false,
+  "huc8": "05120201",
+  "hydro_burn_m": 50.0,
+  "materialized_dense_matrix": false,
+  "slope_floor_rad": 0.001,
+  "template_transform_sha256": "479ac37628bfd7e5d409f6108ae6ba1805acfd37ecdc7093785db06ac9ebec22"
+}
