@@ -1,6 +1,6 @@
 # Checklist
 
-Status as of **2026-08-27:** Stage B report on disk. TWI finite on the live interior. HSG remains incomplete. Stage C has not started.
+Status as of **2026-08-27:** Stage C report on disk. PR-AUC above the SFHA-rate baseline. HSG omitted. Probabilities not calibrated. Stage D has not started.
 
 ## Stage 0
 
@@ -20,6 +20,6 @@ Status as of **2026-08-27:** Stage B report on disk. TWI finite on the live inte
 - [x] Stage A FIRM recount: NFHL layer 28, no `FLD_ZONE` filter, gate samples `unshaded_x`, floodway in `sfha==1` (unshaded_x 6,986,426; unmapped 7,480)
 - [ ] Stage A HSG: Indiana gSSURGO 10 m (tiled SDA is `hsg_incomplete`)
 - [x] Stage B: TWI / HAND stack (flow-path HAND, slope floor, waterbody distance)
-- [ ] Stage C: HUC-10 CV + XGBoost + `p_sfha.tif`
+- [x] Stage C: HUC-10 CV + XGBoost + `p_sfha.tif` (no HSG; HAND-nodata excluded)
 - [ ] Stage D: D1/D2 tables, SHAP, Folium
 - [ ] Research note PDF

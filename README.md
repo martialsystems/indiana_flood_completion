@@ -44,7 +44,15 @@ Stage B (network for NHD waterbodies; live template + DEM required):
 PYTHONPATH=src:. python3 scripts/run_stage_b.py
 ```
 
-Finite TWI on interior, toy-watershed tests in `tests/test_hydro.py`, bands on transform sha256 `479ac37628bfd7e5`. D1 is `unshaded_x`. OFR 2008-1322 Appendix 2 is a reach-scale three-state mask. HSG stays out of the B stack. Do not start Stage C from B. The fixture path is the CI join.
+Finite TWI on interior, toy-watershed tests in `tests/test_hydro.py`, bands on transform sha256 `479ac37628bfd7e5`. D1 is `unshaded_x`. OFR 2008-1322 Appendix 2 is a reach-scale three-state mask. HSG stays out of the B stack and out of this C model.
+
+Stage C (HUC-10 fetch; live bands required):
+
+```bash
+PYTHONPATH=src:. python3 scripts/run_stage_c.py
+```
+
+Report and colorbar: `P(sfha | hydro)`. Do not start D from C. The fixture path is the CI join.
 
 ## Claim bans
 

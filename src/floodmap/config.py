@@ -33,6 +33,9 @@ USER_AGENT = "MartialSystemsResearch/indiana_flood_completion (stage0)"
 WBD_LAYER_URL = (
     "https://hydro.nationalmap.gov/arcgis/rest/services/wbd/MapServer/4"
 )
+WBD_HUC10_LAYER_URL = (
+    "https://hydro.nationalmap.gov/arcgis/rest/services/wbd/MapServer/5"
+)
 WBD_MAX_ALLOWABLE_OFFSET_DEG = 0.0001
 WBD_GEOMETRY_PRECISION = 6
 # USGS catalog ~2700 sq mi; live query 2026-08-26 was 7046.97 km2.
@@ -109,6 +112,20 @@ STAGE_B_BANDS = (
     "dist_flowline",
     "dist_waterbody",
 )
+# Stage C covariates. HSG is not in this list until gSSURGO coverage is majority-coded.
+STAGE_C_FEATURES = (
+    "slope",
+    "twi",
+    "hand",
+    "dist_flowline",
+    "dist_waterbody",
+    "nlcd_impervious",
+)
+HAND_NODATA_RULE = "exclude_from_sample_and_p_sfha_nodata"
+C_NON_SFHA_RATIO = 3.0
+C_NEAR_STREAM_M = 300.0
+C_RANDOM_SEED = 20260827
+P_SFHA_NODATA = -1.0
 
 # gSSURGO / muaggatt hydrologic group. Dual groups stay distinct codes.
 HSG_CODE = {

@@ -98,6 +98,20 @@ def test_stage_gate_blocks_b_without_firm_unshaded_x() -> None:
     )
 
 
+def test_stage_gate_allows_c_with_ab_and_firm() -> None:
+    require_stage(
+        current_stage="B",
+        target_stage="C",
+        freeze_verified=True,
+        template_kind="nlcd_2021",
+        stage_a_report=True,
+        stage_b_report=True,
+        firm_unshaded_x_ok=True,
+        inundation_2008_mask=True,
+        thread_id="test.stage.c_allow",
+    )
+
+
 def test_stage_gate_blocks_c_without_ab_and_d_without_mask() -> None:
     with pytest.raises(LawBlockedError):
         require_stage(

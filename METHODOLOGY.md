@@ -73,7 +73,7 @@ Binary `sfha==1` is 758,046 cells, equal to floodway + sfha. Gate samples (Monum
 
 Codes live in `floodmap.codes`. D1 filter is `zone_class == unshaded_x`. Shaded X (0.2% annual chance) is a mapped FEMA moderate-hazard zone: it is still Zone X in speech and is **not** eligible for D1. Count shaded X in a sensitivity column. D1 headers say “SFHA-like hydrology outside Zone A/AE” and name the filter `unshaded_x`, not `sfha==0`.
 
-HSG from tiled SDA `TOP 4000` per 0.25° tile is incomplete (~15% of the interior on 2026-08-26). Stage A may record `hsg_incomplete` and keep code 255 as `hsg_missing`. Replace that pull with the Indiana gSSURGO 10 m raster joined to `hydgrpdcd` after Stage B and before Stage C trains on soils. Stage B does not wait on HSG and does not put HSG in the stack.
+HSG from tiled SDA `TOP 4000` per 0.25° tile is incomplete (~15% of the interior on 2026-08-26). Stage A may record `hsg_incomplete` and keep code 255 as `hsg_missing`. Stage C may start without HSG. Do not train C on the 15% SDA scrape. When the Indiana gSSURGO 10 m band exists and `hsg_missing` is not the majority interior class, that is a C addendum or a second model, not a silent column drop-in.
 
 ## Stage B hydrology
 
@@ -87,7 +87,19 @@ Inputs: live template DEM, NHD Flowline `ftype=460`, NHD Waterbody, NHD Area `ft
 
 Write `slope`, `twi`, `hand`, `dist_flowline`, `dist_waterbody` as separate COGs plus `stack_manifest.json`. Do not materialize 7.83M × k as a dense float64 matrix. Do not put HSG in the stack.
 
-Stage C trains on binary `sfha` (floodway included). Stage D filters `unshaded_x`. Do not start Stage C from the B runner. OFR mask code 2 (3082) and `n_tris_huc_year` (117) stay frozen until D.
+HAND nodata (cells that never reach NHD along D8): exclude from train/test; write nodata in `p_sfha.tif`. Do not fill with 0. Stream cells are native NHD paint (`all_touched=True`), not an extra buffer: log flowline-only vs waterbody-only vs overlap vs Area 460 remainder on the B report before C samples.
+
+## Stage C
+
+Train on binary `sfha` (floodway included). Do not train on `zone_class`. D still filters `unshaded_x`.
+
+Features: `slope`, `twi`, `hand`, `dist_flowline`, `dist_waterbody`, `nlcd_impervious`. No HSG in this commit.
+
+Sampling: do not load 7.83M rows as a dense matrix. Take all eligible SFHA ones plus 3× non-SFHA, with extra weight on `unshaded_x` within 300 m of a flowline or waterbody. Drop HAND-nodata.
+
+Blocks: WBD 10-digit HU (17 watersheds in 05120201). Leave-one-HUC-10-out. No test HUC-10 in train, including a 1-pixel halo. Metrics on all eligible held-out cells, not the stratified train sample.
+
+Pass: PR-AUC above the SFHA-rate constant; Brier vs that constant logged; report and colorbar say `P(sfha | hydro)`; file `p_sfha.tif`. If the booster barely beats a HAND score, still pass C and say so. Stratified sampling plus class weight can rank well while Brier is worse than the constant: log `probabilities_calibrated` as false until a calibration pass. Do not treat 0.75 as a cutoff in C. Do not write D1/D2. Do not touch OFR or TRI. Do not start D until C metrics exist and HSG is either in under the coverage rule or explicitly omitted in the C report.
 
 ## 2008 three-state mask (Stage A)
 
@@ -181,3 +193,4 @@ Pass only if all of these hold:
 - 2026-08-26: Stage A fetch: warp_to_template on live nlcd_2021; all 17 Appendix 2 zips downloaded; only intersecting reaches paint mask code 2; Martinsville/Paragon intersection measured.
 - 2026-08-27: FIRM source switched to FEMA NFHL layer 28, `where=1=1`. IndianaMap 2023 left Monument Circle, Carmel, and a Delaware field as `unmapped`. Gate samples must be `unshaded_x`. Binary `sfha==1` includes floodway. HSG tiled SDA marked `hsg_incomplete`. Stage B blocked until `firm_unshaded_x_ok`.
 - 2026-08-27: Stage B hydrology: slope floor 0.001 rad, NHD burn + waterbodies, flow-path HAND, TWI, separate COGs. HSG stays out of the stack. Stage C not started.
+- 2026-08-27: Stage C: binary sfha labels, HUC-10 leave-one-out with 1-pixel halo, HAND-nodata excluded, no HSG, `P(sfha | hydro)`. Stage D not started.

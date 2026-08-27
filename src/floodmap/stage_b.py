@@ -288,3 +288,67 @@ def run_stage_b(
     )
     _write_json(out_dir / "stage_b_report.json", report)
     return report
+
+
+def stream_composition(
+    *,
+    inside: np.ndarray,
+    dist_flowline: np.ndarray,
+    dist_waterbody: np.ndarray,
+    n_stream_cells: int,
+) -> dict[str, Any]:
+    """Line vs waterbody split from existing distance rasters. No new hydrology."""
+    fl = (dist_flowline == 0) & inside
+    wb = (dist_waterbody == 0) & inside
+    n_fl = int(fl.sum())
+    n_wb = int(wb.sum())
+    n_both = int((fl & wb).sum())
+    n_union = n_fl + n_wb - n_both
+    remainder = int(n_stream_cells) - n_union
+    return {
+        "n_flowline_cells": n_fl,
+        "n_waterbody_cells": n_wb,
+        "n_flowline_only": n_fl - n_both,
+        "n_waterbody_only": n_wb - n_both,
+        "n_flowline_and_waterbody": n_both,
+        "n_union_flowline_waterbody": n_union,
+        "n_stream_cells": int(n_stream_cells),
+        "n_remainder_area_460": remainder,
+        "rasterize": "all_touched=True on native NHD geometry, no extra buffer_m",
+        "dilated": False,
+    }
+
+
+def encode_b_leftovers(
+    report_path: Path,
+    *,
+    inside: np.ndarray,
+    dist_flowline: np.ndarray,
+    dist_waterbody: np.ndarray,
+    hand: np.ndarray,
+) -> dict[str, Any]:
+    """Write stream split and HAND-nodata rule onto the Stage B report. No hydro re-run."""
+    if not report_path.is_file():
+        raise GateError(f"Stage B report missing: {report_path}")
+    report = json.loads(report_path.read_text(encoding="utf-8"))
+    if report.get("stage") != "B":
+        raise GateError("encode_b_leftovers requires a Stage B report")
+    n_stream = int(report.get("n_stream_cells") or 0)
+    split = stream_composition(
+        inside=inside,
+        dist_flowline=dist_flowline,
+        dist_waterbody=dist_waterbody,
+        n_stream_cells=n_stream,
+    )
+    from floodmap.config import HAND_NODATA_RULE, HYDRO_NODATA
+
+    hand_nd = inside & ((hand == HYDRO_NODATA) | ~np.isfinite(hand))
+    leftovers = {
+        "stream_composition": split,
+        "hand_nodata_rule": HAND_NODATA_RULE,
+        "n_hand_nodata": int(hand_nd.sum()),
+        "hand_nodata_filled_with_zero": False,
+    }
+    report.update(leftovers)
+    _write_json(report_path, report)
+    return leftovers

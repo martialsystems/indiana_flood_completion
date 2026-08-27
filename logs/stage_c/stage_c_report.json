@@ -1,0 +1,179 @@
+{
+  "booster_barely_beats_hand": false,
+  "booster_minus_hand_pr_auc": 0.12602615779632742,
+  "brier": 0.17691105604171753,
+  "brier_baseline": 0.08769620681786426,
+  "colorbar": "P(sfha | hydro)",
+  "cv": "leave_one_huc10_out",
+  "d1_d2_written": false,
+  "features": [
+    "slope",
+    "twi",
+    "hand",
+    "dist_flowline",
+    "dist_waterbody",
+    "nlcd_impervious"
+  ],
+  "filename": "p_sfha.tif",
+  "folds": [
+    {
+      "huc10": "0512020101",
+      "n_test": 684163,
+      "n_train_sampled": 2857480
+    },
+    {
+      "huc10": "0512020102",
+      "n_test": 287549,
+      "n_train_sampled": 2940344
+    },
+    {
+      "huc10": "0512020114",
+      "n_test": 493310,
+      "n_train_sampled": 2755044
+    },
+    {
+      "huc10": "0512020116",
+      "n_test": 269128,
+      "n_train_sampled": 2896580
+    },
+    {
+      "huc10": "0512020117",
+      "n_test": 296293,
+      "n_train_sampled": 2803396
+    },
+    {
+      "huc10": "0512020103",
+      "n_test": 606126,
+      "n_train_sampled": 2824708
+    },
+    {
+      "huc10": "0512020104",
+      "n_test": 438799,
+      "n_train_sampled": 2925996
+    },
+    {
+      "huc10": "0512020105",
+      "n_test": 300606,
+      "n_train_sampled": 2986008
+    },
+    {
+      "huc10": "0512020106",
+      "n_test": 647840,
+      "n_train_sampled": 2805156
+    },
+    {
+      "huc10": "0512020107",
+      "n_test": 336717,
+      "n_train_sampled": 2876860
+    },
+    {
+      "huc10": "0512020108",
+      "n_test": 627826,
+      "n_train_sampled": 2807172
+    },
+    {
+      "huc10": "0512020109",
+      "n_test": 294534,
+      "n_train_sampled": 2928692
+    },
+    {
+      "huc10": "0512020110",
+      "n_test": 394777,
+      "n_train_sampled": 2862376
+    },
+    {
+      "huc10": "0512020111",
+      "n_test": 603210,
+      "n_train_sampled": 2806496
+    },
+    {
+      "huc10": "0512020115",
+      "n_test": 236621,
+      "n_train_sampled": 2879844
+    },
+    {
+      "huc10": "0512020112",
+      "n_test": 451641,
+      "n_train_sampled": 2764904
+    },
+    {
+      "huc10": "0512020113",
+      "n_test": 832113,
+      "n_train_sampled": 2767076
+    }
+  ],
+  "gate": "pass",
+  "halo_pixels": 1,
+  "hand_negated_pr_auc": 0.2425163783643896,
+  "hand_nodata_rule": "exclude_from_sample_and_p_sfha_nodata",
+  "hand_threshold_logged": true,
+  "hsg_in_model": false,
+  "hsg_omitted": "tiled_sda_incomplete; not a silent column",
+  "huc10_codes": [
+    "0512020101",
+    "0512020102",
+    "0512020114",
+    "0512020116",
+    "0512020117",
+    "0512020103",
+    "0512020104",
+    "0512020105",
+    "0512020106",
+    "0512020107",
+    "0512020108",
+    "0512020109",
+    "0512020110",
+    "0512020111",
+    "0512020115",
+    "0512020112",
+    "0512020113"
+  ],
+  "huc8": "05120201",
+  "n_halo_train_excluded": 47252,
+  "n_hand_nodata_excluded": 28695,
+  "n_huc10": 17,
+  "n_oof": 7801253,
+  "n_sfha_eligible": 757740,
+  "n_train_neg_sampled": 36366099,
+  "n_train_pos_sampled": 12122033,
+  "non_sfha_ratio": 3.0,
+  "ofr_touched": false,
+  "p_definition": "P(sfha | hydro)",
+  "p_sfha_path": "/Users/samw/indiana_flood_completion/data/interim/p_sfha.tif",
+  "pr_auc": 0.368542536160717,
+  "pr_auc_baseline": 0.09713055069486914,
+  "probabilities_calibrated": false,
+  "sfha_rate_eligible": 0.09712941770033472,
+  "stage": "C",
+  "stage_d_started": false,
+  "stream_composition": {
+    "dilated": false,
+    "n_flowline_and_waterbody": 9781,
+    "n_flowline_cells": 568236,
+    "n_flowline_only": 558455,
+    "n_remainder_area_460": 68081,
+    "n_stream_cells": 838844,
+    "n_union_flowline_waterbody": 770763,
+    "n_waterbody_cells": 212308,
+    "n_waterbody_only": 202527,
+    "rasterize": "all_touched=True on native NHD geometry, no extra buffer_m"
+  },
+  "template_fingerprint": {
+    "crs": 5070,
+    "height": 4252,
+    "kind": "nlcd_2021",
+    "raster_sha256": "bfbd21bdbb1564fd9df58ffd8d0e80c0b4dcf2ac34c010aea4c6306df5ec2a2f",
+    "transform": [
+      30.0,
+      0.0,
+      793020.0,
+      0.0,
+      -30.0,
+      1977420.0
+    ],
+    "transform_sha256": "479ac37628bfd7e5d409f6108ae6ba1805acfd37ecdc7093785db06ac9ebec22",
+    "width": 4826
+  },
+  "tri_touched": false,
+  "unit": "pixel"
+}
