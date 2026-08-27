@@ -71,12 +71,16 @@ def main() -> int:
     )
     n2 = (report.get("mask_value_counts") or {}).get("2", 0)
     reaches = report.get("ofr_reaches_intersecting_huc") or []
+    zc = report.get("zone_class_counts") or {}
     print(
         f"stage {report['stage']} gate={report['gate']} "
         f"template={report['template_fingerprint']['width']}x"
         f"{report['template_fingerprint']['height']} "
         f"mask2={n2} reaches={len(reaches)} "
-        f"n_tris_huc_year={report['tri']['n_tris_huc_year']}"
+        f"n_tris_huc_year={report['tri']['n_tris_huc_year']} "
+        f"firm_ok={report.get('firm_unshaded_x_ok')} "
+        f"unshaded_x={zc.get('unshaded_x')} sfha={zc.get('sfha')} "
+        f"hsg_incomplete={report.get('hsg_incomplete')}"
     )
     return 0
 

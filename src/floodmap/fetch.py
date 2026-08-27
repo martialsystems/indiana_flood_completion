@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import json
 import math
+import time
 from pathlib import Path
 from typing import Any, Callable, Iterable
 from urllib.error import HTTPError, URLError
@@ -31,13 +32,25 @@ GetJson = Callable[[str], dict[str, Any]]
 GetBytes = Callable[[str], bytes]
 
 
-def _request(url: str, *, timeout: int) -> bytes:
+def _is_retryable(exc: BaseException) -> bool:
+    if isinstance(exc, HTTPError):
+        return int(getattr(exc, "code", 0) or 0) >= 500
+    return isinstance(exc, (URLError, TimeoutError, ConnectionResetError, ConnectionError))
+
+
+def _request(url: str, *, timeout: int, attempts: int = 6) -> bytes:
     req = Request(url, headers={"User-Agent": USER_AGENT})
-    try:
-        with urlopen(req, timeout=timeout) as resp:
-            return resp.read()
-    except (HTTPError, URLError, TimeoutError) as exc:
-        raise FetchError(f"GET failed: {url}: {exc}") from exc
+    last: BaseException | None = None
+    for i in range(attempts):
+        try:
+            with urlopen(req, timeout=timeout) as resp:
+                return resp.read()
+        except (HTTPError, URLError, TimeoutError, ConnectionResetError, ConnectionError) as exc:
+            last = exc
+            if not _is_retryable(exc) or i == attempts - 1:
+                raise FetchError(f"GET failed: {url}: {exc}") from exc
+            time.sleep(min(2 ** i, 16))
+    raise FetchError(f"GET failed: {url}: {last}") from last
 
 
 def default_get_json(url: str, *, timeout: int = 90) -> dict[str, Any]:
@@ -55,19 +68,37 @@ def default_get_bytes(url: str, *, timeout: int = 120) -> bytes:
     return _request(url, timeout=timeout)
 
 
-def default_post_json(url: str, fields: dict[str, str], *, timeout: int = 120) -> dict[str, Any]:
+def default_post_json(
+    url: str,
+    fields: dict[str, str],
+    *,
+    timeout: int = 180,
+    attempts: int = 6,
+) -> dict[str, Any]:
     body = urlencode(fields).encode("utf-8")
-    req = Request(
-        url,
-        data=body,
-        headers={"User-Agent": USER_AGENT, "Content-Type": "application/x-www-form-urlencoded"},
-        method="POST",
-    )
-    try:
-        with urlopen(req, timeout=timeout) as resp:
-            raw = resp.read()
-    except (HTTPError, URLError, TimeoutError) as exc:
-        raise FetchError(f"POST failed: {url}: {exc}") from exc
+    last: BaseException | None = None
+    raw = b""
+    for i in range(attempts):
+        req = Request(
+            url,
+            data=body,
+            headers={
+                "User-Agent": USER_AGENT,
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            method="POST",
+        )
+        try:
+            with urlopen(req, timeout=timeout) as resp:
+                raw = resp.read()
+            break
+        except (HTTPError, URLError, TimeoutError, ConnectionResetError, ConnectionError) as exc:
+            last = exc
+            if not _is_retryable(exc) or i == attempts - 1:
+                raise FetchError(f"POST failed: {url}: {exc}") from exc
+            time.sleep(min(2 ** i, 16))
+    else:
+        raise FetchError(f"POST failed: {url}: {last}") from last
     try:
         doc = json.loads(raw.decode("utf-8"))
     except (UnicodeDecodeError, json.JSONDecodeError) as exc:

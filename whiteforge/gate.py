@@ -28,6 +28,7 @@ def require_stage(
     stage_b_report: bool = False,
     stage_c_metrics: bool = False,
     inundation_2008_mask: bool = False,
+    firm_unshaded_x_ok: bool = False,
     thread_id: str = "white_stage",
 ) -> None:
     require_law(
@@ -42,6 +43,7 @@ def require_stage(
             "stage_b_report": stage_b_report,
             "stage_c_metrics": stage_c_metrics,
             "inundation_2008_mask": inundation_2008_mask,
+            "firm_unshaded_x_ok": firm_unshaded_x_ok,
         },
         allow_decisions=["allow"],
         law_id="white.stage_gate",

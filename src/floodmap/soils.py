@@ -10,6 +10,7 @@ from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 
 import numpy as np
+import rasterio
 from rasterio.crs import CRS
 from rasterio.features import rasterize
 from rasterio.warp import transform_geom
@@ -287,12 +288,13 @@ def write_hsg_from_sda(
     write_aligned(dest, template, painted, dtype="uint8", nodata=HSG_NODATA)
     interior = painted[inside]
     counts = {str(int(k)): int((interior == k).sum()) for k in sorted(np.unique(interior))}
-    return {
-        "hsg_counts": counts,
-        "n_polygons": n_poly,
-        "n_tiles_ok": n_tiles_ok,
-        "path": str(dest),
-    }
+    return hsg_coverage_fields(
+        counts,
+        n_polygons=n_poly,
+        n_tiles_ok=n_tiles_ok,
+        path=dest,
+        from_existing=False,
+    )
 
 
 def rasterize_hsg(
@@ -316,4 +318,49 @@ def rasterize_hsg(
     write_aligned(dest, template, painted, dtype="uint8", nodata=HSG_NODATA)
     interior = painted[inside]
     counts = {str(int(k)): int((interior == k).sum()) for k in sorted(np.unique(interior))}
-    return {"hsg_counts": counts, "n_polygons": len(polygons), "path": str(dest)}
+    return hsg_coverage_fields(
+        counts,
+        n_polygons=len(polygons),
+        path=dest,
+        from_existing=False,
+    )
+
+
+def hsg_coverage_fields(
+    counts: dict[str, int],
+    *,
+    n_polygons: int | None = None,
+    n_tiles_ok: int | None = None,
+    path: Path | None = None,
+    from_existing: bool = False,
+) -> dict[str, Any]:
+    n_missing = int(counts.get(str(HSG_NODATA), 0))
+    n_coded = sum(int(v) for k, v in counts.items() if str(k) != str(HSG_NODATA))
+    n_interior = n_coded + n_missing
+    incomplete = n_interior == 0 or (n_coded / n_interior) < 0.5
+    out: dict[str, Any] = {
+        "hsg_counts": counts,
+        "n_coded": n_coded,
+        "n_missing": n_missing,
+        "n_interior": n_interior,
+        "hsg_incomplete": incomplete,
+        "hsg_source": "tiled_sda_top4000",
+        "from_existing_rasters": from_existing,
+    }
+    if n_polygons is not None:
+        out["n_polygons"] = n_polygons
+    if n_tiles_ok is not None:
+        out["n_tiles_ok"] = n_tiles_ok
+    if path is not None:
+        out["path"] = str(path)
+    return out
+
+
+def summarize_hsg_raster(template: TemplateGrid, path: Path) -> dict[str, Any]:
+    require_live_template(template)
+    with rasterio.open(path) as src:
+        painted = src.read(1)
+    inside = interior_mask(template)
+    interior = painted[inside]
+    counts = {str(int(k)): int((interior == k).sum()) for k in sorted(np.unique(interior))}
+    return hsg_coverage_fields(counts, path=path, from_existing=True)

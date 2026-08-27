@@ -45,14 +45,27 @@ NLCD_TILE_PX = 2000
 NLCD_NODATA = 255
 NLCD_YEAR = 2021
 
+# FEMA NFHL S_FLD_HAZ_AR (Flood Hazard Zones). No FLD_ZONE filter.
+# IndianaMap FIRM 2023 omitted AREA OF MINIMAL FLOOD HAZARD / unshaded X.
 FIRM_LAYER_URL = (
-    "https://gisdata.in.gov/server/rest/services/Hosted/"
-    "FIRM_Flood_Hazard_Zones_2023/FeatureServer/1"
+    "https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28"
 )
+FIRM_WHERE = "1=1"
+FIRM_OUT_FIELDS = "OBJECTID,FLD_ZONE,ZONE_SUBTY,SFHA_TF,DFIRM_ID"
 FIRM_MAX_ALLOWABLE_OFFSET_DEG = 0.0001
 FIRM_GEOMETRY_PRECISION = 6
-FIRM_PAGE_SIZE = 1000
+FIRM_PAGE_SIZE = 200
 FIRM_EXPECTED_CRS = 4269
+FIRM_SOURCE = "fema_nfhl_mapserver_28"
+# lon, lat NAD83; must be unshaded_x if the FIRM is whole (2026-08-27).
+FIRM_GATE_SAMPLES = (
+    ("monument_circle", -86.1581, 39.7684, "unshaded_x"),
+    ("carmel_tillplain", -86.118, 39.978, "unshaded_x"),
+    ("delaware_field", -85.40, 40.20, "unshaded_x"),
+)
+# Live NLCD template is 4826x4252. Gate samples skip CI synthetic windows.
+FIRM_LIVE_MIN_WIDTH = 1000
+FIRM_LIVE_MIN_HEIGHT = 1000
 
 FRS_URL = "https://ordsext.epa.gov/FLA/www3/state_files/state_single_in.zip"
 FRS_CSV_NAME = "STATE_SINGLE_IN.CSV"

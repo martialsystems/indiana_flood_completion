@@ -1,6 +1,6 @@
 # Checklist
 
-Status as of **2026-08-26:** Stage A report on disk. Martinsville and Paragon Appendix 2 rasters intersect 05120201 (measured). Stage B has not started.
+Status as of **2026-08-27:** Stage A OFR arithmetic is closed. FIRM recount from NFHL layer 28 is the remaining Stage A gate. HSG is marked incomplete (tiled SDA ~15% coverage). Stage B has not started.
 
 ## Stage 0
 
@@ -16,8 +16,10 @@ Status as of **2026-08-26:** Stage A report on disk. Martinsville and Paragon Ap
 
 ## Later work
 
-- [x] Stage A: DEM, NHD, soils, FIRM zone codebook, TRI pounds, 2008 three-state mask (OFR 2008-1322 Appendix 2 only)
-- [ ] Stage B: TWI / HAND stack
+- [x] Stage A: DEM, NHD, TRI pounds, 2008 three-state mask (OFR 2008-1322 Appendix 2 only)
+- [x] Stage A FIRM recount: NFHL layer 28, no `FLD_ZONE` filter, gate samples `unshaded_x`, floodway in `sfha==1` (unshaded_x 6,986,426; unmapped 7,480)
+- [ ] Stage A HSG: Indiana gSSURGO 10 m (tiled SDA is `hsg_incomplete`)
+- [ ] Stage B: TWI / HAND stack (blocked until `firm_unshaded_x_ok`)
 - [ ] Stage C: HUC-10 CV + XGBoost + `p_sfha.tif`
 - [ ] Stage D: D1/D2 tables, SHAP, Folium
 - [ ] Research note PDF

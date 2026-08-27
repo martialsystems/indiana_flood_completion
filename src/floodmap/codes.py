@@ -113,7 +113,12 @@ def classify_firm_zone(
     zone_subty: object = "",
     sfha_tf: object = "",
 ) -> tuple[int, str]:
-    """Return (zone_code, zone_class) from IndianaMap FIRM attributes."""
+    """Return (zone_code, zone_class) from NFHL S_FLD_HAZ_AR attributes.
+
+    Unshaded X is FLD_ZONE X with empty ZONE_SUBTY or AREA OF MINIMAL
+    FLOOD HAZARD. Shaded X is 0.2 PCT ANNUAL CHANCE FLOOD HAZARD.
+    Floodway is SFHA; the binary sfha band must include those cells.
+    """
     zone = str(fld_zone or "").strip().upper()
     sub = str(zone_subty or "").strip().upper()
     sfha = _sfha_true(sfha_tf)

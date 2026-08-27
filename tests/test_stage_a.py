@@ -10,6 +10,7 @@ from rasterio.io import MemoryFile
 from rasterio.transform import from_origin
 
 from floodmap.codes import OFR_APPENDIX2_ZIPS
+from floodmap.config import FIRM_LAYER_URL
 from floodmap.huc import load_huc
 from floodmap.stage_a import run_stage_a
 from floodmap.template import write_synthetic_nlcd
@@ -72,9 +73,9 @@ def test_stage_a_injected_path(tmp_path: Path) -> None:
     }
 
     def get_json(url: str) -> dict:
-        if "FIRM" in url and "query" not in url:
+        if FIRM_LAYER_URL in url and "query" not in url:
             return {"extent": {"spatialReference": {"wkid": 4269, "latestWkid": 4269}}}
-        if "FIRM" in url and "query" in url:
+        if FIRM_LAYER_URL in url and "query" in url:
             return {"type": "FeatureCollection", "features": [ae, xz]}
         if "nhd/MapServer/6" in url:
             return {"type": "FeatureCollection", "features": [line]}
@@ -121,6 +122,9 @@ def test_stage_a_injected_path(tmp_path: Path) -> None:
     assert report["tri"]["n_tris_huc_year"] >= 1
     assert report["tri"]["reporting_year"] == 2023
     assert "unshaded_x" in report["zone_class_counts"]
+    assert report["firm_source"] == "fema_nfhl_mapserver_28"
+    assert report["firm_unshaded_x_ok"] is True
+    assert report["hsg_incomplete"] is False
     assert "White River at Martinsville" in report["ofr_reaches_intersecting_huc"]
     assert (tmp_path / "out" / "stage_a_report.json").is_file()
     assert (tmp_path / "interim" / "dem.tif").is_file()

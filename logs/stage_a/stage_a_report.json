@@ -5,21 +5,86 @@
     "skipped_existing": true
   },
   "firm": {
-    "from_existing_rasters": true,
+    "firm_source": "fema_nfhl_mapserver_28",
+    "firm_unshaded_x_ok": true,
+    "firm_where": "1=1",
+    "gate_samples": [
+      {
+        "col": 1367,
+        "expected": "unshaded_x",
+        "lat": 39.7684,
+        "lon": -86.1581,
+        "name": "monument_circle",
+        "row": 2438,
+        "zone_class": "unshaded_x"
+      },
+      {
+        "col": 1399,
+        "expected": "unshaded_x",
+        "lat": 39.978,
+        "lon": -86.118,
+        "name": "carmel_tillplain",
+        "row": 1648,
+        "zone_class": "unshaded_x"
+      },
+      {
+        "col": 3320,
+        "expected": "unshaded_x",
+        "lat": 40.2,
+        "lon": -85.4,
+        "name": "delaware_field",
+        "row": 606,
+        "zone_class": "unshaded_x"
+      }
+    ],
+    "n_empty_geom": 0,
+    "n_firm_features": 28515,
     "sfha_counts": {
-      "0": 7071023,
-      "1": 759016
+      "0": 7071993,
+      "1": 758046
     },
     "sfha_has_0_and_1": true,
     "zone_class_counts": {
-      "floodway": 309852,
-      "sfha": 449164,
-      "shaded_x": 77826,
-      "unmapped": 6981692,
-      "unshaded_x": 11505
+      "floodway": 308139,
+      "sfha": 449907,
+      "shaded_x": 78087,
+      "unmapped": 7480,
+      "unshaded_x": 6986426
     }
   },
+  "firm_source": "fema_nfhl_mapserver_28",
+  "firm_unshaded_x_ok": true,
   "gate": "pass",
+  "gate_samples": [
+    {
+      "col": 1367,
+      "expected": "unshaded_x",
+      "lat": 39.7684,
+      "lon": -86.1581,
+      "name": "monument_circle",
+      "row": 2438,
+      "zone_class": "unshaded_x"
+    },
+    {
+      "col": 1399,
+      "expected": "unshaded_x",
+      "lat": 39.978,
+      "lon": -86.118,
+      "name": "carmel_tillplain",
+      "row": 1648,
+      "zone_class": "unshaded_x"
+    },
+    {
+      "col": 3320,
+      "expected": "unshaded_x",
+      "lat": 40.2,
+      "lon": -85.4,
+      "name": "delaware_field",
+      "row": 606,
+      "zone_class": "unshaded_x"
+    }
+  ],
+  "hsg_incomplete": true,
   "huc8": "05120201",
   "imported_occupancy_path": "/Users/samw/indiana_flood_completion/data/frozen/sibling_stage0_occupancy.json",
   "martinsville_paragon_intersection": "measured, not assumed",
@@ -160,6 +225,7 @@
   ],
   "p_definition": "P(sfha | hydro)",
   "soils": {
+    "from_existing_rasters": true,
     "hsg_counts": {
       "2": 60486,
       "255": 6651027,
@@ -169,8 +235,11 @@
       "6": 437447,
       "7": 453678
     },
-    "n_polygons": 160000,
-    "n_tiles_ok": 40,
+    "hsg_incomplete": true,
+    "hsg_source": "tiled_sda_top4000",
+    "n_coded": 1179012,
+    "n_interior": 7830039,
+    "n_missing": 6651027,
     "path": "/Users/samw/indiana_flood_completion/data/interim/hsg.tif"
   },
   "stage": "A",
@@ -203,10 +272,10 @@
   },
   "unit": "pixel",
   "zone_class_counts": {
-    "floodway": 309852,
-    "sfha": 449164,
-    "shaded_x": 77826,
-    "unmapped": 6981692,
-    "unshaded_x": 11505
+    "floodway": 308139,
+    "sfha": 449907,
+    "shaded_x": 78087,
+    "unmapped": 7480,
+    "unshaded_x": 6986426
   }
 }

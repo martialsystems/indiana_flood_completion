@@ -29,8 +29,8 @@ Vector layers stay EPSG:4269 until an explicit, logged warp.
 | Stage | Job | Success |
 |-------|-----|---------|
 | **0** | Pin, claims, occupancy freeze, HUC clip, 30 m 5070 template | Freeze numbers match; claim scan clean; HUC non-empty; template CRS 5070 at 30 m |
-| **A** | Ingest DEM, NHD, soils, FIRM (all zones), TRI points and pounds, 2008 three-state mask | Shared template transform; `sfha` ∈ {0,1} **and** `zone_class` codebook written; 2008 mask unique values include code 1, and code 2 if any Appendix 2 raster intersects the HUC; TRI error budget fields listed below |
-| **B** | TWI, HAND, distance, stack | Finite TWI on interior; toy-watershed test green |
+| **A** | Ingest DEM, NHD, soils, FIRM (all zones), TRI points and pounds, 2008 three-state mask | Shared template transform; `sfha` ∈ {0,1} **and** `zone_class` codebook written; FIRM from NFHL S_FLD_HAZ_AR with `where=1=1`; gate samples at Monument Circle, Carmel till-plain, and a Delaware field are `unshaded_x`; `unshaded_x` > `sfha`; floodway cells have `sfha==1`; 2008 mask unique values include code 1, and code 2 if any Appendix 2 raster intersects the HUC; TRI error budget fields listed below. HSG may be marked `hsg_incomplete` |
+| **B** | TWI, HAND, distance, stack | Finite TWI on interior; toy-watershed test green. Do not start until Stage A `firm_unshaded_x_ok` is true |
 | **C** | Spatial block CV, XGBoost, `p_sfha.tif` | Report title and colorbar say `P(sfha \| hydro)`; PR-AUC above the SFHA-rate baseline; Brier vs that same constant; no test HUC-10 in train, including a 1-pixel halo; HAND-thresholded SFHA logged on the held-out HUC-10s |
 | **D** | Sample TRI in-HUC; tables D1 and D2; SHAP; Folium | Both tables written; D1 filter is `zone_class == unshaded_x`; D2 is mask code 2; coverage split (`ofr_reaches_intersecting_huc`, `d2_n_code1`, `d2_n_code2`) present even if D2 is empty; pounds column `on_site_release_lb` with year; occupancy is `n_tris_huc_year` only; freeze path cited; every row `huc=05120201` and `state=IN` |
 
@@ -42,10 +42,38 @@ Do not skip. Stage C does not start without A and B reports. Stage D does not st
 
 | Band | Values |
 |------|--------|
-| `sfha` | 1 if `SFHA_TF` is true, else 0 |
+| `sfha` | 1 if the cell is SFHA, including floodway (`ZONE_SFHA` or `ZONE_FLOODWAY`); 0 otherwise |
 | `zone_class` | `unmapped`, `sfha`, `floodway`, `shaded_x`, `unshaded_x`, `D`, `other` |
 
+Source is FEMA NFHL MapServer layer 28 (`S_FLD_HAZ_AR`), `where=1=1`, clipped to the HUC polygon. Do not filter `FLD_ZONE` to A/AE/floodway/0.2%. IndianaMap FIRM 2023 omitted `AREA OF MINIMAL FLOOD HAZARD` polygons: those cells painted as `unmapped` and would have excluded Indianapolis mapped Zone X from D1.
+
+Classification: `FLD_ZONE` X with empty `ZONE_SUBTY` or `AREA OF MINIMAL FLOOD HAZARD` is `unshaded_x`. `0.2 PCT ANNUAL CHANCE FLOOD HAZARD` is `shaded_x`. Floodway is SFHA: every floodway cell must have `sfha==1`.
+
+Live gate samples (must be `unshaded_x` if the FIRM is whole):
+
+| Name | Lon, lat | Place |
+|------|----------|-------|
+| `monument_circle` | -86.1581, 39.7684 | Downtown Indianapolis, off the floodway |
+| `carmel_tillplain` | -86.118, 39.978 | Hamilton County till-plain suburb |
+| `delaware_field` | -85.40, 40.20 | Rural Delaware County field |
+
+On the live HUC template, `unshaded_x` must exceed `sfha`. Unmapped cells should be limited to communities that have no modern FIRM.
+
+Live interior 2026-08-27 (NFHL layer 28, `where=1=1`, 7,830,039 cells):
+
+| `zone_class` | cells | km² | share of interior |
+|--------------|------:|----:|------------------:|
+| unshaded_x | 6,986,426 | 6287.8 | 89.23% |
+| sfha | 449,907 | 404.9 | 5.75% |
+| floodway | 308,139 | 277.3 | 3.94% |
+| shaded_x | 78,087 | 70.3 | 1.00% |
+| unmapped | 7,480 | 6.7 | 0.10% |
+
+Binary `sfha==1` is 758,046 cells, equal to floodway + sfha. Gate samples (Monument Circle, Carmel, Delaware field) are `unshaded_x`.
+
 Codes live in `floodmap.codes`. D1 filter is `zone_class == unshaded_x`. Shaded X (0.2% annual chance) is a mapped FEMA moderate-hazard zone: it is still Zone X in speech and is **not** eligible for D1. Count shaded X in a sensitivity column. D1 headers say “SFHA-like hydrology outside Zone A/AE” and name the filter `unshaded_x`, not `sfha==0`.
+
+HSG from tiled SDA `TOP 4000` per 0.25° tile is incomplete (~15% of the interior on 2026-08-26). Stage A may record `hsg_incomplete` and keep code 255 as `hsg_missing`. Replace that pull with the Indiana gSSURGO 10 m raster joined to `hydgrpdcd` before Stage C trains on soils. HSG may trail one commit. FIRM may not. Do not start Stage B until the NFHL recount and gate samples exist.
 
 ## 2008 three-state mask (Stage A)
 
@@ -137,3 +165,4 @@ Pass only if all of these hold:
 - 2026-08-26: live WBD HUC-8 fetch and NLCD 2021 impervious template (30 m, EPSG:5070, MRLC WMS, tiled).
 - 2026-08-26: Stage A success table: FIRM zone codebook, 2008 three-state mask (OFR 2008-1322 Appendix 2 is reach-scale), D1=`unshaded_x`, D2=mask code 2, TRI error budget, occupancy is `n_tris_huc_year`.
 - 2026-08-26: Stage A fetch: warp_to_template on live nlcd_2021; all 17 Appendix 2 zips downloaded; only intersecting reaches paint mask code 2; Martinsville/Paragon intersection measured.
+- 2026-08-27: FIRM source switched to FEMA NFHL layer 28, `where=1=1`. IndianaMap 2023 left Monument Circle, Carmel, and a Delaware field as `unmapped`. Gate samples must be `unshaded_x`. Binary `sfha==1` includes floodway. HSG tiled SDA marked `hsg_incomplete`. Stage B blocked until `firm_unshaded_x_ok`.

@@ -76,6 +76,28 @@ def test_stage_gate_allows_a_on_nlcd() -> None:
     )
 
 
+def test_stage_gate_blocks_b_without_firm_unshaded_x() -> None:
+    with pytest.raises(LawBlockedError):
+        require_stage(
+            current_stage="A",
+            target_stage="B",
+            freeze_verified=True,
+            template_kind="nlcd_2021",
+            stage_a_report=True,
+            firm_unshaded_x_ok=False,
+            thread_id="test.stage.b_no_firm",
+        )
+    require_stage(
+        current_stage="A",
+        target_stage="B",
+        freeze_verified=True,
+        template_kind="nlcd_2021",
+        stage_a_report=True,
+        firm_unshaded_x_ok=True,
+        thread_id="test.stage.b_firm_ok",
+    )
+
+
 def test_stage_gate_blocks_c_without_ab_and_d_without_mask() -> None:
     with pytest.raises(LawBlockedError):
         require_stage(

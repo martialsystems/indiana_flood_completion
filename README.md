@@ -38,7 +38,7 @@ Stage A (network; live `nlcd_2021` template required):
 PYTHONPATH=src:. python3 scripts/run_stage_a.py
 ```
 
-Do not start Stage B until `logs/stage_a/stage_a_report.json` exists. D1 is `unshaded_x`. OFR 2008-1322 Appendix 2 is a reach-scale three-state mask. The fixture path is the CI join.
+Do not start Stage B until `logs/stage_a/stage_a_report.json` has `firm_unshaded_x_ok: true` (NFHL unfiltered Zone X, gate samples at Monument Circle / Carmel / Delaware). D1 is `unshaded_x`. OFR 2008-1322 Appendix 2 is a reach-scale three-state mask. The fixture path is the CI join. HSG may be `hsg_incomplete` until the gSSURGO 10 m pass.
 
 ## Claim bans
 

@@ -18,12 +18,23 @@ from floodmap.config import (
 )
 from floodmap.dem import fetch_dem
 from floodmap.errors import GateError
-from floodmap.firm import fetch_firm_pages, rasterize_firm, summarize_firm_rasters
+from floodmap.firm import (
+    fetch_firm_pages,
+    is_full_huc_template,
+    rasterize_firm,
+    summarize_firm_rasters,
+)
 from floodmap.freeze import verify_freeze
 from floodmap.huc import load_huc
 from floodmap.nhd import fetch_flowlines, rasterize_distance
 from floodmap.ofr2008 import build_2008_mask
-from floodmap.soils import default_sda_post, fetch_hsg_polygons, rasterize_hsg, write_hsg_from_sda
+from floodmap.soils import (
+    default_sda_post,
+    fetch_hsg_polygons,
+    rasterize_hsg,
+    summarize_hsg_raster,
+    write_hsg_from_sda,
+)
 from floodmap.template import inspect_template
 from floodmap.tri import clip_to_huc, parse_tri_1a, unzip_csv, write_facilities_csv
 from floodmap.fetch import default_get_bytes, default_get_json
@@ -91,10 +102,18 @@ def run_stage_a(
         else:
             flow = fetch_flowlines(huc, gj)
         nhd_info = rasterize_distance(flow, template, dist_path)
+    firm_info = None
     if sfha_path.is_file() and zone_path.is_file():
-        firm_info = summarize_firm_rasters(template, sfha_path, zone_path)
-    else:
-        _wkid, firm_features = fetch_firm_pages(gj)
+        try:
+            firm_info = summarize_firm_rasters(template, sfha_path, zone_path)
+        except GateError:
+            firm_info = None
+    if firm_info is None:
+        if get_json is None:
+            _wkid, firm_features = fetch_firm_pages(gj, huc=huc)
+        else:
+            _wkid, firm_features = fetch_firm_pages(gj)
+        del _wkid
         firm_info = rasterize_firm(
             firm_features,
             template,
@@ -102,7 +121,9 @@ def run_stage_a(
             zone_dest=zone_path,
         )
     hsg_path = interim_dir / "hsg.tif"
-    if get_json is None:
+    if hsg_path.is_file() and is_full_huc_template(template):
+        soils_info = summarize_hsg_raster(template, hsg_path)
+    elif get_json is None:
         soils_info = write_hsg_from_sda(huc, template, hsg_path, sda)
     else:
         hsg_polys = fetch_hsg_polygons(huc, sda)
@@ -141,7 +162,11 @@ def run_stage_a(
         "dem": dem_info,
         "nhd": nhd_info,
         "firm": firm_info,
+        "firm_source": firm_info.get("firm_source"),
+        "firm_unshaded_x_ok": bool(firm_info.get("firm_unshaded_x_ok")),
+        "gate_samples": firm_info.get("gate_samples") or [],
         "soils": soils_info,
+        "hsg_incomplete": bool(soils_info.get("hsg_incomplete")),
         "tri": tri_budget,
         "ofr2008": ofr_info,
         "imported_occupancy_path": str(FROZEN_OCCUPANCY_PATH),

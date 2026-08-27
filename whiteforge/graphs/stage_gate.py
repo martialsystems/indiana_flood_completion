@@ -36,6 +36,7 @@ def _schema() -> StateSchema:
             ChannelSpec("stage_b_report", last_value, default=False),
             ChannelSpec("stage_c_metrics", last_value, default=False),
             ChannelSpec("inundation_2008_mask", last_value, default=False),
+            ChannelSpec("firm_unshaded_x_ok", last_value, default=False),
             ChannelSpec("violations", last_value, default=[]),
             ChannelSpec("decision", last_value, default=None),
             ChannelSpec("events", operator_add, default=[]),
@@ -60,6 +61,8 @@ def _evaluate(state: dict[str, Any]) -> dict[str, Any]:
     kind = str(state.get("template_kind") or "")
     if tr >= _rank("A") and kind != _LIVE:
         violations.append("advance_on_fixture_template")
+    if tr >= _rank("B") and not bool(state.get("firm_unshaded_x_ok")):
+        violations.append("advance_without_firm_unshaded_x")
     if tr >= _rank("C"):
         if not bool(state.get("stage_a_report")):
             violations.append("stage_c_without_a")
