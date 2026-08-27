@@ -14,10 +14,38 @@ from floodmap.align import write_aligned
 from floodmap.codes import P_DEFINITION, ZONE_SFHA, ZONE_UNSHADED_X
 from floodmap.config import D1_HEADER, HYDRO_NODATA, P_SFHA_CALIBRATED_NAME, P_SFHA_NODATA
 from floodmap.huc import load_huc
-from floodmap.stage_d import buffer_p_stats, run_stage_d
+from floodmap.codes import ZONE_FLOODWAY
+from floodmap.stage_d import buffer_p_stats, classify_pmax_cell, run_stage_d
 from floodmap.template import write_synthetic_nlcd
 
 HUC = Path(__file__).resolve().parent / "fixtures" / "huc.geojson"
+
+
+def test_classify_pmax_adjacent_hydro() -> None:
+    assert (
+        classify_pmax_cell(
+            office_row=10,
+            office_col=10,
+            max_row=6,
+            max_col=6,
+            zone_code=ZONE_FLOODWAY,
+            dist_flowline=90.0,
+            dist_waterbody=200.0,
+        )
+        == "adjacent_hydro_cell"
+    )
+    assert (
+        classify_pmax_cell(
+            office_row=10,
+            office_col=10,
+            max_row=10,
+            max_col=10,
+            zone_code=ZONE_UNSHADED_X,
+            dist_flowline=150.0,
+            dist_waterbody=600.0,
+        )
+        == "office_pixel"
+    )
 
 
 def test_buffer_uses_neighbors_not_only_center() -> None:
@@ -155,6 +183,9 @@ def test_stage_d_calibrated_join(tmp_path: Path) -> None:
         tri_csv=tri,
     )
     assert report["d1_header"] == D1_HEADER
+    assert report["n_not_d1"] == 1
+    assert report["not_d1_zone_class"].get("sfha") == 1
+    assert report["d1_n_unshaded_x"] + report["n_not_d1"] == report["n_tris_huc_year"]
     assert report["p_source"] == P_SFHA_CALIBRATED_NAME
     assert report["expected_pounds_from_raw_p"] is False
     assert "share_in_sfha" not in report
@@ -171,5 +202,7 @@ def test_stage_d_calibrated_join(tmp_path: Path) -> None:
     assert len(d1) == 1
     assert d1[0]["name"] == "Plant A"
     assert float(d1[0]["p_max"]) >= 0.75
+    assert report["d1_headline_rows"]
+    assert "p_mean" in report["d1_headline_rows"][0]
     d2 = list(csv.DictReader((tmp_path / "out" / "d2.csv").open()))
     assert d2 == []

@@ -59,7 +59,19 @@ PYTHONPATH=src:. python3 scripts/run_c_calibrate.py
 PYTHONPATH=src:. python3 scripts/run_stage_d.py
 ```
 
-D samples `p_sfha_calibrated.tif`. Do not ship expected pounds from the raw grid. The fixture path is the CI join.
+D samples `p_sfha_calibrated.tif` only. 101 of 117 in-HUC plants are on mapped unshaded X (D1 universe). The other 16 are already floodway (2), SFHA (4), shaded X (8), or unmapped (2).
+
+Buffer-max ≥ 0.75 is a 30 m edge of the 120 m window. Buffer-mean is the footprint. Site-mean P at the five edge-screen rows is 0.06 to 0.19.
+
+| Plant | on_site_release_lb | P_max | p_mean | P_max cell |
+|---|---:|---:|---:|---|
+| THURSDAY POOLS | 257590 | 0.769 | p_mean 0.152 | neighboring land, unshaded X |
+| FGF LLC | 27335 | 0.780 | p_mean 0.060 | adjacent hydro (floodway) |
+| ROYAL SPA CORP | 4950 | 0.774 | p_mean 0.113 | adjacent hydro (waterbody) |
+| LINDE GAS & EQUIPMENT | 1048 | 0.763 | p_mean 0.192 | neighboring land, unshaded X |
+| MAGNA POWERTRAIN EAST | 0 | 0.789 | p_mean 0.098 | neighboring land, unshaded X |
+
+Sum of P_max × lb on those five rows: 224k, mostly THURSDAY POOLS inventory. Zero rows have P_mean ≥ 0.50. D2 is empty: 117 TRI in 2008 mask code 1, 0 in code 2; Appendix 2 reaches are Martinsville and Paragon only. The fixture path is the CI join.
 
 ## Claim bans
 

@@ -1,1 +1,1 @@
-key,name,lat,lon,huc,state,year,on_site_release_lb,zone_class,mask_2008_point,p_max,p_mean,n_buffer_cells,d1_eligible,d2,d1_t_0p50,d1_t_0p75,d1_t_0p90
+key,name,lat,lon,huc,state,year,on_site_release_lb,zone_class,mask_2008_point,p_max,p_mean,p_max_note,p_max_dr,p_max_dc,p_max_zone_class,p_max_hand,p_max_dist_flowline,p_max_dist_waterbody,n_buffer_cells,d1_eligible,d2,d1_t_0p50,d1_t_0p75,d1_t_0p90

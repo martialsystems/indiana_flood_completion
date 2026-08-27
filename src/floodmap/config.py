@@ -132,6 +132,14 @@ D_HEADLINE_T = 0.75
 # 9x9 window at 30 m: 120 m orthogonal, 170 m diagonal. Inside 100-300 m.
 D_BUFFER_RADIUS_CELLS = 4
 D1_HEADER = "SFHA-like hydrology outside Zone A/AE"
+# Names that must not appear in prose without a p_mean / P_mean in the same window.
+D1_HEADLINE_NAME_NEEDLES = (
+    "MAGNA POWERTRAIN EAST",
+    "FGF LLC",
+    "ROYAL SPA CORP",
+    "THURSDAY POOLS",
+    "LINDE GAS & EQUIPMENT",
+)
 
 # gSSURGO / muaggatt hydrologic group. Dual groups stay distinct codes.
 HSG_CODE = {

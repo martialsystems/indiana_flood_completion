@@ -27,6 +27,17 @@ def test_bans_sibling_and_this_tree() -> None:
         require_clean("fatalities overnight", source="t")
 
 
+def test_d1_names_require_p_mean() -> None:
+    assert "d1_names_without_p_mean" in scan_text(
+        "MAGNA POWERTRAIN EAST, FGF LLC, and THURSDAY POOLS exceed 0.75"
+    )
+    assert scan_text(
+        "MAGNA POWERTRAIN EAST p_mean=0.10; FGF LLC p_mean=0.06; "
+        "ROYAL SPA CORP p_mean=0.11; THURSDAY POOLS p_mean=0.15; "
+        "LINDE GAS & EQUIPMENT p_mean=0.19"
+    ) == []
+
+
 def test_allows_firm_and_sfha_like() -> None:
     assert scan_text(
         "SFHA-like hydrology outside Zone A/AE. Flood hazard zone X. TRI reporter. "

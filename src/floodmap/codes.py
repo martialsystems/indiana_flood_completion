@@ -184,5 +184,25 @@ def validate_d_report(obj: Mapping[str, Any]) -> None:
         raise GateError("d2_n_code1/code2 must be integers") from exc
     if n1 < 0 or n2 < 0:
         raise GateError("d2 coverage counts must be >= 0")
-    # Zero D2 rows is a coverage result. The split must still be present.
+    if "n_not_d1" not in obj:
+        raise GateError("Stage D must report n_not_d1 as the non-unshaded_x denominator")
+    if "not_d1_zone_class" not in obj:
+        raise GateError("Stage D must break down n_not_d1 by zone_class")
+    try:
+        n_d1 = int(obj["d1_n_unshaded_x"])
+        n_not = int(obj["n_not_d1"])
+        n_all = int(obj["n_tris_huc_year"])
+    except (TypeError, ValueError, KeyError) as exc:
+        raise GateError("Stage D d1/not_d1/n_tris must be integers") from exc
+    if n_d1 + n_not != n_all:
+        raise GateError("d1_n_unshaded_x + n_not_d1 must equal n_tris_huc_year")
+    rows = obj.get("d1_headline_rows")
+    if not isinstance(rows, list):
+        raise GateError("Stage D must list d1_headline_rows with p_max and p_mean")
+    for row in rows:
+        if not isinstance(row, dict):
+            raise GateError("d1_headline_rows entries must be objects")
+        for key in ("name", "p_max", "p_mean", "on_site_release_lb"):
+            if key not in row:
+                raise GateError(f"d1_headline_rows missing {key}")
     del n1, n2, path

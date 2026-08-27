@@ -10,7 +10,7 @@ Stay on 05120201. Expanding the HUC is a new stage and a methodology edit.
 
 ## Claim bans
 
-Run `floodmap.claims.scan_text` on every written report (JSON, markdown, HTML, PDF text). Fail closed on casualties, climate attribution, tornado counts, population-at-risk, TRI storage as pounds, `P` as 100-year exceedance, the phrase “unmapped risk”, and “no 2008 overlap” without the coverage split.
+Run `floodmap.claims.scan_text` on every written report (JSON, markdown, HTML, PDF text). Fail closed on casualties, climate attribution, tornado counts, population-at-risk, TRI storage as pounds, `P` as 100-year exceedance, the phrase “unmapped risk”, “no 2008 overlap” without the coverage split, and D1 headline plant names without `p_mean` in the same window.
 
 Cite OFR 2008-1322 as “June 7-9, 2008 inundation (OFR 2008-1322)”. Do not paste the abstract.
 

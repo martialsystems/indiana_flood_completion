@@ -8,6 +8,7 @@ import re
 from pathlib import Path
 from typing import Iterable
 
+from floodmap.config import D1_HEADLINE_NAME_NEEDLES
 from floodmap.errors import ClaimBanError
 
 # Keep patterns tight so ordinary FIRM words (hazard, zone AE) are not banned.
@@ -73,12 +74,45 @@ _BANS: tuple[tuple[str, re.Pattern[str]], ...] = (
     ),
 )
 
+_P_MEAN_NEAR_NAME = re.compile(
+    r"p_mean|p mean|mean p|p_\{?mean\}?",
+    re.I,
+)
+
+
+_TWO_PROBS_ON_LINE = re.compile(r"0\.\d+.*=0\.\d+|0\.\d+.*0\.\d+")
+
+
+def _d1_names_without_p_mean(text: str) -> bool:
+    """True if a D1 headline plant is named without p_mean in a nearby window.
+
+    A table row that carries both P_max and P_mean as 0.xxx values on the same
+    line also passes, so CSV headline tables do not need a redundant token.
+    """
+    blob = text or ""
+    for needle in D1_HEADLINE_NAME_NEEDLES:
+        for match in re.finditer(re.escape(needle), blob, re.I):
+            lo = max(0, match.start() - 120)
+            hi = min(len(blob), match.end() + 900)
+            window = blob[lo:hi]
+            line_start = blob.rfind("\n", 0, match.start()) + 1
+            line_end = blob.find("\n", match.end())
+            if line_end < 0:
+                line_end = len(blob)
+            line = blob[line_start:line_end]
+            if _P_MEAN_NEAR_NAME.search(window) or _TWO_PROBS_ON_LINE.search(line):
+                continue
+            return True
+    return False
+
 
 def scan_text(text: str) -> list[str]:
     hits: list[str] = []
     for name, pat in _BANS:
         if pat.search(text or ""):
             hits.append(name)
+    if _d1_names_without_p_mean(text):
+        hits.append("d1_names_without_p_mean")
     return hits
 
 

@@ -31,7 +31,66 @@
     }
   ],
   "d1_header": "SFHA-like hydrology outside Zone A/AE",
+  "d1_headline_expected_pounds_p_max": 223988.67173606157,
+  "d1_headline_rows": [
+    {
+      "name": "THURSDAY POOLS",
+      "on_site_release_lb": 257590.0,
+      "p_max": 0.7688588500022888,
+      "p_max_dist_flowline": 318.9043884277344,
+      "p_max_dist_waterbody": 534.1348266601562,
+      "p_max_hand": 0.0,
+      "p_max_note": "neighboring_land_cell",
+      "p_max_zone_class": "unshaded_x",
+      "p_mean": 0.15194113552570343
+    },
+    {
+      "name": "FGF LLC",
+      "on_site_release_lb": 27335.0,
+      "p_max": 0.7795918583869934,
+      "p_max_dist_flowline": 94.86833190917969,
+      "p_max_dist_waterbody": 192.09373474121094,
+      "p_max_hand": 0.0,
+      "p_max_note": "adjacent_hydro_cell",
+      "p_max_zone_class": "floodway",
+      "p_mean": 0.059961166232824326
+    },
+    {
+      "name": "ROYAL SPA CORP",
+      "on_site_release_lb": 4950.0,
+      "p_max": 0.7735424041748047,
+      "p_max_dist_flowline": 484.6648254394531,
+      "p_max_dist_waterbody": 0.0,
+      "p_max_hand": 0.0,
+      "p_max_note": "adjacent_hydro_cell",
+      "p_max_zone_class": "sfha",
+      "p_mean": 0.11286924034357071
+    },
+    {
+      "name": "LINDE GAS & EQUIPMENT",
+      "on_site_release_lb": 1048.0,
+      "p_max": 0.7625402808189392,
+      "p_max_dist_flowline": 342.0526123046875,
+      "p_max_dist_waterbody": 84.85281372070312,
+      "p_max_hand": 0.0,
+      "p_max_note": "neighboring_land_cell",
+      "p_max_zone_class": "unshaded_x",
+      "p_mean": 0.19238290190696716
+    },
+    {
+      "name": "MAGNA POWERTRAIN EAST",
+      "on_site_release_lb": 0.0,
+      "p_max": 0.789226770401001,
+      "p_max_dist_flowline": 150.0,
+      "p_max_dist_waterbody": 637.8087768554688,
+      "p_max_hand": 0.0,
+      "p_max_note": "neighboring_land_cell",
+      "p_max_zone_class": "unshaded_x",
+      "p_mean": 0.09751777350902557
+    }
+  ],
   "d1_n_unshaded_x": 101,
+  "d1_reading": "buffer-max is a 30 m edge of the 120 m window; buffer-mean is the site footprint",
   "d1_zone_class": "unshaded_x",
   "d2_empty_is_coverage": true,
   "d2_n": 0,
@@ -47,7 +106,14 @@
   "huc8": "05120201",
   "imported_occupancy_path": "/Users/samw/indiana_flood_completion/data/frozen/sibling_stage0_occupancy.json",
   "n_dioxin_rows_held_grams": 29,
+  "n_not_d1": 16,
   "n_tris_huc_year": 117,
+  "not_d1_zone_class": {
+    "floodway": 2,
+    "sfha": 4,
+    "shaded_x": 8,
+    "unmapped": 2
+  },
   "ofr_reaches_intersecting_huc": [
     "unnamed tributary of Fall Creek at Paragon",
     "White River at Martinsville"

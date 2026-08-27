@@ -1,6 +1,6 @@
 # Checklist
 
-Status as of **2026-08-27:** Calibrated P and Stage D tables on disk. D2 empty (coverage). HSG omitted. B closed. SHAP/Folium not written.
+Status as of **2026-08-27:** D tables on calibrated P. 101/117 unshaded X; 16 already in SFHA/floodway/shaded X/unmapped. Five-row edge screen includes P_mean. D2 empty (coverage). B closed. SHAP/Folium not written.
 
 ## Stage 0
 

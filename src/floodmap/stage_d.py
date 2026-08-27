@@ -21,6 +21,8 @@ from floodmap.codes import (
     MASK_OFR_OR_HWM,
     P_DEFINITION,
     ZONE_CLASS_NAME,
+    ZONE_FLOODWAY,
+    ZONE_SFHA,
     ZONE_SHADED_X,
     d1_eligible,
     validate_d_report,
@@ -80,6 +82,46 @@ def buffer_p_stats(
         return None, None, 0
     vals = win[ok]
     return float(vals.max()), float(vals.mean()), int(ok.sum())
+
+
+def buffer_p_argmax(
+    p: np.ndarray,
+    row: int,
+    col: int,
+    *,
+    radius: int,
+    nodata: float,
+) -> tuple[int, int] | None:
+    h, w = p.shape
+    r0 = max(0, row - radius)
+    r1 = min(h, row + radius + 1)
+    c0 = max(0, col - radius)
+    c1 = min(w, col + radius + 1)
+    win = p[r0:r1, c0:c1]
+    ok = np.isfinite(win) & (win != nodata)
+    if not ok.any():
+        return None
+    filled = np.where(ok, win, -np.inf)
+    wr, wc = np.unravel_index(int(np.argmax(filled)), win.shape)
+    return r0 + int(wr), c0 + int(wc)
+
+
+def classify_pmax_cell(
+    *,
+    office_row: int,
+    office_col: int,
+    max_row: int,
+    max_col: int,
+    zone_code: int,
+    dist_flowline: float,
+    dist_waterbody: float,
+) -> str:
+    """Office pixel vs neighboring NHD hydro vs other land in the 9x9."""
+    if max_row == office_row and max_col == office_col:
+        return "office_pixel"
+    if dist_waterbody == 0 or dist_flowline == 0 or zone_code in (ZONE_SFHA, ZONE_FLOODWAY):
+        return "adjacent_hydro_cell"
+    return "neighboring_land_cell"
 
 
 def _load_tri_csv(path: Path) -> list[dict[str, Any]]:
@@ -172,6 +214,15 @@ def run_stage_d(
         zone = src.read(1)
     with rasterio.open(interim_dir / "mask_2008.tif") as src:
         mask = src.read(1)
+    hydro = None
+    if (interim_dir / "hand.tif").is_file() and (interim_dir / "dist_flowline.tif").is_file():
+        with rasterio.open(interim_dir / "hand.tif") as src:
+            hand = src.read(1)
+        with rasterio.open(interim_dir / "dist_flowline.tif") as src:
+            dist_fl = src.read(1)
+        with rasterio.open(interim_dir / "dist_waterbody.tif") as src:
+            dist_wb = src.read(1)
+        hydro = (hand, dist_fl, dist_wb)
 
     facilities = _load_tri_csv(tri_csv)
     n_tris = len(facilities)
@@ -203,6 +254,33 @@ def run_stage_d(
         p_max, p_mean, n_buf = buffer_p_stats(
             p, int(row), int(col), radius=radius, nodata=P_SFHA_NODATA
         )
+        arg = buffer_p_argmax(p, int(row), int(col), radius=radius, nodata=P_SFHA_NODATA)
+        p_max_note = "unscored"
+        p_max_dr = p_max_dc = None
+        p_max_zone = None
+        p_max_hand = p_max_dist_fl = p_max_dist_wb = None
+        if arg is not None:
+            pr, pc = arg
+            p_max_dr, p_max_dc = int(pr - row), int(pc - col)
+            p_max_zone = ZONE_CLASS_NAME.get(int(zone[pr, pc]), "other")
+            if hydro is not None:
+                hnd, dfl, dwb = hydro
+                p_max_hand = float(hnd[pr, pc])
+                p_max_dist_fl = float(dfl[pr, pc])
+                p_max_dist_wb = float(dwb[pr, pc])
+                p_max_note = classify_pmax_cell(
+                    office_row=int(row),
+                    office_col=int(col),
+                    max_row=pr,
+                    max_col=pc,
+                    zone_code=int(zone[pr, pc]),
+                    dist_flowline=p_max_dist_fl,
+                    dist_waterbody=p_max_dist_wb,
+                )
+            elif p_max_dr == 0 and p_max_dc == 0:
+                p_max_note = "office_pixel"
+            else:
+                p_max_note = "neighboring_land_cell"
         item = {
             "key": rec["key"],
             "name": rec["name"],
@@ -216,6 +294,13 @@ def run_stage_d(
             "mask_2008_point": mcode,
             "p_max": p_max,
             "p_mean": p_mean,
+            "p_max_note": p_max_note,
+            "p_max_dr": p_max_dr,
+            "p_max_dc": p_max_dc,
+            "p_max_zone_class": p_max_zone,
+            "p_max_hand": p_max_hand,
+            "p_max_dist_flowline": p_max_dist_fl,
+            "p_max_dist_waterbody": p_max_dist_wb,
             "n_buffer_cells": n_buf,
             "buffer_radius_cells": radius,
             "buffer_m": radius * TEMPLATE_RES_M,
@@ -229,6 +314,10 @@ def run_stage_d(
 
     d1_rows = [r for r in rows_out if r["d1_eligible"]]
     d2_rows = [r for r in rows_out if r["d2"]]
+    not_d1 = [r for r in rows_out if not r["d1_eligible"]]
+    not_d1_zones: dict[str, int] = {}
+    for r in not_d1:
+        not_d1_zones[r["zone_class"]] = not_d1_zones.get(r["zone_class"], 0) + 1
     shaded = [r for r in rows_out if r["zone_class"] == ZONE_CLASS_NAME[ZONE_SHADED_X]]
 
     def _count_at(rows: list[dict[str, Any]], t: float, pkey: str) -> int:
@@ -280,6 +369,13 @@ def run_stage_d(
         "mask_2008_point",
         "p_max",
         "p_mean",
+        "p_max_note",
+        "p_max_dr",
+        "p_max_dc",
+        "p_max_zone_class",
+        "p_max_hand",
+        "p_max_dist_flowline",
+        "p_max_dist_waterbody",
         "n_buffer_cells",
         "d1_eligible",
         "d2",
@@ -288,9 +384,29 @@ def run_stage_d(
         fields.append(f"d1_t_{t:.2f}".replace(".", "p"))
 
     out_dir.mkdir(parents=True, exist_ok=True)
+    headline_key = f"d1_t_{D_HEADLINE_T:.2f}".replace(".", "p")
+    headline_rows = [r for r in d1_rows if r.get(headline_key)]
+    headline_rows.sort(key=lambda r: float(r["on_site_release_lb"]), reverse=True)
+    headline_fields = [
+        "name",
+        "on_site_release_lb",
+        "p_max",
+        "p_mean",
+        "p_max_note",
+        "p_max_zone_class",
+        "p_max_hand",
+        "p_max_dist_flowline",
+        "p_max_dist_waterbody",
+        "p_max_dr",
+        "p_max_dc",
+        "huc",
+        "state",
+        "year",
+    ]
     _write_csv(out_dir / "d1.csv", d1_rows, fields)
     _write_csv(out_dir / "d2.csv", d2_rows, fields)
     _write_csv(out_dir / "facilities.csv", rows_out, fields)
+    _write_csv(out_dir / "d1_headline.csv", headline_rows, headline_fields)
 
     report: dict[str, Any] = {
         "stage": "D",
@@ -314,6 +430,27 @@ def run_stage_d(
         "n_dioxin_rows_held_grams": int(a_report["tri"]["n_dioxin_rows_held_grams"]),
         "imported_occupancy_path": str(FROZEN_OCCUPANCY_PATH),
         "d1_n_unshaded_x": len(d1_rows),
+        "n_not_d1": len(not_d1),
+        "not_d1_zone_class": not_d1_zones,
+        "d1_reading": (
+            "buffer-max is a 30 m edge of the 120 m window; "
+            "buffer-mean is the site footprint"
+        ),
+        "d1_headline_rows": [
+            {
+                "name": r["name"],
+                "on_site_release_lb": r["on_site_release_lb"],
+                "p_max": r["p_max"],
+                "p_mean": r["p_mean"],
+                "p_max_note": r["p_max_note"],
+                "p_max_zone_class": r["p_max_zone_class"],
+                "p_max_hand": r["p_max_hand"],
+                "p_max_dist_flowline": r["p_max_dist_flowline"],
+                "p_max_dist_waterbody": r["p_max_dist_waterbody"],
+            }
+            for r in headline_rows
+        ],
+        "d1_headline_expected_pounds_p_max": _expected(headline_rows, "p_max"),
         "d1_by_t": summary_t,
         "d2_n": len(d2_rows),
         "d2_n_code1": n_code1,
