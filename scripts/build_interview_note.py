@@ -31,6 +31,10 @@ NOTE_DATE = "2026-08-27"
 DEST_PDF = REPO / "docs" / "interview_note.pdf"
 MAP_PNG = REPO / "logs" / "stage_d" / "map_figure.png"
 SHAP_PNG = REPO / "logs" / "stage_d" / "shap_global.png"
+DISAGREE_PNG = REPO / "logs" / "stage_d" / "disagreement.png"
+ZOOMS_PNG = REPO / "logs" / "stage_d" / "zooms.png"
+OFR_PNG = REPO / "logs" / "stage_d" / "ofr_reaches.png"
+PARCELS_PNG = REPO / "logs" / "parcels" / "zooms_parcels.png"
 
 
 def _git_sha() -> str:
@@ -298,10 +302,31 @@ def letter_w():
     return letter[0]
 
 
-def build_pdf(*, dest: Path, map_png: Path, sha: str) -> Path:
+def _png_block(path: Path, heading: str, caption: str, styles):
+    from PIL import Image as PILImage
+    from reportlab.lib.units import inch
+    from reportlab.platypus import Image, KeepTogether, Paragraph
+
+    if not path.is_file():
+        raise GateError(f"missing figure {path}")
+    with PILImage.open(path) as im:
+        aspect = im.height / im.width
+    width = 6.9 * inch
+    img = Image(str(path), width=width, height=width * aspect)
+    img.hAlign = "CENTER"
+    return KeepTogether(
+        [
+            Paragraph(heading, styles["h1"]),
+            img,
+            Paragraph(caption, styles["cap"]),
+        ]
+    )
+
+
+def build_pdf(*, dest: Path, sha: str) -> Path:
     from reportlab.lib.pagesizes import letter
     from reportlab.lib.units import inch
-    from reportlab.platypus import Image, KeepTogether, Paragraph, SimpleDocTemplate
+    from reportlab.platypus import Image, Paragraph, SimpleDocTemplate
 
     styles = _styles()
     generated = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -316,8 +341,10 @@ def build_pdf(*, dest: Path, map_png: Path, sha: str) -> Path:
     )
     story.append(
         Paragraph(
-            f"Revisions: {NOTE_DATE}: first interview note (abstract, Table 1, Figure 2, uses, Stage C metrics, limitations). "
-            f"Generated {generated}. Git {sha}. Product artifacts at c0e9d5e.",
+            f"Revisions: {NOTE_DATE}: first interview note. "
+            f"{NOTE_DATE}: Figures 1 to 3 (basin disagreement, five office-to-max zooms, two 2008 reaches) and "
+            f"Figure 4 (five-site Indiana 2025 parcels). D tables unchanged. "
+            f"Generated {generated}. Git {sha}. Product artifacts at c0e9d5e. Parcels tag: parcels-five-sites.",
             styles["rev"],
         )
     )
@@ -422,23 +449,47 @@ def build_pdf(*, dest: Path, map_png: Path, sha: str) -> Path:
         )
     )
 
-    if not map_png.is_file():
-        raise GateError(f"missing map figure {map_png}")
-    img = Image(str(map_png), width=6.9 * inch, height=6.9 * inch * 7.0 / 8.2)
-    img.hAlign = "CENTER"
     story.append(
-        KeepTogether(
-            [
-                Paragraph("Figure 2. Calibrated map and TRI overlay", styles["h1"]),
-                img,
-                Paragraph(
-                    "Figure 2. Calibrated P(sfha | hydro) for 05120201. Blue dots: 117 in-HUC TRI plants (2023). "
-                    "Red dots: five headline plants. Black line: office point to the window-max cell (yellow square). "
-                    "Blue outlines: June 7-9, 2008 inundation (OFR 2008-1322) code 2, dissolved to Martinsville and Paragon. "
-                    "Interactive copy: logs/stage_d/map.html.",
-                    styles["cap"],
-                ),
-            ]
+        _png_block(
+            DISAGREE_PNG,
+            "Figure 1. Basin disagreement",
+            "Figure 1. Basin disagreement on calibrated P(sfha | hydro). Dark red: mapped SFHA and floodway. "
+            "Cyan: unshaded X with calibrated P >= 0.75 (same t as Table 1 window-max, pixel not plant). "
+            "Pale: other interior. Cyan is map-completion on the FIRM, not a plant-level hazard list.",
+            styles,
+        )
+    )
+    story.append(
+        _png_block(
+            ZOOMS_PNG,
+            "Figure 2. Five office-to-max windows",
+            "Figure 2. Office point to window-max cell. Each panel title has p_mean. Wash is calibrated P. "
+            "Box is the 9x9 (120 m) window. THURSDAY POOLS p_mean 0.152 is neighboring unshaded X. "
+            "FGF LLC p_mean 0.060 and ROYAL SPA CORP p_mean 0.113 are adjacent hydro. "
+            "MAGNA POWERTRAIN EAST p_mean 0.098 ranks on window-max.",
+            styles,
+        )
+    )
+    story.append(
+        _png_block(
+            OFR_PNG,
+            "Figure 3. Two 2008 reaches",
+            "Figure 3. June 7-9, 2008 inundation (OFR 2008-1322) code 2 on the same HUC. Blue polygons: "
+            "Martinsville and Paragon. Grey dots: 117 TRI office points. D2 stays 117 / 0. Appendix 2 is "
+            "reach-scale; the industrial core is code 1.",
+            styles,
+        )
+    )
+    story.append(
+        _png_block(
+            PARCELS_PNG,
+            "Figure 4. Five-site parcels",
+            "Figure 4. Indiana 2025 parcels (GIS Data Harvest) on the five Table 1 sites only. Snap 30 m. "
+            "D tables unchanged. THURSDAY POOLS p_mean 0.152: max cell off the office parcel. "
+            "FGF LLC p_mean 0.060: floodway cell on the office parcel. ROYAL SPA CORP p_mean 0.113: "
+            "waterbody cell off the office parcel. LINDE GAS & EQUIPMENT p_mean 0.192 and "
+            "MAGNA POWERTRAIN EAST p_mean 0.098: max cell on the office parcel. Folder: logs/parcels/.",
+            styles,
         )
     )
 
@@ -449,8 +500,8 @@ def build_pdf(*, dest: Path, map_png: Path, sha: str) -> Path:
             "This is the highest-value use. Geospatial, climate-risk, insurance, and civic-tech readers can see that the work "
             "locked a geography (Upper White 05120201), refused a bad label (IndianaMap dropped unshaded Zone X; NFHL layer 28 "
             "with where=1=1 restored it), calibrated probabilities instead of waving at 0.75, split window-max from site-mean "
-            "so five factories were not called flooded, and wrote claim bans into CI. Lead with the five abstract sentences and "
-            "Figure 2. Show map.html, Table 1, and the Stage C metrics below. Do not pitch this as hidden flood zones.",
+            "so five factories were not called flooded, and wrote claim bans into CI. Lead with the five abstract sentences, "
+            "Table 1, and Figures 1 to 4. Do not pitch this as hidden flood zones.",
             styles["body"],
         )
     )
@@ -474,8 +525,8 @@ def build_pdf(*, dest: Path, map_png: Path, sha: str) -> Path:
     story.append(Paragraph("<b>3. This short note.</b>", styles["body"]))
     story.append(
         Paragraph(
-            "Five sentences as abstract, Table 1, Figure 2, one limitations paragraph. That is the sendable object. "
-            "The repo is martialsystems/indiana_flood_completion (private).",
+            "Five sentences as abstract, Table 1, Figures 1 to 4, one limitations paragraph. That is the sendable object. "
+            "The repo is martialsystems/indiana_flood_completion (private). Parcels tag: parcels-five-sites.",
             styles["body"],
         )
     )
@@ -527,8 +578,9 @@ def build_pdf(*, dest: Path, map_png: Path, sha: str) -> Path:
     story.append(
         Paragraph(
             "Max versus mean: buffer-max is one 30 m cell in a 120 m window. Buffer-mean is the footprint. Zero headline rows "
-            "have mean P at or above 0.50. Adjacent hydro is NHD/FIRM paint: FGF LLC (p_mean 0.060) floodway corner, "
-            "ROYAL SPA CORP (p_mean 0.113) waterbody.",
+            "have mean P at or above 0.50. Adjacent hydro, after the five-site parcel clip: FGF LLC (p_mean 0.060) "
+            "floodway cell is on the office parcel; ROYAL SPA CORP (p_mean 0.113) waterbody cell is off the office parcel. "
+            "THURSDAY POOLS (p_mean 0.152) max cell is off the office parcel.",
             styles["body"],
         )
     )
@@ -554,17 +606,16 @@ def build_pdf(*, dest: Path, map_png: Path, sha: str) -> Path:
         shap = Image(str(SHAP_PNG), width=5.4 * inch, height=5.4 * inch * 3.2 / 6.0)
         shap.hAlign = "CENTER"
         story.append(shap)
-        story.append(Paragraph("Figure 3. Global SHAP for C features. Close-out, not a new result.", styles["cap"]))
+        story.append(Paragraph("Figure 5. Global SHAP for C features. Close-out, not a new result.", styles["cap"]))
 
     story.append(Paragraph("Limitations", styles["h1"]))
     story.append(
         Paragraph(
-            "No parcels: adjacent hydro is NHD/FIRM paint, not a cadastral clip; a parcel clip would change certainty on FGF LLC "
-            "(p_mean 0.060) and ROYAL SPA CORP (p_mean 0.113), not the mean-versus-max finding. No soil: hydrologic soil group "
-            "is not in this model; gSSURGO C2 was not required for the claim graph. Not a FIRM: P does not replace the effective "
-            "flood map. 2008 is coverage: 117 plants in mask code 1, 0 in code 2; Appendix 2 reaches in the HUC are Martinsville "
-            "and Paragon only. The map HTML was not opened in a browser for this note; Figure 2 is drawn from the calibrated "
-            "raster and the D tables.",
+            "Parcels: five Table 1 sites only (Indiana 2025 harvest, logs/parcels/). Rest of the HUC has no cadastral clip. "
+            "No soil: hydrologic soil group is not in this model; gSSURGO C2 was not required for the claim graph. Not a FIRM: "
+            "P does not replace the effective flood map. 2008 is coverage: 117 plants in mask code 1, 0 in code 2; Appendix 2 "
+            "reaches in the HUC are Martinsville and Paragon only. The map HTML was not opened in a browser for this note; "
+            "Figures 1 to 4 are drawn from the calibrated raster, D tables, and the five-site parcel query.",
             styles["body"],
         )
     )
@@ -586,13 +637,7 @@ def build_pdf(*, dest: Path, map_png: Path, sha: str) -> Path:
 
 def main() -> int:
     sha = _git_sha()
-    render_map_figure(
-        interim_dir=REPO / "data" / "interim",
-        facilities_csv=REPO / "logs" / "stage_d" / "facilities.csv",
-        headline_csv=REPO / "logs" / "stage_d" / "d1_headline.csv",
-        dest_png=MAP_PNG,
-    )
-    pdf = build_pdf(dest=DEST_PDF, map_png=MAP_PNG, sha=sha)
+    pdf = build_pdf(dest=DEST_PDF, sha=sha)
     from pypdf import PdfReader
 
     reader = PdfReader(str(pdf))
