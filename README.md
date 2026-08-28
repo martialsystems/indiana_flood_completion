@@ -1,6 +1,6 @@
 # Upper White flood-map completion
 
-This tree scores every 30 m cell in the Upper White River basin (HUC-8 **05120201**) for how much it looks like FEMA's current Special Flood Hazard Area, given terrain and distance-to-water. The score is `P(sfha | hydro)`. TRI on-site releases for 2023 are an overlay, not the training target.
+This tree scores every 30 meter cell in the Upper White River basin (HUC-8 **05120201**) for how much it looks like FEMA's current Special Flood Hazard Area, given terrain and distance-to-water. The score is `P(sfha | hydro)`. TRI on-site releases for 2023 are an overlay, not the training target.
 
 `P(sfha | hydro)` is a map-completion score, not a 100-year exceedance.
 
