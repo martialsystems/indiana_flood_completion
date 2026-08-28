@@ -19,10 +19,12 @@ def test_readme_keeps_lead_table_and_caveat() -> None:
     assert "THURSDAY POOLS" in README
     assert "Highest P in 120 m" in README
     assert "Mean P (p_mean)" in README
-    assert "Not a FIRM, not site-level flood risk: TRI names are an overlay." in README
+    assert "Not a FIRM or site-level flood risk" in README
+    assert "TRI names are an overlay" in README
     assert "All rights reserved" not in README
     lead, _sep, table = README.partition("| Plant |")
-    assert "Not a FIRM, not site-level flood risk: TRI names are an overlay." in lead
+    assert "Not a FIRM or site-level flood risk" in lead
+    assert "white_river_stage_inundation" in README
     assert "FGF LLC" in table
 
 

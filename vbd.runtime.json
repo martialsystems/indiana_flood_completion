@@ -8,6 +8,7 @@
         "src/**",
         "tests/**",
         "scripts/**",
+        "docs/**",
         "whiteforge/**",
         "requirements.txt",
         "vbd.runtime.json"

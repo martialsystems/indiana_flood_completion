@@ -27,5 +27,6 @@ Status as of **2026-08-27:** D tables, Folium map, SHAP, interview note, README 
 - [x] SHAP global + five max cells
 - [x] README cartography (disagreement, five zooms, two 2008 reaches)
 - [x] Five-site parcels (`logs/parcels/`; D tables untouched)
-- [x] Research note PDF (`docs/interview_note.pdf`)
+- [x] Research note PDF (`docs/interview_note.pdf`: map completion plus Nora stage pair)
+- [x] Related tree listed: `white_river_stage_inundation`
 - [ ] gSSURGO C2 (must not rewrite D)
