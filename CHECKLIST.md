@@ -1,6 +1,6 @@
 # Checklist
 
-Status as of **2026-08-27:** D tables on calibrated P. 101/117 unshaded X; 16 already in SFHA/floodway/shaded X/unmapped. Five-row edge screen includes P_mean. D2 empty (coverage). B closed. SHAP/Folium not written.
+Status as of **2026-08-27:** D tables, Folium map, and SHAP on disk. gSSURGO C2 not run. B closed.
 
 ## Stage 0
 
@@ -22,5 +22,8 @@ Status as of **2026-08-27:** D tables on calibrated P. 101/117 unshaded X; 16 al
 - [x] Stage B: TWI / HAND stack (flow-path HAND, slope floor, waterbody distance)
 - [x] Stage C: HUC-10 CV + XGBoost + `p_sfha.tif` (no HSG; HAND-nodata excluded)
 - [x] Stage C addendum: isotonic OOF `p_sfha_calibrated.tif`
-- [x] Stage D: D1/D2 tables from calibrated P (SHAP/Folium later)
+- [x] Stage D: D1/D2 tables from calibrated P
+- [x] Folium map (calibrated P, five office vs max cells)
+- [x] SHAP global + five max cells
 - [ ] Research note PDF
+- [ ] gSSURGO C2 (must not rewrite D)

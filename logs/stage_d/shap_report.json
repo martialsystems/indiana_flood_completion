@@ -1,0 +1,216 @@
+{
+  "features": [
+    "slope",
+    "twi",
+    "hand",
+    "dist_flowline",
+    "dist_waterbody",
+    "nlcd_impervious"
+  ],
+  "global_mean_abs_shap": [
+    {
+      "feature": "hand",
+      "mean_abs_shap": 1.3673033714294434
+    },
+    {
+      "feature": "dist_waterbody",
+      "mean_abs_shap": 0.3144858479499817
+    },
+    {
+      "feature": "slope",
+      "mean_abs_shap": 0.28614112734794617
+    },
+    {
+      "feature": "nlcd_impervious",
+      "mean_abs_shap": 0.12912847101688385
+    },
+    {
+      "feature": "dist_flowline",
+      "mean_abs_shap": 0.1223938837647438
+    },
+    {
+      "feature": "twi",
+      "mean_abs_shap": 0.10182523727416992
+    }
+  ],
+  "hand_nodata_rule": "exclude_from_sample_and_p_sfha_nodata",
+  "headline_max_cells": [
+    {
+      "col": 2200,
+      "features": {
+        "dist_flowline": {
+          "shap": 0.6014172434806824,
+          "value": 318.9043884277344
+        },
+        "dist_waterbody": {
+          "shap": 0.2311953753232956,
+          "value": 534.1348266601562
+        },
+        "hand": {
+          "shap": 1.7852321863174438,
+          "value": 0.0
+        },
+        "nlcd_impervious": {
+          "shap": 0.17554010450839996,
+          "value": 0.0
+        },
+        "slope": {
+          "shap": 0.15826253592967987,
+          "value": 0.02526245266199112
+        },
+        "twi": {
+          "shap": 0.04091903194785118,
+          "value": 9.025330543518066
+        }
+      },
+      "name": "THURSDAY POOLS",
+      "p_max": 0.7688588500022888,
+      "p_max_note": "neighboring_land_cell",
+      "p_mean": 0.15194113552570343,
+      "row": 1728
+    },
+    {
+      "col": 655,
+      "features": {
+        "dist_flowline": {
+          "shap": 0.49460509419441223,
+          "value": 94.86833190917969
+        },
+        "dist_waterbody": {
+          "shap": 0.3659311830997467,
+          "value": 192.09373474121094
+        },
+        "hand": {
+          "shap": 1.5290815830230713,
+          "value": 0.0
+        },
+        "nlcd_impervious": {
+          "shap": 0.12330704182386398,
+          "value": 0.0
+        },
+        "slope": {
+          "shap": 0.1873336136341095,
+          "value": 0.07533376663923264
+        },
+        "twi": {
+          "shap": 0.3870755434036255,
+          "value": 7.776889324188232
+        }
+      },
+      "name": "FGF LLC",
+      "p_max": 0.7795918583869934,
+      "p_max_note": "adjacent_hydro_cell",
+      "p_mean": 0.059961166232824326,
+      "row": 2157
+    },
+    {
+      "col": 1292,
+      "features": {
+        "dist_flowline": {
+          "shap": 1.025796890258789,
+          "value": 484.6648254394531
+        },
+        "dist_waterbody": {
+          "shap": -0.1369657963514328,
+          "value": 0.0
+        },
+        "hand": {
+          "shap": 1.5466334819793701,
+          "value": 0.0
+        },
+        "nlcd_impervious": {
+          "shap": 0.24195744097232819,
+          "value": 0.0
+        },
+        "slope": {
+          "shap": -0.12857122719287872,
+          "value": 0.019221926108002663
+        },
+        "twi": {
+          "shap": 0.35629716515541077,
+          "value": 7.35277795791626
+        }
+      },
+      "name": "ROYAL SPA CORP",
+      "p_max": 0.7735424041748047,
+      "p_max_note": "adjacent_hydro_cell",
+      "p_mean": 0.11286924034357071,
+      "row": 2753
+    },
+    {
+      "col": 1141,
+      "features": {
+        "dist_flowline": {
+          "shap": 0.5764661431312561,
+          "value": 342.0526123046875
+        },
+        "dist_waterbody": {
+          "shap": 0.18818899989128113,
+          "value": 84.85281372070312
+        },
+        "hand": {
+          "shap": 1.1887123584747314,
+          "value": 0.0
+        },
+        "nlcd_impervious": {
+          "shap": -0.7535889148712158,
+          "value": 66.0
+        },
+        "slope": {
+          "shap": 0.537935197353363,
+          "value": 0.09406369924545288
+        },
+        "twi": {
+          "shap": 0.6806815266609192,
+          "value": 6.455172061920166
+        }
+      },
+      "name": "LINDE GAS & EQUIPMENT",
+      "p_max": 0.7625402808189392,
+      "p_max_note": "neighboring_land_cell",
+      "p_mean": 0.19238290190696716,
+      "row": 2405
+    },
+    {
+      "col": 3339,
+      "features": {
+        "dist_flowline": {
+          "shap": 0.40430012345314026,
+          "value": 150.0
+        },
+        "dist_waterbody": {
+          "shap": 0.1441219598054886,
+          "value": 637.8087768554688
+        },
+        "hand": {
+          "shap": 1.707253336906433,
+          "value": 0.0
+        },
+        "nlcd_impervious": {
+          "shap": 0.14098095893859863,
+          "value": 0.0
+        },
+        "slope": {
+          "shap": 0.24508069455623627,
+          "value": 0.029652554541826248
+        },
+        "twi": {
+          "shap": 0.037488363683223724,
+          "value": 9.11633586883545
+        }
+      },
+      "name": "MAGNA POWERTRAIN EAST",
+      "p_max": 0.789226770401001,
+      "p_max_note": "neighboring_land_cell",
+      "p_mean": 0.09751777350902557,
+      "row": 793
+    }
+  ],
+  "hsg_in_shap": false,
+  "huc8": "05120201",
+  "n_train": 80000,
+  "p_definition": "P(sfha | hydro)",
+  "p_source": "p_sfha_calibrated.tif",
+  "raw_p_sampled": false,
+  "shap_global_png": "shap_global.png"
+}

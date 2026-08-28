@@ -198,3 +198,4 @@ Pass only if all of these hold:
 - 2026-08-27: Stage C: binary sfha labels, HUC-10 leave-one-out with 1-pixel halo, HAND-nodata excluded, no HSG, `P(sfha | hydro)`. Stage D not started.
 - 2026-08-27: C addendum: isotonic OOF calibration, `p_sfha_calibrated.tif`. Stage D tables from calibrated P, buffer max/mean, D2 coverage split. Raw `sum(P*lb)` not shipped.
 - 2026-08-27: D finding narrowed: 16 not-D1 as denominator; five-row edge screen with P_mean; P_max cell GIS note (adjacent hydro vs neighboring land). Claim scan fails D1 names without p_mean.
+- 2026-08-27: Folium map of calibrated P, zone_class, OFR code 2 as two named polygons (Martinsville, Paragon), 117 points, five office-to-max cells. SHAP global (HAND first) plus the five max cells. gSSURGO C2 not run.

@@ -59,9 +59,14 @@ PYTHONPATH=src:. python3 scripts/run_c_calibrate.py
 PYTHONPATH=src:. python3 scripts/run_stage_d.py
 ```
 
-D samples `p_sfha_calibrated.tif` only. 101 of 117 in-HUC plants are on mapped unshaded X (D1 universe). The other 16 are already floodway (2), SFHA (4), shaded X (8), or unmapped (2).
+D samples `p_sfha_calibrated.tif` only. Calibrated `P(sfha | hydro)` beats HAND on rank. 101 of 117 in-HUC plants sit on mapped unshaded X; the other 16 are already floodway (2), SFHA (4), shaded X (8), or unmapped (2).
 
-Buffer-max ≥ 0.75 is a 30 m edge of the 120 m window. Buffer-mean is the footprint. Site-mean P at the five edge-screen rows is 0.06 to 0.19.
+```bash
+PYTHONPATH=src:. python3 scripts/run_d_map.py
+PYTHONPATH=src:. python3 scripts/run_d_shap.py
+```
+
+THURSDAY POOLS is the one large-inventory row with a real terrain signal: neighboring unshaded X, HAND = 0, 120 m from the office point, p_mean 0.152. That is still an edge screen (a wet 30 m cell in a 120 m window), not a wet footprint. The original question (low HAND outside A/AE) survives there without calling the plant flooded. FGF LLC (p_mean 0.060) and ROYAL SPA CORP (p_mean 0.113) are adjacent-hydro cells (floodway corner; waterbody). LINDE GAS & EQUIPMENT p_mean 0.192 and MAGNA POWERTRAIN EAST p_mean 0.098 are neighboring unshaded X.
 
 | Plant | on_site_release_lb | P_max | p_mean | P_max cell |
 |---|---:|---:|---:|---|
@@ -71,7 +76,7 @@ Buffer-max ≥ 0.75 is a 30 m edge of the 120 m window. Buffer-mean is the footp
 | LINDE GAS & EQUIPMENT | 1048 | 0.763 | p_mean 0.192 | neighboring land, unshaded X |
 | MAGNA POWERTRAIN EAST | 0 | 0.789 | p_mean 0.098 | neighboring land, unshaded X |
 
-Sum of P_max × lb on those five rows: 224k, mostly THURSDAY POOLS inventory. Zero rows have P_mean ≥ 0.50. D2 is empty: 117 TRI in 2008 mask code 1, 0 in code 2; Appendix 2 reaches are Martinsville and Paragon only. The fixture path is the CI join.
+Zero rows have P_mean ≥ 0.50. D2 is empty coverage: 117 TRI in 2008 mask code 1, 0 in code 2; Appendix 2 reaches are Martinsville and Paragon only. Map: `logs/stage_d/map.html` (calibrated P, zone_class, two OFR code-2 polygons, 117 office points, five office-to-max cells). SHAP global on C features, no HSG: HAND, then dist_waterbody, then slope; at the THURSDAY POOLS P_max cell (p_mean 0.152) HAND = 0 is the local driver. Report: `logs/stage_d/shap_report.json`. The fixture path is the CI join. gSSURGO C2 is not run.
 
 ## Claim bans
 
