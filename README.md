@@ -15,7 +15,7 @@ June 2008 Appendix 2 does not cover the industrial core of 05120201.
 | Plant | 2023 on-site release (lb) | Highest P in 120 m | Mean P in 120 m | What the high cell is |
 |---|---:|---:|---:|---|
 | THURSDAY POOLS | 257,590 | 0.769 | p_mean 0.152 | neighboring land, unshaded X |
-| FGF LLC | 27335 | 0.780 | p_mean 0.060 | adjacent hydro (floodway) |
+| FGF LLC | 27,335 | 0.780 | p_mean 0.060 | adjacent hydro (floodway) |
 | ROYAL SPA CORP | 4,950 | 0.774 | p_mean 0.113 | adjacent hydro (waterbody) |
 | LINDE GAS & EQUIPMENT | 1,048 | 0.763 | p_mean 0.192 | neighboring land, unshaded X |
 | MAGNA POWERTRAIN EAST | 0 | 0.789 | p_mean 0.098 | neighboring land, unshaded X |
