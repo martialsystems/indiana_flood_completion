@@ -22,7 +22,15 @@ Not a FIRM or site-level flood risk. TRI names are an overlay only.
 | LINDE GAS & EQUIPMENT | 1,048 | 0.763 | 0.192 | max on the office parcel |
 | MAGNA POWERTRAIN EAST | 0 | 0.789 | 0.098 | max on the office parcel |
 
-The table ranks on window-max P. Buffer-max is one 30 m cell; buffer-mean is the 120 m footprint. THURSDAY POOLS (p_mean 0.152): max off parcel, neighboring unshaded X, HAND = 0. FGF LLC (p_mean 0.060): floodway cell on the office parcel, so the lot is still not a wet footprint. ROYAL SPA CORP (p_mean 0.113): waterbody cell off the office parcel. LINDE GAS & EQUIPMENT (p_mean 0.192) and MAGNA POWERTRAIN EAST (p_mean 0.098): max on the office parcel; means stay below 0.50.
+The table ranks on window-max P. Buffer-max is one 30 m cell; buffer-mean is the 120 m footprint.
+
+THURSDAY POOLS (p_mean 0.152) - max off parcel, neighboring unshaded X, HAND = 0.
+
+FGF LLC (p_mean 0.060) - floodway cell on the office parcel, so the lot is still not a wet footprint.
+
+ROYAL SPA CORP (p_mean 0.113) - waterbody cell off the office parcel.
+
+LINDE GAS & EQUIPMENT (p_mean 0.192) & MAGNA POWERTRAIN EAST (p_mean 0.098) - max on the office parcel; means stay below 0.50.
 
 ![Figure 1. Basin disagreement](logs/stage_d/disagreement.png)
 
