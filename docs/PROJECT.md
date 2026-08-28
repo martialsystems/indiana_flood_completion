@@ -9,13 +9,4 @@ Two trees, one basin (HUC-8 05120201).
 
 Interview notes are merged in [interview_note.pdf](interview_note.pdf). Do not reopen D, B, or HAND. No third Delta. No second HUC.
 
-GitHub Projects (board) needs a token with the `project` scope. From a machine that can complete the browser prompt:
-
-```bash
-gh auth refresh -h github.com -s project,read:project
-gh project create --owner martialsystems --title "Indiana flood"
-gh project link --owner martialsystems --repo martialsystems/indiana_flood_completion
-gh project link --owner martialsystems --repo martialsystems/white_river_stage_inundation
-```
-
-This checkout cannot mint that scope. The two repositories are linked here in git instead.
+GitHub Project (user board): [Indiana flood](https://github.com/users/martialsystems/projects/1) (also listed at https://github.com/martialsystems?tab=projects). Linked repositories: `indiana_flood_completion`, `white_river_stage_inundation`. Private board.
