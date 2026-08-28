@@ -141,6 +141,15 @@ D1_HEADLINE_NAME_NEEDLES = (
     "LINDE GAS & EQUIPMENT",
 )
 
+# Five-site cadastral overlay only. Does not rewrite D tables.
+PARCEL_LAYER_URL = (
+    "https://gisdata.in.gov/server/rest/services/Hosted/"
+    "Parcel_Boundaries_of_Indiana_2025/FeatureServer/0"
+)
+PARCEL_SOURCE = "indiana_gis_data_harvest_2025"
+PARCEL_SNAP_M = 30.0
+PARCEL_WINDOW_M = 200.0
+
 # gSSURGO / muaggatt hydrologic group. Dual groups stay distinct codes.
 HSG_CODE = {
     "A": 1,

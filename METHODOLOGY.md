@@ -202,3 +202,4 @@ Pass only if all of these hold:
 - 2026-08-27: README lead is the five-sentence claim graph: map-completion P, OOF PR-AUC, five Zone X wet cells, THURSDAY POOLS (p_mean 0.152) neighboring land, 2008 not the industrial core. Map and SHAP are close-outs. Do not reopen D, B, or raw P.
 - 2026-08-27: Interview note PDF (`docs/interview_note.pdf`): abstract, Table 1, Figure 2, portfolio/talk/uses, Stage C metrics, limitations. Does not reopen D, B, or raw P.
 - 2026-08-27: README cartography: basin disagreement (unshaded X and P >= 0.75 vs mapped SFHA), five office-to-max zooms, two OFR 2008 reaches on the same HUC. Calibrated P only. Does not reopen D.
+- 2026-08-27: Five-site Indiana 2025 parcels in `logs/parcels/` (snap 30 m). Tightens adjacent hydro. Does not rewrite D tables.

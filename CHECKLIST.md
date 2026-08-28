@@ -1,6 +1,6 @@
 # Checklist
 
-Status as of **2026-08-27:** D tables, Folium map, SHAP, interview note, and README cartography on disk. gSSURGO C2 not run. B closed.
+Status as of **2026-08-27:** D tables, Folium map, SHAP, interview note, README cartography, and five-site parcels on disk. gSSURGO C2 not run. B closed.
 
 ## Stage 0
 
@@ -26,5 +26,6 @@ Status as of **2026-08-27:** D tables, Folium map, SHAP, interview note, and REA
 - [x] Folium map (calibrated P, five office vs max cells)
 - [x] SHAP global + five max cells
 - [x] README cartography (disagreement, five zooms, two 2008 reaches)
+- [x] Five-site parcels (`logs/parcels/`; D tables untouched)
 - [x] Research note PDF (`docs/interview_note.pdf`)
 - [ ] gSSURGO C2 (must not rewrite D)

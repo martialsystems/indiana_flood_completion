@@ -34,13 +34,17 @@ Figure 2. Office point to window-max cell. Each panel title has p_mean. Wash is 
 
 Figure 3. June 7-9, 2008 inundation (OFR 2008-1322) code 2 on the same HUC. Blue polygons: Martinsville and Paragon. Grey dots: 117 TRI office points. D2 stays 117 / 0. Appendix 2 is reach-scale; the industrial core is code 1.
 
+![Figure 4. Five-site parcels](logs/parcels/zooms_parcels.png)
+
+Figure 4. Indiana 2025 parcels (GIS Data Harvest) on the five Table 1 sites only. Snap 30 m. D tables unchanged. THURSDAY POOLS p_mean 0.152: max cell off the office parcel. FGF LLC p_mean 0.060: floodway cell on the office parcel. ROYAL SPA CORP p_mean 0.113: waterbody cell off the office parcel. LINDE GAS & EQUIPMENT p_mean 0.192 and MAGNA POWERTRAIN EAST p_mean 0.098: max cell on the office parcel. Folder: `logs/parcels/`.
+
 Map (interactive): [logs/stage_d/map.html](logs/stage_d/map.html). Interview note: [docs/interview_note.pdf](docs/interview_note.pdf).
 
 101 of 117 in-HUC plants sit on mapped unshaded X. The other 16 are already floodway (2), SFHA (4), shaded X (8), or unmapped (2).
 
 Limitations:
 
-- No parcels: adjacent hydro is NHD/FIRM paint, not a cadastral clip.
+- Parcels: five Table 1 sites only (Indiana 2025 harvest, `logs/parcels/`). Rest of the HUC has no cadastral clip.
 - No soil: hydrologic soil group is not in this model.
 - Not a FIRM: P does not replace the effective flood map.
 - 2008 is coverage: 117 plants in mask code 1, 0 in code 2. Appendix 2 reaches in the HUC are Martinsville and Paragon only.
@@ -103,6 +107,7 @@ PYTHONPATH=src:. python3 scripts/run_stage_d.py
 PYTHONPATH=src:. python3 scripts/run_d_map.py
 PYTHONPATH=src:. python3 scripts/run_d_shap.py
 PYTHONPATH=src:. python3 scripts/run_d_cartography.py
+PYTHONPATH=src:. python3 scripts/run_parcels.py
 ```
 
 The fixture path is the CI join. gSSURGO C2 is not run. Do not reopen D, B, or raw `p_sfha.tif`.
