@@ -1,10 +1,10 @@
 # Upper White flood-map completion
 
-Private research tree. Upper White HUC-8 **05120201**. Pixel unit: `P(sfha | hydro)` on a 30 m EPSG:5070 grid. Facility overlay (TRI on-site releases) is Stage D.
+This tree scores every 30 m cell in the Upper White River basin (HUC-8 **05120201**) for how much it looks like FEMA's current Special Flood Hazard Area, given terrain and distance-to-water. The score is `P(sfha | hydro)`. TRI on-site releases for 2023 are an overlay, not the training target.
 
 `P(sfha | hydro)` is a map-completion score, not a 100-year exceedance.
 
-Calibrated OOF PR-AUC (0.36) beats the SFHA-rate baseline (0.10) and a HAND score (0.24).
+Calibrated OOF PR-AUC (0.36) beats the SFHA-rate baseline (0.10) and a HAND score (0.24). To three decimals: raw PR-AUC 0.369, calibrated 0.362, Brier 0.073 after isotonic calibration. Stage D samples `p_sfha_calibrated.tif` only.
 
 Five Zone X plants have one wet cell in a 120 m window; site-mean P is 0.06 to 0.19; none clear 0.50 on the footprint.
 
@@ -20,9 +20,18 @@ June 2008 Appendix 2 does not cover the industrial core of 05120201.
 | LINDE GAS & EQUIPMENT | 1048 | 0.763 | p_mean 0.192 | neighboring land, unshaded X |
 | MAGNA POWERTRAIN EAST | 0 | 0.789 | p_mean 0.098 | neighboring land, unshaded X |
 
-FGF LLC (p_mean 0.060) and ROYAL SPA CORP (p_mean 0.113) remain adjacent-hydro footnotes (floodway corner; waterbody). MAGNA POWERTRAIN EAST (p_mean 0.098) stays in the P_max rank list. D2 is 117 / 0; the map draws two named OFR polygons (Martinsville, Paragon). Map and SHAP are close-outs, not new results: `logs/stage_d/map.html`, `logs/stage_d/shap_report.json`. Global SHAP on C features (no HSG): HAND 1.37, then distance to water, then slope; TWI is last because HAND already ate the wetness signal. At the THURSDAY POOLS max cell (p_mean 0.152), HAND = 0 is the local driver and the cell is still unshaded X.
+The table ranks on window-max P. Buffer-max is one 30 m cell; buffer-mean is the 120 m footprint. At THURSDAY POOLS (p_mean 0.152) the wet cell is neighboring unshaded X, HAND = 0, 120 m from the office point: an edge screen, not a wet footprint. FGF LLC (p_mean 0.060) and ROYAL SPA CORP (p_mean 0.113) are adjacent-hydro footnotes (floodway corner; waterbody). MAGNA POWERTRAIN EAST (p_mean 0.098) is in the list because the rank is P_max.
 
-101 of 117 in-HUC plants sit on mapped unshaded X; the other 16 are already floodway (2), SFHA (4), shaded X (8), or unmapped (2). D samples `p_sfha_calibrated.tif` only.
+Map: [logs/stage_d/map.html](logs/stage_d/map.html). Calibrated P, zone class, two named 2008 polygons (Martinsville, Paragon), 117 office points, five office-to-max cells.
+
+101 of 117 in-HUC plants sit on mapped unshaded X. The other 16 are already floodway (2), SFHA (4), shaded X (8), or unmapped (2).
+
+Limitations:
+
+- No parcels: adjacent hydro is NHD/FIRM paint, not a cadastral clip.
+- No soil: hydrologic soil group is not in this model.
+- Not a FIRM: P does not replace the effective flood map.
+- 2008 is coverage: 117 plants in mask code 1, 0 in code 2. Appendix 2 reaches in the HUC are Martinsville and Paragon only.
 
 Sibling occupancy study: `indiana_hazmat_floodplain` (parked, Stage 0 frozen 2026-08-25). This tree imports that occupancy as a freeze file. It does not recompute it.
 
