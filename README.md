@@ -46,8 +46,6 @@ Figure 1. Basin disagreement on calibrated P(sfha | hydro).
 
 Figure 2. Office point to window-max cell.
 
-*Note*: Each panel title has p_mean. Wash is calibrated P; box is the 9x9 (120 m) window.
-
 - THURSDAY POOLS (p_mean 0.152): Neighboring unshaded X, max off parcel.
 
 - FGF LLC (p_mean 0.060): On-parcel floodway sliver.
@@ -55,6 +53,8 @@ Figure 2. Office point to window-max cell.
 - ROYAL SPA CORP (p_mean 0.113): Waterbody cell off the office parcel.
 
 - LINDE GAS & EQUIPMENT (p_mean 0.192) & MAGNA POWERTRAIN EAST (p_mean 0.098): Max cell on the office parcel.
+
+*Note*: Each panel title has p_mean. Wash is calibrated P; box is the 9x9 (120 m) window.
   
 ![Figure 3. Two 2008 reaches](logs/stage_d/ofr_reaches.png)
 
