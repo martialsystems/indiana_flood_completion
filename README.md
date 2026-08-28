@@ -79,6 +79,7 @@ Figure 4. Indiana 2025 parcels (GIS Data Harvest) on the five Table 1 sites only
 - ROYAL SPA CORP (p_mean 0.113): Waterbody cell off the office parcel.
 
 - LINDE GAS & EQUIPMENT (p_mean 0.192) & MAGNA POWERTRAIN EAST (p_mean 0.098): Max cell on the office parcel.
+  
 
 Map (interactive): [logs/stage_d/map.html](logs/stage_d/map.html). Interview note: [docs/interview_note.pdf](docs/interview_note.pdf).
 
