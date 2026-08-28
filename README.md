@@ -12,7 +12,7 @@ THURSDAY POOLS is the only large-inventory terrain hit, and it is neighboring la
 
 June 2008 Appendix 2 does not cover the industrial core of 05120201.
 
-| Plant | on_site_release_lb | P_max | p_mean | P_max cell |
+| Plant | 2023 on-site release (lb) | Highest P in 120 m | Mean P in 120 m | What the high cell is |
 |---|---:|---:|---:|---|
 | THURSDAY POOLS | 257590 | 0.769 | p_mean 0.152 | neighboring land, unshaded X |
 | FGF LLC | 27335 | 0.780 | p_mean 0.060 | adjacent hydro (floodway) |
