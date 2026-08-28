@@ -12,7 +12,7 @@ THURSDAY POOLS is the only large-inventory terrain hit, and it is neighboring la
 
 June 2008 Appendix 2 does not cover the industrial core of 05120201.
 
-Not a FIRM, not site-level flood risk: TRI names are an overlay.
+Not a FIRM or site-level flood risk. TRI names are an overlay only.
 
 | Plant | 2023 on-site release (lb) | Highest P in 120 m | Mean P (p_mean) | What the high cell is |
 |---|---:|---:|---:|---|
