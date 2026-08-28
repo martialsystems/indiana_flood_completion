@@ -29,4 +29,5 @@ Status as of **2026-08-27:** D tables, Folium map, SHAP, interview note, README 
 - [x] Five-site parcels (`logs/parcels/`; D tables untouched)
 - [x] Research note PDF (`docs/interview_note.pdf`)
 - [x] Related tree listed: https://github.com/martialsystems/white_river_stage_inundation
+- [x] Three-tree gist: https://gist.github.com/martialsystems/16584e78d079666f7e8994b4cc6158be
 - [ ] gSSURGO C2 (must not rewrite D)

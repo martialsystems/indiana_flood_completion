@@ -206,3 +206,4 @@ Pass only if all of these hold:
 - 2026-08-27: Five-site Indiana 2025 parcels in `logs/parcels/` (snap 30 m). Tightens adjacent hydro. Does not rewrite D tables.
 - 2026-08-27: Interview note PDF updated with Figures 1 to 4 (disagreement, zooms, 2008 reaches, five-site parcels). D tables unchanged.
 - 2026-08-27: README Table 1 notes match Figure 4 parcels: FGF is an on-parcel floodway sliver with dry mean, not adjacent hydro. D tables unchanged.
+- 2026-08-28: Three-tree summary gist on README and docs/PROJECT.md: https://gist.github.com/martialsystems/16584e78d079666f7e8994b4cc6158be

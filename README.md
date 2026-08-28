@@ -85,6 +85,8 @@ Map (interactive): [logs/stage_d/map.html](logs/stage_d/map.html). Interview not
 
 Related tree: https://github.com/martialsystems/white_river_stage_inundation (same HAND grid; USGS 03351000 flood stage and 21.18 ft crest).
 
+Three-tree summary: https://gist.github.com/martialsystems/16584e78d079666f7e8994b4cc6158be
+
 101 of 117 in-HUC plants sit on mapped unshaded X. The other 16 are already floodway (2), SFHA (4), shaded X (8), or unmapped (2).
 
 Limitations:
