@@ -22,7 +22,7 @@ June 2008 Appendix 2 does not cover the industrial core of 05120201.
 
 The table ranks on window-max P. Buffer-max is one 30 m cell; buffer-mean is the 120 m footprint. At THURSDAY POOLS (p_mean 0.152) the wet cell is neighboring unshaded X, HAND = 0, 120 m from the office point: an edge screen, not a wet footprint. FGF LLC (p_mean 0.060) and ROYAL SPA CORP (p_mean 0.113) are adjacent-hydro footnotes (floodway corner; waterbody). MAGNA POWERTRAIN EAST (p_mean 0.098) is in the list because the rank is P_max.
 
-Map: [logs/stage_d/map.html](logs/stage_d/map.html). Calibrated P, zone class, two named 2008 polygons (Martinsville, Paragon), 117 office points, five office-to-max cells.
+Map: [logs/stage_d/map.html](logs/stage_d/map.html). Calibrated P, zone class, two named 2008 polygons (Martinsville, Paragon), 117 office points, five office-to-max cells. Interview note: [docs/interview_note.pdf](docs/interview_note.pdf).
 
 101 of 117 in-HUC plants sit on mapped unshaded X. The other 16 are already floodway (2), SFHA (4), shaded X (8), or unmapped (2).
 

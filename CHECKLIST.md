@@ -1,6 +1,6 @@
 # Checklist
 
-Status as of **2026-08-27:** D tables, Folium map, and SHAP on disk. gSSURGO C2 not run. B closed.
+Status as of **2026-08-27:** D tables, Folium map, SHAP, and interview note on disk. gSSURGO C2 not run. B closed.
 
 ## Stage 0
 
@@ -25,5 +25,5 @@ Status as of **2026-08-27:** D tables, Folium map, and SHAP on disk. gSSURGO C2 
 - [x] Stage D: D1/D2 tables from calibrated P
 - [x] Folium map (calibrated P, five office vs max cells)
 - [x] SHAP global + five max cells
-- [ ] Research note PDF
+- [x] Research note PDF (`docs/interview_note.pdf`)
 - [ ] gSSURGO C2 (must not rewrite D)
