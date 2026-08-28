@@ -2,6 +2,28 @@
 
 Private research tree. Upper White HUC-8 **05120201**. Pixel unit: `P(sfha | hydro)` on a 30 m EPSG:5070 grid. Facility overlay (TRI on-site releases) is Stage D.
 
+`P(sfha | hydro)` is a map-completion score, not a 100-year exceedance.
+
+Calibrated OOF PR-AUC (0.36) beats the SFHA-rate baseline (0.10) and a HAND score (0.24).
+
+Five Zone X plants have one wet cell in a 120 m window; site-mean P is 0.06 to 0.19; none clear 0.50 on the footprint.
+
+THURSDAY POOLS is the only large-inventory terrain hit, and it is neighboring land.
+
+June 2008 Appendix 2 does not cover the industrial core of 05120201.
+
+| Plant | on_site_release_lb | P_max | p_mean | P_max cell |
+|---|---:|---:|---:|---|
+| THURSDAY POOLS | 257590 | 0.769 | p_mean 0.152 | neighboring land, unshaded X |
+| FGF LLC | 27335 | 0.780 | p_mean 0.060 | adjacent hydro (floodway) |
+| ROYAL SPA CORP | 4950 | 0.774 | p_mean 0.113 | adjacent hydro (waterbody) |
+| LINDE GAS & EQUIPMENT | 1048 | 0.763 | p_mean 0.192 | neighboring land, unshaded X |
+| MAGNA POWERTRAIN EAST | 0 | 0.789 | p_mean 0.098 | neighboring land, unshaded X |
+
+FGF LLC (p_mean 0.060) and ROYAL SPA CORP (p_mean 0.113) remain adjacent-hydro footnotes (floodway corner; waterbody). MAGNA POWERTRAIN EAST (p_mean 0.098) stays in the P_max rank list. D2 is 117 / 0; the map draws two named OFR polygons (Martinsville, Paragon). Map and SHAP are close-outs, not new results: `logs/stage_d/map.html`, `logs/stage_d/shap_report.json`. Global SHAP on C features (no HSG): HAND 1.37, then distance to water, then slope; TWI is last because HAND already ate the wetness signal. At the THURSDAY POOLS max cell (p_mean 0.152), HAND = 0 is the local driver and the cell is still unshaded X.
+
+101 of 117 in-HUC plants sit on mapped unshaded X; the other 16 are already floodway (2), SFHA (4), shaded X (8), or unmapped (2). D samples `p_sfha_calibrated.tif` only.
+
 Sibling occupancy study: `indiana_hazmat_floodplain` (parked, Stage 0 frozen 2026-08-25). This tree imports that occupancy as a freeze file. It does not recompute it.
 
 | File | Role |
@@ -57,26 +79,11 @@ Report and colorbar: `P(sfha | hydro)`. Calibrate OOF scores before D:
 ```bash
 PYTHONPATH=src:. python3 scripts/run_c_calibrate.py
 PYTHONPATH=src:. python3 scripts/run_stage_d.py
-```
-
-D samples `p_sfha_calibrated.tif` only. Calibrated `P(sfha | hydro)` beats HAND on rank. 101 of 117 in-HUC plants sit on mapped unshaded X; the other 16 are already floodway (2), SFHA (4), shaded X (8), or unmapped (2).
-
-```bash
 PYTHONPATH=src:. python3 scripts/run_d_map.py
 PYTHONPATH=src:. python3 scripts/run_d_shap.py
 ```
 
-THURSDAY POOLS is the one large-inventory row with a real terrain signal: neighboring unshaded X, HAND = 0, 120 m from the office point, p_mean 0.152. That is still an edge screen (a wet 30 m cell in a 120 m window), not a wet footprint. The original question (low HAND outside A/AE) survives there without calling the plant flooded. FGF LLC (p_mean 0.060) and ROYAL SPA CORP (p_mean 0.113) are adjacent-hydro cells (floodway corner; waterbody). LINDE GAS & EQUIPMENT p_mean 0.192 and MAGNA POWERTRAIN EAST p_mean 0.098 are neighboring unshaded X.
-
-| Plant | on_site_release_lb | P_max | p_mean | P_max cell |
-|---|---:|---:|---:|---|
-| THURSDAY POOLS | 257590 | 0.769 | p_mean 0.152 | neighboring land, unshaded X |
-| FGF LLC | 27335 | 0.780 | p_mean 0.060 | adjacent hydro (floodway) |
-| ROYAL SPA CORP | 4950 | 0.774 | p_mean 0.113 | adjacent hydro (waterbody) |
-| LINDE GAS & EQUIPMENT | 1048 | 0.763 | p_mean 0.192 | neighboring land, unshaded X |
-| MAGNA POWERTRAIN EAST | 0 | 0.789 | p_mean 0.098 | neighboring land, unshaded X |
-
-Zero rows have P_mean ≥ 0.50. D2 is empty coverage: 117 TRI in 2008 mask code 1, 0 in code 2; Appendix 2 reaches are Martinsville and Paragon only. Map: `logs/stage_d/map.html` (calibrated P, zone_class, two OFR code-2 polygons, 117 office points, five office-to-max cells). SHAP global on C features, no HSG: HAND, then dist_waterbody, then slope; at the THURSDAY POOLS P_max cell (p_mean 0.152) HAND = 0 is the local driver. Report: `logs/stage_d/shap_report.json`. The fixture path is the CI join. gSSURGO C2 is not run.
+The fixture path is the CI join. gSSURGO C2 is not run. Do not reopen D, B, or raw `p_sfha.tif`.
 
 ## Claim bans
 

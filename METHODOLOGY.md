@@ -199,3 +199,4 @@ Pass only if all of these hold:
 - 2026-08-27: C addendum: isotonic OOF calibration, `p_sfha_calibrated.tif`. Stage D tables from calibrated P, buffer max/mean, D2 coverage split. Raw `sum(P*lb)` not shipped.
 - 2026-08-27: D finding narrowed: 16 not-D1 as denominator; five-row edge screen with P_mean; P_max cell GIS note (adjacent hydro vs neighboring land). Claim scan fails D1 names without p_mean.
 - 2026-08-27: Folium map of calibrated P, zone_class, OFR code 2 as two named polygons (Martinsville, Paragon), 117 points, five office-to-max cells. SHAP global (HAND first) plus the five max cells. gSSURGO C2 not run.
+- 2026-08-27: README lead is the five-sentence claim graph: map-completion P, OOF PR-AUC, five Zone X wet cells, THURSDAY POOLS (p_mean 0.152) neighboring land, 2008 not the industrial core. Map and SHAP are close-outs. Do not reopen D, B, or raw P.
