@@ -64,7 +64,7 @@ Figure 3. June 7-9, 2008 inundation (OFR 2008-1322) code 2 on the same HUC.
 
 - Grey dots: 117 TRI office points (D2 stays 117 / 0).
 
-Notes: Appendix 2 is reach-scale; the industrial core is code 1.
+*Note*: Appendix 2 is reach-scale; the industrial core is code 1.
 
 ![Figure 4. Five-site parcels](logs/parcels/zooms_parcels.png)
 
