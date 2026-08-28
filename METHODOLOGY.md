@@ -204,3 +204,4 @@ Pass only if all of these hold:
 - 2026-08-27: README cartography: basin disagreement (unshaded X and P >= 0.75 vs mapped SFHA), five office-to-max zooms, two OFR 2008 reaches on the same HUC. Calibrated P only. Does not reopen D.
 - 2026-08-27: Five-site Indiana 2025 parcels in `logs/parcels/` (snap 30 m). Tightens adjacent hydro. Does not rewrite D tables.
 - 2026-08-27: Interview note PDF updated with Figures 1 to 4 (disagreement, zooms, 2008 reaches, five-site parcels). D tables unchanged.
+- 2026-08-27: README Table 1 notes match Figure 4 parcels: FGF is an on-parcel floodway sliver with dry mean, not adjacent hydro. D tables unchanged.

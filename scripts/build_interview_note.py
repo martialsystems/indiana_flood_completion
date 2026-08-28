@@ -396,43 +396,43 @@ def build_pdf(*, dest: Path, sha: str) -> Path:
                     "Plant",
                     "2023 on-site release (lb)",
                     "Highest P in 120 m",
-                    "Mean P in 120 m",
+                    "Mean P (p_mean)",
                     "What the high cell is",
                 ],
                 [
                     "THURSDAY POOLS",
                     "257590",
                     "0.769",
-                    "p_mean 0.152",
-                    "neighboring land, unshaded X",
+                    "0.152",
+                    "max off parcel, neighboring unshaded X, HAND = 0",
                 ],
                 [
                     "FGF LLC",
                     "27335",
                     "0.780",
-                    "p_mean 0.060",
-                    "adjacent hydro (floodway)",
+                    "0.060",
+                    "on-parcel floodway sliver; dry mean",
                 ],
                 [
                     "ROYAL SPA CORP",
                     "4950",
                     "0.774",
-                    "p_mean 0.113",
-                    "adjacent hydro (waterbody)",
+                    "0.113",
+                    "waterbody cell off the office parcel",
                 ],
                 [
                     "LINDE GAS & EQUIPMENT",
                     "1048",
                     "0.763",
-                    "p_mean 0.192",
-                    "neighboring land, unshaded X",
+                    "0.192",
+                    "max on the office parcel",
                 ],
                 [
                     "MAGNA POWERTRAIN EAST",
                     "0",
                     "0.789",
-                    "p_mean 0.098",
-                    "neighboring land, unshaded X",
+                    "0.098",
+                    "max on the office parcel",
                 ],
             ],
             [1.85 * inch, 1.15 * inch, 1.05 * inch, 1.05 * inch, 1.90 * inch],
@@ -441,10 +441,11 @@ def build_pdf(*, dest: Path, sha: str) -> Path:
     story.append(
         Paragraph(
             "Table 1 ranks on the wettest 30 m cell inside a 120 m window. Mean P is the footprint. "
-            "At THURSDAY POOLS (p_mean 0.152) that cell is neighboring unshaded X, HAND = 0, 120 m from the office point: "
-            "an edge screen, not a wet footprint. FGF LLC (p_mean 0.060) and ROYAL SPA CORP (p_mean 0.113) are adjacent-hydro "
-            "footnotes (floodway corner; waterbody). MAGNA POWERTRAIN EAST (p_mean 0.098) is in the list because the rank is "
-            "window-max P. Inventory pounds are the table column only.",
+            "THURSDAY POOLS (p_mean 0.152): max off parcel, neighboring unshaded X, HAND = 0. "
+            "FGF LLC (p_mean 0.060): floodway cell on the office parcel, so the lot is still not a wet footprint. "
+            "ROYAL SPA CORP (p_mean 0.113): waterbody cell off the office parcel. "
+            "LINDE GAS & EQUIPMENT (p_mean 0.192) and MAGNA POWERTRAIN EAST (p_mean 0.098): max on the office parcel; "
+            "means stay below 0.50. Inventory pounds are the table column only.",
             styles["cap"],
         )
     )
@@ -464,9 +465,10 @@ def build_pdf(*, dest: Path, sha: str) -> Path:
             ZOOMS_PNG,
             "Figure 2. Five office-to-max windows",
             "Figure 2. Office point to window-max cell. Each panel title has p_mean. Wash is calibrated P. "
-            "Box is the 9x9 (120 m) window. THURSDAY POOLS p_mean 0.152 is neighboring unshaded X. "
-            "FGF LLC p_mean 0.060 and ROYAL SPA CORP p_mean 0.113 are adjacent hydro. "
-            "MAGNA POWERTRAIN EAST p_mean 0.098 ranks on window-max.",
+            "Box is the 9x9 (120 m) window. THURSDAY POOLS p_mean 0.152 is neighboring unshaded X, max off parcel. "
+            "FGF LLC p_mean 0.060 is an on-parcel floodway sliver. ROYAL SPA CORP p_mean 0.113 is a waterbody cell "
+            "off the office parcel. LINDE GAS & EQUIPMENT p_mean 0.192 and MAGNA POWERTRAIN EAST p_mean 0.098 "
+            "have the max cell on the office parcel.",
             styles,
         )
     )
@@ -578,7 +580,7 @@ def build_pdf(*, dest: Path, sha: str) -> Path:
     story.append(
         Paragraph(
             "Max versus mean: buffer-max is one 30 m cell in a 120 m window. Buffer-mean is the footprint. Zero headline rows "
-            "have mean P at or above 0.50. Adjacent hydro, after the five-site parcel clip: FGF LLC (p_mean 0.060) "
+            "have mean P at or above 0.50. After the five-site parcel clip: FGF LLC (p_mean 0.060) "
             "floodway cell is on the office parcel; ROYAL SPA CORP (p_mean 0.113) waterbody cell is off the office parcel. "
             "THURSDAY POOLS (p_mean 0.152) max cell is off the office parcel.",
             styles["body"],
