@@ -28,7 +28,7 @@ from floodmap.errors import GateError  # noqa: E402
 from floodmap.map_d import _ofr_polygons  # noqa: E402
 
 NOTE_DATE = "2026-08-27"
-DEST_PDF = REPO / "docs" / "interview_note_map_completion.pdf"
+DEST_PDF = REPO / "docs" / "interview_note.pdf"
 MAP_PNG = REPO / "logs" / "stage_d" / "map_figure.png"
 SHAP_PNG = REPO / "logs" / "stage_d" / "shap_global.png"
 DISAGREE_PNG = REPO / "logs" / "stage_d" / "disagreement.png"

@@ -1,6 +1,6 @@
 # Agent notes: indiana_flood_completion
 
-Public snapshot of Upper White HUC-8 05120201. MIT on this tree. Later HUCs or a parcel product stay out of this repo. Nora reach stage inundation is https://github.com/martialsystems/white_river_stage_inundation. Combined interview PDF is packaging only: do not reopen D, B, or HAND.
+Public snapshot of Upper White HUC-8 05120201. MIT on this tree. Later HUCs or a parcel product stay out of this repo. Nora reach stage inundation is https://github.com/martialsystems/white_river_stage_inundation. Combined interview sheet is not in this git tree. Do not reopen D, B, or HAND.
 
 Sibling `~/indiana_hazmat_floodplain` is parked. Do not unpark it. Do not start its Stage A/B. Do not rewrite `data/frozen/sibling_stage0_occupancy.json`.
 
