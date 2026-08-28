@@ -1,0 +1,24 @@
+{
+  "caption_disagreement": "Figure 1. Basin disagreement on calibrated P(sfha | hydro). Dark red: mapped SFHA and floodway. Cyan: unshaded X with calibrated P >= 0.75 (same t as Table 1 window-max, pixel not plant). Pale: other interior. Cyan is map-completion on the FIRM, not a plant-level hazard list and not a 1%-annual-chance layer.",
+  "caption_ofr": "Figure 3. June 7-9, 2008 inundation (OFR 2008-1322) code 2 on the same HUC. Blue polygons: White River at Martinsville and unnamed tributary of Fall Creek at Paragon. Grey dots: 117 TRI office points (no names). D2 stays 117 / 0. Appendix 2 is reach-scale; the industrial core is code 1.",
+  "caption_zooms": "Figure 2. Office point to window-max cell for the five Table 1 plants. Wash is calibrated P. Box is the 9x9 (120 m) window. Black line is office to the max cell. Adjacent-hydro notes stay footnotes; mean P is the footprint.",
+  "disagreement_png": "disagreement.png",
+  "headline_t": 0.75,
+  "huc8": "05120201",
+  "n_ofr_polygons": 2,
+  "ofr_reaches": [
+    "White River at Martinsville",
+    "unnamed tributary of Fall Creek at Paragon"
+  ],
+  "ofr_reaches_png": "ofr_reaches.png",
+  "p_source": "p_sfha_calibrated.tif",
+  "raw_p_sampled": false,
+  "zoom_titles": [
+    "THURSDAY POOLS p_mean 0.152",
+    "FGF LLC p_mean 0.060",
+    "ROYAL SPA CORP p_mean 0.113",
+    "LINDE GAS & EQUIPMENT p_mean 0.192",
+    "MAGNA POWERTRAIN EAST p_mean 0.098"
+  ],
+  "zooms_png": "zooms.png"
+}

@@ -22,7 +22,19 @@ June 2008 Appendix 2 does not cover the industrial core of 05120201.
 
 The table ranks on window-max P. Buffer-max is one 30 m cell; buffer-mean is the 120 m footprint. At THURSDAY POOLS (p_mean 0.152) the wet cell is neighboring unshaded X, HAND = 0, 120 m from the office point: an edge screen, not a wet footprint. FGF LLC (p_mean 0.060) and ROYAL SPA CORP (p_mean 0.113) are adjacent-hydro footnotes (floodway corner; waterbody). MAGNA POWERTRAIN EAST (p_mean 0.098) is in the list because the rank is P_max.
 
-Map: [logs/stage_d/map.html](logs/stage_d/map.html). Calibrated P, zone class, two named 2008 polygons (Martinsville, Paragon), 117 office points, five office-to-max cells. Interview note: [docs/interview_note.pdf](docs/interview_note.pdf).
+![Figure 1. Basin disagreement](logs/stage_d/disagreement.png)
+
+Figure 1. Basin disagreement on calibrated `P(sfha | hydro)`. Dark red: mapped SFHA and floodway. Cyan: unshaded X with calibrated P >= 0.75 (same t as Table 1 window-max, pixel not plant). Pale: other interior. Cyan is map-completion on the FIRM, not a plant-level hazard list.
+
+![Figure 2. Five office-to-max windows](logs/stage_d/zooms.png)
+
+Figure 2. Office point to window-max cell. Each panel title has p_mean. Wash is calibrated P. Box is the 9x9 (120 m) window. THURSDAY POOLS p_mean 0.152 is neighboring unshaded X. FGF LLC p_mean 0.060 and ROYAL SPA CORP p_mean 0.113 are adjacent hydro. MAGNA POWERTRAIN EAST p_mean 0.098 ranks on window-max.
+
+![Figure 3. Two 2008 reaches](logs/stage_d/ofr_reaches.png)
+
+Figure 3. June 7-9, 2008 inundation (OFR 2008-1322) code 2 on the same HUC. Blue polygons: Martinsville and Paragon. Grey dots: 117 TRI office points. D2 stays 117 / 0. Appendix 2 is reach-scale; the industrial core is code 1.
+
+Map (interactive): [logs/stage_d/map.html](logs/stage_d/map.html). Interview note: [docs/interview_note.pdf](docs/interview_note.pdf).
 
 101 of 117 in-HUC plants sit on mapped unshaded X. The other 16 are already floodway (2), SFHA (4), shaded X (8), or unmapped (2).
 
@@ -90,6 +102,7 @@ PYTHONPATH=src:. python3 scripts/run_c_calibrate.py
 PYTHONPATH=src:. python3 scripts/run_stage_d.py
 PYTHONPATH=src:. python3 scripts/run_d_map.py
 PYTHONPATH=src:. python3 scripts/run_d_shap.py
+PYTHONPATH=src:. python3 scripts/run_d_cartography.py
 ```
 
 The fixture path is the CI join. gSSURGO C2 is not run. Do not reopen D, B, or raw `p_sfha.tif`.
