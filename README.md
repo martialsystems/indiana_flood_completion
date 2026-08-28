@@ -34,19 +34,51 @@ The table ranks on window-max P. Buffer-max is one 30 m cell; buffer-mean is the
 
 ![Figure 1. Basin disagreement](logs/stage_d/disagreement.png)
 
-Figure 1. Basin disagreement on calibrated `P(sfha | hydro)`. Dark red: mapped SFHA and floodway. Cyan: unshaded X with calibrated P >= 0.75 (same t as Table 1 window-max, pixel not plant). Pale: other interior. Cyan is map-completion on the FIRM, not a plant-level hazard list.
+Figure 1. Basin disagreement on calibrated P(sfha | hydro).
+
+- Dark red: Mapped SFHA and floodway.
+
+- Cyan: Unshaded X with calibrated P >= 0.75 (same threshold as Table 1 window-max, pixel not plant). Map-completion on the FIRM, not a plant-level hazard list.
+
+- Pale: Other interior.
 
 ![Figure 2. Five office-to-max windows](logs/stage_d/zooms.png)
 
-Figure 2. Office point to window-max cell. Each panel title has p_mean. Wash is calibrated P. Box is the 9x9 (120 m) window. THURSDAY POOLS p_mean 0.152 is neighboring unshaded X, max off parcel. FGF LLC p_mean 0.060 is an on-parcel floodway sliver. ROYAL SPA CORP p_mean 0.113 is a waterbody cell off the office parcel. LINDE GAS & EQUIPMENT p_mean 0.192 and MAGNA POWERTRAIN EAST p_mean 0.098 have the max cell on the office parcel.
+Figure 2. Office point to window-max cell.
 
+*Note*: Each panel title has p_mean. Wash is calibrated P; box is the 9x9 (120 m) window.
+
+- THURSDAY POOLS (p_mean 0.152): Neighboring unshaded X, max off parcel.
+
+- FGF LLC (p_mean 0.060): On-parcel floodway sliver.
+
+- ROYAL SPA CORP (p_mean 0.113): Waterbody cell off the office parcel.
+
+- LINDE GAS & EQUIPMENT (p_mean 0.192) & MAGNA POWERTRAIN EAST (p_mean 0.098): Max cell on the office parcel.
+  
 ![Figure 3. Two 2008 reaches](logs/stage_d/ofr_reaches.png)
 
-Figure 3. June 7-9, 2008 inundation (OFR 2008-1322) code 2 on the same HUC. Blue polygons: Martinsville and Paragon. Grey dots: 117 TRI office points. D2 stays 117 / 0. Appendix 2 is reach-scale; the industrial core is code 1.
+Figure 3. June 7-9, 2008 inundation (OFR 2008-1322) code 2 on the same HUC.
+
+- Blue polygons: Martinsville and Paragon.
+
+- Grey dots: 117 TRI office points (D2 stays 117 / 0).
+
+Notes: Appendix 2 is reach-scale; the industrial core is code 1.
 
 ![Figure 4. Five-site parcels](logs/parcels/zooms_parcels.png)
 
-Figure 4. Indiana 2025 parcels (GIS Data Harvest) on the five Table 1 sites only. Snap 30 m. D tables unchanged. THURSDAY POOLS p_mean 0.152: max cell off the office parcel. FGF LLC p_mean 0.060: floodway cell on the office parcel. ROYAL SPA CORP p_mean 0.113: waterbody cell off the office parcel. LINDE GAS & EQUIPMENT p_mean 0.192 and MAGNA POWERTRAIN EAST p_mean 0.098: max cell on the office parcel. Folder: `logs/parcels/`.
+Figure 4. Indiana 2025 parcels (GIS Data Harvest) on the five Table 1 sites only.
+
+- Setup: Snap 30 m. D tables unchanged. Folder: logs/parcels/.
+
+- THURSDAY POOLS (p_mean 0.152): Max cell off the office parcel.
+
+- FGF LLC (p_mean 0.060): Floodway cell on the office parcel.
+
+- ROYAL SPA CORP (p_mean 0.113): Waterbody cell off the office parcel.
+
+- LINDE GAS & EQUIPMENT (p_mean 0.192) & MAGNA POWERTRAIN EAST (p_mean 0.098): Max cell on the office parcel.
 
 Map (interactive): [logs/stage_d/map.html](logs/stage_d/map.html). Interview note: [docs/interview_note.pdf](docs/interview_note.pdf).
 
