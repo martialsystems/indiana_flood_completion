@@ -1,6 +1,6 @@
 # Agent notes: indiana_flood_completion
 
-Private research. Geography is Upper White HUC-8 05120201.
+Public snapshot of Upper White HUC-8 05120201. MIT on this tree. Later HUCs or a parcel product stay out of this repo.
 
 Sibling `~/indiana_hazmat_floodplain` is parked. Do not unpark it. Do not start its Stage A/B. Do not rewrite `data/frozen/sibling_stage0_occupancy.json`.
 

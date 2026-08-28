@@ -12,6 +12,8 @@ THURSDAY POOLS is the only large-inventory terrain hit, and it is neighboring la
 
 June 2008 Appendix 2 does not cover the industrial core of 05120201.
 
+Not a FIRM, not site-level flood risk: TRI names are an overlay.
+
 | Plant | 2023 on-site release (lb) | Highest P in 120 m | Mean P (p_mean) | What the high cell is |
 |---|---:|---:|---:|---|
 | THURSDAY POOLS | 257,590 | 0.769 | 0.152 | max off parcel, neighboring unshaded X, HAND = 0 |
@@ -122,4 +124,4 @@ Pin: `whiteforge/`. Verify-before-done is the finish gate.
 
 ## Legal
 
-Copyright (c) 2026 Martial Systems LLC. All rights reserved.
+Copyright (c) 2026 Martial Systems LLC. MIT. See [LICENSE](LICENSE).

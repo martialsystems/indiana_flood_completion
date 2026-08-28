@@ -12,7 +12,7 @@ Status as of **2026-08-27:** D tables, Folium map, SHAP, interview note, README 
 - [x] Fixture Stage 0 path (`tests/fixtures/huc.geojson` + 30 m 5070 template)
 - [x] Live WBD clip for 05120201
 - [x] Live NLCD 2021 impervious template (4826x4252, 30 m, EPSG:5070; 0% kept)
-- [x] Private GitHub remote (`martialsystems/indiana_flood_completion`)
+- [x] Public GitHub remote (`martialsystems/indiana_flood_completion`; MIT)
 
 ## Later work
 
