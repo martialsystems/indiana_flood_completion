@@ -83,7 +83,7 @@ Figure 4. Indiana 2025 parcels (GIS Data Harvest) on the five Table 1 sites only
 
 Map (interactive): [logs/stage_d/map.html](logs/stage_d/map.html). Interview note (map completion plus Nora stage pair): [docs/interview_note.pdf](docs/interview_note.pdf). Project: [docs/PROJECT.md](docs/PROJECT.md).
 
-Related tree: private `martialsystems/white_river_stage_inundation` (same HAND grid; USGS 03351000 flood stage and 21.18 ft crest).
+Related tree: https://github.com/martialsystems/white_river_stage_inundation (same HAND grid; USGS 03351000 flood stage and 21.18 ft crest).
 
 101 of 117 in-HUC plants sit on mapped unshaded X. The other 16 are already floodway (2), SFHA (4), shaded X (8), or unmapped (2).
 

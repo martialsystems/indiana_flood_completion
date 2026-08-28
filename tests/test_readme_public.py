@@ -24,7 +24,7 @@ def test_readme_keeps_lead_table_and_caveat() -> None:
     assert "All rights reserved" not in README
     lead, _sep, table = README.partition("| Plant |")
     assert "Not a FIRM or site-level flood risk" in lead
-    assert "white_river_stage_inundation" in README
+    assert "https://github.com/martialsystems/white_river_stage_inundation" in README
     assert "FGF LLC" in table
 
 

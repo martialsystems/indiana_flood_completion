@@ -27,5 +27,5 @@ def test_combined_interview_note_has_both_parts() -> None:
     assert "21.18" in text
     assert "03351000" in text
     assert "provisional" in text.lower()
-    assert "white_river_stage_inundation" in text
-    assert "indiana_flood_completion" in text
+    assert "https://github.com/martialsystems/white_river_stage_inundation" in text
+    assert "https://github.com/martialsystems/indiana_flood_completion" in text

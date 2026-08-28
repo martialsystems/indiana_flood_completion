@@ -47,8 +47,8 @@ def _spine_text() -> list[str]:
             "not water at 21.18 ft. Paint on the Nora reach uses stage and WSE, "
             "not discharge."
         ),
-        "Trees: martialsystems/indiana_flood_completion (public). "
-        "martialsystems/white_river_stage_inundation (private, same basin).",
+        "Trees: https://github.com/martialsystems/indiana_flood_completion "
+        "and https://github.com/martialsystems/white_river_stage_inundation.",
     ]
 
 
