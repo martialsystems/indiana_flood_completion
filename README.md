@@ -179,4 +179,4 @@ Pin: `whiteforge/`. Verify-before-done is the finish gate.
 
 Copyright (c) 2026 Martial Systems LLC. MIT. See [LICENSE](LICENSE).
 
-Research index: https://gist.github.com/martialsystems/66b896b0a4a0b8cba2b478aef64312f3
+[![Open the research console](https://img.shields.io/badge/Open_the_research_console-2e7d32?style=for-the-badge)](https://martialsystems.github.io/indiana_wx_pages/)
