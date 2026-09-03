@@ -55,7 +55,7 @@ Figure 2. Office point to window-max cell.
 - LINDE GAS & EQUIPMENT (p_mean 0.192) & MAGNA POWERTRAIN EAST (p_mean 0.098): Max cell on the office parcel.
 
 *Note*: Each panel title has p_mean. Wash is calibrated P; box is the 9x9 (120 m) window.
-  
+
 ![Figure 3. Two 2008 reaches](logs/stage_d/ofr_reaches.png)
 
 Figure 3. June 7-9, 2008 inundation (OFR 2008-1322) code 2 on the same HUC.
@@ -79,7 +79,6 @@ Figure 4. Indiana 2025 parcels (GIS Data Harvest) on the five Table 1 sites only
 - ROYAL SPA CORP (p_mean 0.113): Waterbody cell off the office parcel.
 
 - LINDE GAS & EQUIPMENT (p_mean 0.192) & MAGNA POWERTRAIN EAST (p_mean 0.098): Max cell on the office parcel.
-  
 
 Map (interactive): [logs/stage_d/map.html](logs/stage_d/map.html). Interview note: [docs/interview_note.pdf](docs/interview_note.pdf). Project: [docs/PROJECT.md](docs/PROJECT.md).
 
@@ -93,7 +92,7 @@ Three trees on one 30 m HAND grid (HUC-8 05120201). This repo is map completion.
 | [white_river_stage_inundation](https://github.com/martialsystems/white_river_stage_inundation) | Which cells on one White River reach are wet at USGS 03351000 stage 11.00 ft and at 21.18 ft? |
 | [white_river_fim_compare](https://github.com/martialsystems/white_river_fim_compare) | Does that HAND bathtub sit in the same neighborhood as USGS SIR 2011-5138 on the Nora window? |
 
-[![Maps writeup](https://img.shields.io/badge/Maps_writeup-2e7d32?style=for-the-badge)](https://gist.github.com/martialsystems/16584e78d079666f7e8994b4cc6158be)
+[Maps writeup](https://gist.github.com/martialsystems/16584e78d079666f7e8994b4cc6158be)
 
 101 of 117 in-HUC plants sit on mapped unshaded X. The other 16 are already floodway (2), SFHA (4), shaded X (8), or unmapped (2).
 
@@ -177,6 +176,6 @@ Pin: `whiteforge/`. Verify-before-done is the finish gate.
 
 ## Legal
 
-Copyright (c) 2026 Martial Systems LLC. MIT. See [LICENSE](LICENSE).
+Research index: https://gist.github.com/martialsystems/66b896b0a4a0b8cba2b478aef64312f3
 
-[![Open the research console](https://img.shields.io/badge/Open_the_research_console-2e7d32?style=for-the-badge)](https://martialsystems.github.io/indiana_wx_pages/)
+Copyright (c) 2026 Martial Systems LLC. MIT. See [LICENSE](LICENSE).

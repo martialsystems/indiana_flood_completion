@@ -26,16 +26,13 @@ def test_readme_keeps_lead_table_and_caveat() -> None:
     assert "Not a FIRM or site-level flood risk" in lead
     assert "https://github.com/martialsystems/white_river_stage_inundation" in README
     assert "https://gist.github.com/martialsystems/16584e78d079666f7e8994b4cc6158be" in README
-    assert (
-        "[![Open the research console]"
-        "(https://img.shields.io/badge/Open_the_research_console-2e7d32"
-        "?style=for-the-badge)]"
-        "(https://martialsystems.github.io/indiana_wx_pages/)"
-    ) in README
+    assert "Open_the_research_console" not in README
     assert "labelColor" not in README
     assert "6e1f1c" not in README
-    assert "66b896b0" not in README
-    assert "Research index:" not in README
+    assert (
+        "Research index: https://gist.github.com/martialsystems/"
+        "66b896b0a4a0b8cba2b478aef64312f3"
+    ) in README
     assert "## Summary" in README
     assert "white_river_fim_compare" in README
     assert "FGF LLC" in table
