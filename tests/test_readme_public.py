@@ -36,6 +36,9 @@ def test_readme_keeps_lead_table_and_caveat() -> None:
     assert "## Summary" in README
     assert "white_river_fim_compare" in README
     assert "FGF LLC" in table
+    fig2 = README.split("![Figure 2", 1)[1].split("![Figure 3", 1)[0]
+    assert "parcel" not in fig2.lower()
+    assert "office cell" in fig2
 
 
 def test_gitignore_keeps_raw_and_interim() -> None:
