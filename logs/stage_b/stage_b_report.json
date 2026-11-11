@@ -5,7 +5,7 @@
       "dtype": "float32",
       "name": "slope",
       "nodata": -9999.0,
-      "path": "/Users/samw/indiana_flood_completion/data/interim/slope.tif",
+      "path": "data/interim/slope.tif",
       "units": "rad"
     },
     {
@@ -13,7 +13,7 @@
       "dtype": "float32",
       "name": "twi",
       "nodata": -9999.0,
-      "path": "/Users/samw/indiana_flood_completion/data/interim/twi.tif",
+      "path": "data/interim/twi.tif",
       "units": "ln(m)"
     },
     {
@@ -21,7 +21,7 @@
       "dtype": "float32",
       "name": "hand",
       "nodata": -9999.0,
-      "path": "/Users/samw/indiana_flood_completion/data/interim/hand.tif",
+      "path": "data/interim/hand.tif",
       "units": "m"
     },
     {
@@ -29,7 +29,7 @@
       "dtype": "float32",
       "name": "dist_flowline",
       "nodata": -1.0,
-      "path": "/Users/samw/indiana_flood_completion/data/interim/dist_flowline.tif",
+      "path": "data/interim/dist_flowline.tif",
       "units": "m"
     },
     {
@@ -37,7 +37,7 @@
       "dtype": "float32",
       "name": "dist_waterbody",
       "nodata": -1.0,
-      "path": "/Users/samw/indiana_flood_completion/data/interim/dist_waterbody.tif",
+      "path": "data/interim/dist_waterbody.tif",
       "units": "m"
     }
   ],
@@ -63,7 +63,7 @@
   "n_waterbody_features": 11745,
   "p_definition": "P(sfha | hydro)",
   "slope_floor_rad": 0.001,
-  "stack_manifest": "/Users/samw/indiana_flood_completion/logs/stage_b/stack_manifest.json",
+  "stack_manifest": "logs/stage_b/stack_manifest.json",
   "stage": "B",
   "stage_c_started": false,
   "stream_composition": {

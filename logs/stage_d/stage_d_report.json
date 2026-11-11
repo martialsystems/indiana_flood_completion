@@ -104,7 +104,7 @@
   "headline_t": 0.75,
   "hsg_in_model": false,
   "huc8": "05120201",
-  "imported_occupancy_path": "/Users/samw/indiana_flood_completion/data/frozen/sibling_stage0_occupancy.json",
+  "imported_occupancy_path": "data/frozen/sibling_stage0_occupancy.json",
   "map_path": "logs/stage_d/map.html",
   "n_dioxin_rows_held_grams": 29,
   "n_not_d1": 16,

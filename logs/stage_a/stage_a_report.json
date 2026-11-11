@@ -1,7 +1,7 @@
 {
   "citation_2008": "June 7-9, 2008 inundation (OFR 2008-1322)",
   "dem": {
-    "path": "/Users/samw/indiana_flood_completion/data/interim/dem.tif",
+    "path": "data/interim/dem.tif",
     "skipped_existing": true
   },
   "firm": {
@@ -86,7 +86,7 @@
   ],
   "hsg_incomplete": true,
   "huc8": "05120201",
-  "imported_occupancy_path": "/Users/samw/indiana_flood_completion/data/frozen/sibling_stage0_occupancy.json",
+  "imported_occupancy_path": "data/frozen/sibling_stage0_occupancy.json",
   "martinsville_paragon_intersection": "measured, not assumed",
   "mask_value_counts": {
     "0": 12690113,
@@ -94,7 +94,7 @@
     "2": 3082
   },
   "nhd": {
-    "path": "/Users/samw/indiana_flood_completion/data/interim/dist_stream.tif",
+    "path": "data/interim/dist_stream.tif",
     "skipped_existing": true
   },
   "ofr2008": {
@@ -102,7 +102,7 @@
     "citation": "June 7-9, 2008 inundation (OFR 2008-1322)",
     "elnora_withdrawn": true,
     "martinsville_paragon_measured": true,
-    "mask_path": "/Users/samw/indiana_flood_completion/data/interim/mask_2008.tif",
+    "mask_path": "data/interim/mask_2008.tif",
     "mask_value_counts": {
       "0": 12690113,
       "1": 7826957,
@@ -240,7 +240,7 @@
     "n_coded": 1179012,
     "n_interior": 7830039,
     "n_missing": 6651027,
-    "path": "/Users/samw/indiana_flood_completion/data/interim/hsg.tif"
+    "path": "data/interim/hsg.tif"
   },
   "stage": "A",
   "template_fingerprint": {
